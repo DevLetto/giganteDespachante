@@ -10,11 +10,17 @@ function Login(){
     navigate('/menu')
   }
 
+  function handleSubmit(e){
+    e.preventDefault()
+    navigate('/menu')
+  }
+
   return(
       <div className='w-screen h-screen bg-fundo flex justify-between gap-35 items-center flex-col p-4 '>
     <img src={Logo} alt="" className='w-[700px] h-[250px]' />
+    
 
-    <form action="post" className='w-[400px] h-[616px] flex flex-col items-center  gap-15'>
+    <form onSubmit={handleSubmit} action="post" className='w-[400px] h-[616px] flex flex-col items-center  gap-15'>
 
       <fieldset className='w-full h-[330px] border-2 border-traco flex flex-col items-center pt-5 pl-1 pr-1 rounded-lg shadow-2xl'>
 
