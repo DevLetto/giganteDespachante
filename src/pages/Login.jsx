@@ -44,7 +44,7 @@ function Login(){
 
       </fieldset>
 
-      <button onClick={onSubmitClick} className='bg-white w-[210px] h-11 text-traco text-2xl rounded-[10px] hover:bg-traco hover:text-white '>
+      <button onClick={onSubmitClick} className='bg-white w-[210px] h-11 text-traco text-2xl rounded-[10px] hover:bg-traco hover:cursor-pointer hover:text-white '>
           
           Entrar
 
