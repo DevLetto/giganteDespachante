@@ -7,12 +7,14 @@ import { useState } from "react";
 function Login() {
   const [user, setUser] = useState("");
   const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState(false);
+  const [tremer, setTremer] = useState(false);
 
   const navigate = useNavigate();
 
-  function onSubmitClick() {
-    navigate("/menu");
-  }
+  // function onSubmitClick() {
+  //   navigate("/menu");
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +33,14 @@ function Login() {
       if (response.ok) {
         navigate("/menu");
       } else {
-        alert("Usuario ou senha incorretos");
+        setErro(true)
+        setTremer(true)
+
+        setTimeout(() =>{
+          setErro(false)
+          setTremer(false)
+        }, 2000)
+        
       }
     } catch (error) {
       console.error("erro na requisição", error);
@@ -47,7 +56,7 @@ function Login() {
         action="post"
         className="w-[400px] h-[616px] flex flex-col items-center  gap-15"
       >
-        <fieldset className="w-full h-[330px] border-2 border-traco flex flex-col items-center pt-5 pl-1 pr-1 rounded-lg shadow-2xl">
+        <fieldset className={`w-full h-[330px] border-2 ${erro?  "border-red-600 ":"border-traco"} ${tremer? "shake" : ""} flex flex-col items-center pt-5 pl-1 pr-1 rounded-lg shadow-2xl transition`}>
           <div className="w-[98%] flex items-start mb-[5px]">
             <img src={Bolas} alt="Tres bolinhas" className="w-[85px]" />
           </div>
@@ -87,9 +96,7 @@ function Login() {
           />
         </fieldset>
 
-        <button
-          className="bg-white w-[210px] h-11 text-traco text-2xl rounded-[10px] hover:bg-traco hover:cursor-pointer hover:text-white "
-        >
+        <button className={`${erro? "bg-red-600 text-white hover:bg-red-600 after:content-['Usuario ou senha Invalidos'] " : "bg-white text-traco hover:bg-traco"}  ${tremer? "shake" : ""} w-[210px] h-11  text-2xl rounded-[10px]  hover:cursor-pointer hover:text-white `}>
           Entrar
         </button>
       </form>
