@@ -1,46 +1,65 @@
-const express = require('express')
-const app = express()
-// const bcrypt = require('bcrypt')
-const fs = require('fs')
-const cors = require('cors')
+const express = require("express");
+const app = express();
+const bcrypt = require("bcrypt");
+const fs = require("fs");
+const cors = require("cors");
 const port = 8080;
-const db = require('./dataBase/db')
+const db = require("./dataBase/db");
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
-// app.post('/login', (req, res) =>{
-//     const {user, senha} = req.body
+// db.prepare(
+//   `INSERT INTO clients(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor, data_emissao ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+// ).run(
+//   "Gabriel",
+//   "123.123.123.123",
+//   "1234567890",
+//   "transferencia",
+//   "190.00",
+//   "ONH_AHA",
+//   "impala",
+//   1967,
+//   "asdasdasdasd",
+//   "preto",
+//   "09/10?2006"
+// );
 
-//     const usersData = fs.readFileSync('./data/users.json', 'utf8')
-//     const users = JSON.parse(usersData)
+function createUser(usuario, senha) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(senha, salt);
 
-//     const usuar = users.find(
-//         (u) => u.user === user && u.senha === senha
-//     )
-
-//     if(!usuar){
-//         return res.status(401).json({message:"usuario ou senha incoreta"})
-//     }
-    
-//     res.status(200).json({
-//         message: "dados recebidos",
-//         dadosRecebidos: {user, senha}
-//     })
-
-// })
-
-try{
-    const clientes = db.prepare("SELECT * FROM clients").all();
-    console.log("deu bom")
-
-}catch(err){
-    console.log('error', err)
+  const stmt = db.prepare(`INSERT INTO users(usuario, senha) VALUES(?, ?)`);
+  stmt.run(usuario, hash);
 }
-console.log("DB: ",db)
 
 
 
+try {
+  const clientes = db.prepare("SELECT * FROM clients").all();
+  console.log(clientes);
+  const usarios = db.prepare("SELECT * FROM users").all();
+  console.log(usarios);
+} catch (err) {
+  console.log("error", err);
+}
 
-app.listen(port, ()=> console.log(`rodando na port ${port}`))
+app.post('/login', async (req, res) =>{
+    const {usuario, senha} = req.body;
 
+    const user = db.prepare("SELECT * FROM users WHERE usuario = ?").get(usuario)
+
+    if(!user){
+        return res.status(401).json({error: "Usuario não encontrado"})
+    }
+
+    const match = await bcrypt.compare(senha, user.senha)
+
+    if(!match){
+        return res.status(401).json({error: "Senha Invalida"})
+    }
+
+    res.json({message: "Login bem sucedido"})
+})
+
+app.listen(port, () => console.log(`rodando na port ${port}`));

@@ -5,7 +5,7 @@ import { useState } from "react";
 // import axios from "axios";
 
 function Login() {
-  const [user, setUser] = useState("");
+  const [usuario, setUser] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
   const [tremer, setTremer] = useState(false);
@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const dadosLogin = { user, senha };
+    const dadosLogin = { usuario, senha };
 
     try {
       const response = await fetch("http://localhost:8080/login", {

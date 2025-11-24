@@ -1,0 +1,252 @@
+[
+  {
+    "grupo": "Alterações",
+    "servicos": [
+      {
+        "nome": "ALTERA ENDEREÇO (SEM TAXA)",
+        "preco": 130.0,
+        "valor": "ALTERA_ENDERECO_SEM_TAXA"
+      },
+      {
+        "nome": "ALTERAÇÃO DE CARACTERÍSTICAS",
+        "preco": 469.02,
+        "valor": "ALTERACAO_DE_CARACTERISTICAS"
+      },
+      {
+        "nome": "ALTERAÇÃO RESTRIÇÃO",
+        "preco": 463.35,
+        "valor": "ALTERACAO_RESTRICAO"
+      },
+      {
+        "nome": "BAIXA COMODATO (BAIXA)",
+        "preco": 463.35,
+        "valor": "BAIXA_COMODATO_BAIXA"
+      },
+      {
+        "nome": "BAIXA DE GRAVAME DE RESTRIÇÃO TRIBUTÁRIA",
+        "preco": 463.35,
+        "valor": "BAIXA_GRAVAME_RESTRICAO_TRIBUTARIA"
+      },
+      {
+        "nome": "CORREÇÃO DE DADOS",
+        "preco": 130.0,
+        "valor": "CORRECAO_DE_DADOS"
+      },
+      {
+        "nome": "GRAVAR/SUBSTITUIR MOTOR",
+        "preco": 346.02,
+        "valor": "GRAVAR_SUBSTITUIR_MOTOR"
+      },
+      {
+        "nome": "INCLUSÃO DE GRAVAME DE RESTRIÇÃO TRIBUTÁRIA",
+        "preco": 463.35,
+        "valor": "INCLUSAO_GRAVAME_RESTRICAO_TRIBUTARIA"
+      },
+      {
+        "nome": "INCLUSÃO GRAVAME (FINANCIAMENTO)",
+        "preco": 270.0,
+        "valor": "INCLUSAO_GRAVAME_FINANCIAMENTO"
+      },
+      {
+        "nome": "MUDANÇA DE CATEGORIA",
+        "preco": 339.15,
+        "valor": "MUDANCA_DE_CATEGORIA"
+      },
+      {
+        "nome": "MUDANÇA DE PLACA (2 PARA 3 LETRAS)",
+        "preco": 300.0,
+        "valor": "MUDANCA_DE_PLACA_2_PARA_3_LETRAS"
+      },
+      {
+        "nome": "REGISTRO DE COMODATO (INCLUSAO)",
+        "preco": 463.35,
+        "valor": "REGISTRO_DE_COMODATO_INCLUSAO"
+      },
+      {
+        "nome": "REMARCAÇÃO CHASSI",
+        "preco": 346.02,
+        "valor": "REMARCACAO_CHASSI"
+      },
+      {
+        "nome": "SEGUNDA VIA CRV",
+        "preco": 399.55,
+        "valor": "SEGUNDA_VIA_CRV"
+      },
+      {
+        "nome": "SEGUNDA VIA CRV (END OUTRO MUNICÍPIO)",
+        "preco": 399.55,
+        "valor": "SEGUNDA_VIA_CRV_END_OUTRO_MUNICIPIO"
+      },
+      {
+        "nome": "SEGUNDA VIA CRV COM CV",
+        "preco": 399.55,
+        "valor": "SEGUNDA_VIA_CRV_COM_CV"
+      },
+      {
+        "nome": "TRANSF. PROP. VEIC.USADO P/EMP. REV. GO. CRED.NO DET",
+        "preco": 248.68,
+        "valor": "TRANSF_PROP_VEIC_USADO_P_EMP_REV"
+      },
+      {
+        "nome": "TRANSFERÊNCIA DE PROPRIEDADE",
+        "preco": 518.03,
+        "valor": "TRANSFERENCIA_DE_PROPRIEDADE"
+      },
+      {
+        "nome": "TRANSFERÊNCIA MUNICÍPIO",
+        "preco": 270.0,
+        "valor": "TRANSFERENCIA_MUNICIPIO"
+      },
+      {
+        "nome": "TRANSFERÊNCIA MUNICÍPIO E PROPRIEDADE",
+        "preco": 588.01,
+        "valor": "TRANSFERENCIA_MUNICIPIO_E_PROPRIEDADE"
+      }
+    ]
+  },
+  {
+    "grupo": "Comunicação de venda",
+    "servicos": [
+      {
+        "nome": "AVERBACAO CANC COMUNIC VENDA",
+        "preco": 250.0,
+        "valor": "AVERBACAO_CANC_COMUNIC_VENDA"
+      },
+      {
+        "nome": "INCLUSÃO COMUNICADO DE VENDA",
+        "preco": 100.0,
+        "valor": "INCLUSAO_COMUNICADO_DE_VENDA"
+      }
+    ]
+  },
+  {
+    "grupo": "Inclusao veiculo novo/usado",
+    "servicos": [
+      {
+        "nome": "INCLUSÃO MOTO",
+        "preco": 393.81,
+        "valor": "INCLUSAO_MOTO"
+      },
+      {
+        "nome": "INCLUSÃO MOTO USADA",
+        "preco": 400.0,
+        "valor": "INCLUSAO_MOTO_USADA"
+      },
+      {
+        "nome": "INCLUSÃO MÁQUINA AGRÍCOLA",
+        "preco": 399.98,
+        "valor": "INCLUSAO_MAQUINA_AGRICOLA"
+      },
+      {
+        "nome": "INCLUSÃO REBOQUE",
+        "preco": 400.0,
+        "valor": "INCLUSAO_REBOQUE"
+      },
+      {
+        "nome": "INCLUSÃO VEÍCULO",
+        "preco": 400.0,
+        "valor": "INCLUSAO_VEICULO"
+      },
+      {
+        "nome": "INCLUSÃO VEÍCULO USADO",
+        "preco": 400.0,
+        "valor": "INCLUSAO_VEICULO_USADO"
+      }
+    ]
+  },
+  {
+    "grupo": "licenciamento",
+    "servicos": [
+      {
+        "nome": "EMISSÃO/REEMISSÃO CRLV",
+        "preco": 50.0,
+        "valor": "EMISSAO_REEMISSAO_CRLV"
+      },
+      {
+        "nome": "LICENCIAMENTO POR DECISÃO JUDICIAL",
+        "preco": 100.0,
+        "valor": "LICENCIAMENTO_POR_DECISAO_JUDICIAL"
+      },
+      {
+        "nome": "LICENCIAMENTO PRIMEIRA VIA",
+        "preco": 50.0,
+        "valor": "LICENCIAMENTO_PRIMEIRA_VIA"
+      }
+    ]
+  },
+  {
+    "grupo": "outros",
+    "servicos": [
+      {
+        "nome": "BAIXA DE VEÍCULO",
+        "preco": 350.0,
+        "valor": "BAIXA_DE_VEICULO"
+      },
+      {
+        "nome": "PLACA (CINZA PARA PIV)",
+        "preco": 150.0,
+        "valor": "PLACA_CINZA_PARA_PIV"
+      },
+      {
+        "nome": "INCLUSÃO DE GRAVAME",
+        "preco": 180.0,
+        "valor": "INCLUSAO_DE_GRAVAME"
+      },
+      {
+        "nome": "SOLICITAÇÃO FABRICANTE (PAR DE PLACAS MERCOSUL)",
+        "preco": 180.0,
+        "valor": "SOLICITACAO_FABRICANTE_PAR_MERCOSUL"
+      },
+      {
+        "nome": "SOLICITAÇÃO FABRICANTE (PERDA TRASEIRA MERCOSUL)",
+        "preco": 180.0,
+        "valor": "SOLICITACAO_FABRICANTE_PERDA_TRASEIRA"
+      },
+      {
+        "nome": "SOLICITAÇÃO FABRICANTE (PLACA DIANTEIRA MERCOSUL)",
+        "preco": 180.0,
+        "valor": "SOLICITACAO_FABRICANTE_PLACA_DIANTEIRA"
+      },
+      {
+        "nome": "SOLICITAÇÃO FABRICANTE (TERCEIRA PLACA MERCOSUL)",
+        "preco": 180.0,
+        "valor": "SOLICITACAO_FABRICANTE_TERCEIRA_PLACA"
+      },
+      {
+        "nome": "TROCA DE PLACA NOVA PIV (CINZA PARA MERCOSUL)",
+        "preco": 180.0,
+        "valor": "TROCA_DE_PLACA_PIV_MERCOSUL"
+      },
+      {
+        "nome": "VISTORIA DE VEÍCULO",
+        "preco": 50.0,
+        "valor": "VISTORIA_DE_VEICULO"
+      },
+      {
+        "nome": "VISTORIA LACRADA",
+        "preco": 100.0,
+        "valor": "VISTORIA_LACRADA"
+      }
+    ]
+  },
+  {
+    "grupo": "Transferenfia de jurisdição-uf",
+    "servicos": [
+      {
+        "nome": "TRANSFERÊNCIA DE JURISDIÇÃO-UF",
+        "preco": 200.0,
+        "valor": "TRANSFERENCIA_DE_JURISDICAO_UF"
+      },
+      {
+        "nome": "TRANSFERÊNCIA DE UF E PROP. VEIC.USADO P/EMP. REV. GO. CRED.NO DET",
+        "preco": 180.0,
+        "valor": "TRANSFERENCIA_DE_UF_E_PROP_VEIC_USADO"
+      },
+      {
+        "nome": "TRANSFERÊNCIA DE UF E PROPRIEDADE",
+        "preco": 250.0,
+        "valor": "TRANSFERENCIA_DE_UF_E_PROPRIEDADE"
+      }
+    ]
+  }
+]

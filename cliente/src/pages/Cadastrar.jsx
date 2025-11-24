@@ -41,7 +41,14 @@ function Cadastrar(){
 
                             <fieldset className="w-[98%]">
                                 <label htmlFor="Servi" className="text-xl text-traco font-bold font-[Arial]">Serviço Feito</label>
-                                <select name="Servi" className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"></select>
+                                <select name="Servi" className="bg-white  h-12 rounded-lg w-full  p-1 text-traco">
+                                    <option value="" selected></option>
+                                    <optgroup label="sla">
+                                        <option value="first">Primeri</option>
+                                        <option value="second">Segundo</option>
+                                        <option value="third">Terceiro</option>
+                                    </optgroup>
+                                </select>
                             </fieldset>
                         </section>
 

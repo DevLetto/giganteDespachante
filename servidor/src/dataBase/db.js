@@ -1,7 +1,5 @@
-const path = require('path')
 const Database = require('better-sqlite3')
-const dbPath = path.join(__dirname, '../db.sqlite')
-const db = new Database(dbPath)
+const db = new Database('./db.sqlite')
 
 const dados = `
     CREATE TABLE IF NOT EXISTS users(
@@ -10,7 +8,7 @@ const dados = `
         senha TEXT NOT NULL
     );
 
-    CREATE TABLE IF NOT EXIST clients(
+    CREATE TABLE IF NOT EXISTS clients(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         cpf_cnpj TEXT NOT NULL,
@@ -21,15 +19,15 @@ const dados = `
         modelo TEXT NOT NULL,
         ano INTEGER NOT NULL,
         chassi TEXT NOT NULL,
-        cor TEXT NOT NULL
+        cor TEXT NOT NULL,
         data_emissao TEXT NOT NULL
     );
 
-    CREATE INDEX IF NOT EXIST idx_cliente_servico ON clients(servico);
+    CREATE INDEX IF NOT EXISTS idx_cliente_servico ON clients(servico);
 
-    CREATE INDEX IF NOT EXIST idx_client_-placa ON clients(placa);
+    CREATE INDEX IF NOT EXISTS idx_client_placa ON clients(placa);
 
-    CREATE INDEX IF NOT EXIST idx_client_-data ON clients(data_emissao);
+    CREATE INDEX IF NOT EXISTS idx_client_data ON clients(data_emissao);
     
     
 `;
@@ -42,7 +40,8 @@ try{
 }
 
 
-module.export = db;
+
+module.exports = db;
 
 
 
