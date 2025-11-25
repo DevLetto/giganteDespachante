@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcrypt");
-const fs = require("fs");
+// const bcrypt = require("bcrypt");
+// const fs = require("fs");
 const cors = require("cors");
 const port = 8080;
 const db = require("./dataBase/db");
+const rotaLogin = require('./rotas/rotaLogin')
+const createUser = require('./modelos/criarUsuario')
+
+// createUser("jose", "123")
 
 app.use(express.json());
 app.use(cors());
@@ -25,13 +29,7 @@ app.use(cors());
 //   "09/10?2006"
 // );
 
-function createUser(usuario, senha) {
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(senha, salt);
 
-  const stmt = db.prepare(`INSERT INTO users(usuario, senha) VALUES(?, ?)`);
-  stmt.run(usuario, hash);
-}
 
 
 
@@ -44,22 +42,8 @@ try {
   console.log("error", err);
 }
 
-app.post('/login', async (req, res) =>{
-    const {usuario, senha} = req.body;
 
-    const user = db.prepare("SELECT * FROM users WHERE usuario = ?").get(usuario)
 
-    if(!user){
-        return res.status(401).json({error: "Usuario não encontrado"})
-    }
-
-    const match = await bcrypt.compare(senha, user.senha)
-
-    if(!match){
-        return res.status(401).json({error: "Senha Invalida"})
-    }
-
-    res.json({message: "Login bem sucedido"})
-})
+app.use('/', rotaLogin)
 
 app.listen(port, () => console.log(`rodando na port ${port}`));

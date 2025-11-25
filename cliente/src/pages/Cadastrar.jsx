@@ -1,11 +1,23 @@
 import { ArrowLeft, Bold } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ServicoData from "../data/Servicos.json";
+import { useState } from "react";
 
 function Cadastrar() {
   const navigate = useNavigate();
+  const [nome, setNome] = useState("")
+  const [cpf, setCpf] = useState("")
+  const [telefone, setTelefone] = useState("")
+  const [servi, setServi] = useState("")
+  const [placa, setPlaca] = useState("")
+  const [modelo, setModelo] = useState("")
+  const [ano, setAno] = useState("")
+  const [chassi, setChassi] = useState("")
+  const [cor, setCor] = useState("")
 
   const servicos = ServicoData;
+
+  const info = {nome, cpf, telefone, servi, placa, modelo, ano, chassi, cor}
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
@@ -41,6 +53,7 @@ function Cadastrar() {
                 <input
                   type="text"
                   name="Nome"
+                  onChange={(e) => setNome(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
               </fieldset>
@@ -55,6 +68,7 @@ function Cadastrar() {
                 <input
                   type="number"
                   name="CPF"
+                  onChange={(e) => setCpf(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
               </fieldset>
@@ -69,6 +83,7 @@ function Cadastrar() {
                 <input
                   type="tel"
                   name="Telef"
+                  onChange={(e) => setTelefone(e.target.value)}
                   className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
               </fieldset>
@@ -82,6 +97,7 @@ function Cadastrar() {
                 </label>
                 <select
                   name="Servi"
+                  onChange={(e) => setServi(e.target.value)}
                   className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
                 >
                   <option value="" selected>
@@ -119,6 +135,7 @@ function Cadastrar() {
               <input
                 type="text "
                 name="placa"
+                onChange={(e) => setPlaca(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
             </fieldset>
@@ -133,6 +150,7 @@ function Cadastrar() {
               <input
                 type="text "
                 name="modelo"
+                onChange={(e) => setModelo(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />
             </fieldset>
@@ -148,6 +166,7 @@ function Cadastrar() {
                 type="number"
                 name="ano"
                 id=""
+                onChange={(e) => setAno(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
             </fieldset>
@@ -163,6 +182,7 @@ function Cadastrar() {
                 type="text"
                 name="chassi"
                 id=""
+                onChange={(e) => setChassi(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />
             </fieldset>
@@ -177,6 +197,7 @@ function Cadastrar() {
               <input
                 type="text"
                 name="cor"
+                onChange={(e) => setCor(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
             </fieldset>
