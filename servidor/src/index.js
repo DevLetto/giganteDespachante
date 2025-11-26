@@ -8,13 +8,13 @@ const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
 const createUser = require('./modelos/criarUsuario')
 
-// createUser("jose", "123")
+// createUser("User", "1234")
 
 app.use(express.json());
 app.use(cors());
 
 // db.prepare(
-//   `INSERT INTO clients(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor, data_emissao ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+//   `INSERT INTO clients(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
 // ).run(
 //   "Gabriel",
 //   "123.123.123.123",
@@ -25,8 +25,7 @@ app.use(cors());
 //   "impala",
 //   1967,
 //   "asdasdasdasd",
-//   "preto",
-//   "09/10?2006"
+//   "preto"
 // );
 
 

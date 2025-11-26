@@ -1,5 +1,5 @@
 const Database = require('better-sqlite3')
-const db = new Database('./db.sqlite')
+const db = new Database('./dbs.sqlite')
 
 const dados = `
     CREATE TABLE IF NOT EXISTS users(
@@ -20,7 +20,7 @@ const dados = `
         ano INTEGER NOT NULL,
         chassi TEXT NOT NULL,
         cor TEXT NOT NULL,
-        data_emissao TEXT NOT NULL
+        data_emissao DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
     );
 
     CREATE INDEX IF NOT EXISTS idx_cliente_servico ON clients(servico);
