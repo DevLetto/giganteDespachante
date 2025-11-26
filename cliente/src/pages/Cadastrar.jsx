@@ -17,7 +17,18 @@ function Cadastrar() {
 
   const servicos = ServicoData;
 
-  const info = {nome, cpf, telefone, servi, placa, modelo, ano, chassi, cor}
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    
+    const info = {nome, cpf, telefone, servi, placa, modelo, ano, chassi, cor}
+
+    try{
+      const response = await fetch('http://localhost:8080/login')
+    }
+
+
+  }
+
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
