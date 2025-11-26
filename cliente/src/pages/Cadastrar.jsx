@@ -5,30 +5,61 @@ import { useState } from "react";
 
 function Cadastrar() {
   const navigate = useNavigate();
-  const [nome, setNome] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [telefone, setTelefone] = useState("")
-  const [servi, setServi] = useState("")
-  const [placa, setPlaca] = useState("")
-  const [modelo, setModelo] = useState("")
-  const [ano, setAno] = useState("")
-  const [chassi, setChassi] = useState("")
-  const [cor, setCor] = useState("")
+  const [nome, setNome] = useState("");
+  const [cpf_cnpj, setCpf] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [servico, setServi] = useState("");
+  const [valor_servico, setValorServ] = useState("");
+  const [placa, setPlaca] = useState("");
+  const [modelo, setModelo] = useState("");
+  const [ano, setAno] = useState("");
+  const [chassi, setChassi] = useState("");
+  const [cor, setCor] = useState("");
 
   const servicos = ServicoData;
 
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
-    
-    const info = {nome, cpf, telefone, servi, placa, modelo, ano, chassi, cor}
+  const handleServicoChange = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const nomeServico = e.target.value;
+    setServi(nomeServico);
 
-    try{
-      const response = await fetch('http://localhost:8080/login')
+    const precoServico = selectedOption.dataset.price;
+    setValorServ(precoServico);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const dadosCadastro = {
+      nome,
+      cpf_cnpj,
+      telefone,
+      servico,
+      valor_servico,
+      placa,
+      modelo,
+      ano,
+      chassi,
+      cor,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/cadastro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dadosCadastro),
+      });
+
+      if (response.ok) {
+        console.log("Cadastro realizado");
+        navigate(-1)
+      }
+    } catch (error) {
+      console.error("Erro", error);
     }
-
-
-  }
-
+  };
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
@@ -42,7 +73,8 @@ function Cadastrar() {
       </header>
 
       <form
-        action="*"
+        onSubmit={handleSubmit}
+        action=""
         className="w-[70%] h-[80%] justify-between flex flex-col "
       >
         <main className="flex justify-between   ">
@@ -108,10 +140,10 @@ function Cadastrar() {
                 </label>
                 <select
                   name="Servi"
-                  onChange={(e) => setServi(e.target.value)}
+                  onChange={handleServicoChange}
                   className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
                 >
-                  <option value="" selected>
+                  <option value="" >
                     Selecione um serviço
                   </option>
 
@@ -120,7 +152,7 @@ function Cadastrar() {
                       {grup.servicos.map((opc, opcIndex) => (
                         <option
                           key={`${grupoIndex} - ${opcIndex}`}
-                          value={opc.valor}
+                          value={opc.nome}
                           data-price={opc.preco}
                         >
                           {" "}
@@ -129,7 +161,6 @@ function Cadastrar() {
                       ))}
                     </optgroup>
                   ))}
-                  
                 </select>
               </fieldset>
             </section>
@@ -144,7 +175,7 @@ function Cadastrar() {
                 Placa
               </label>
               <input
-                type="text "
+                type="text"
                 name="placa"
                 onChange={(e) => setPlaca(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
@@ -159,7 +190,7 @@ function Cadastrar() {
                 Modelo
               </label>
               <input
-                type="text "
+                type="text"
                 name="modelo"
                 onChange={(e) => setModelo(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
@@ -176,7 +207,6 @@ function Cadastrar() {
               <input
                 type="number"
                 name="ano"
-                id=""
                 onChange={(e) => setAno(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
@@ -192,7 +222,6 @@ function Cadastrar() {
               <input
                 type="text"
                 name="chassi"
-                id=""
                 onChange={(e) => setChassi(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />

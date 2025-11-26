@@ -6,7 +6,8 @@ const cors = require("cors");
 const port = 8080;
 const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
-const createUser = require('./modelos/criarUsuario')
+const rotaCadastro = require('./rotas/rotaCliente');
+// const createUser = require('./modelos/criarUsuario')
 
 // createUser("User", "1234")
 
@@ -42,7 +43,7 @@ try {
 }
 
 
-
+app.use('/', rotaCadastro)
 app.use('/', rotaLogin)
 
 app.listen(port, () => console.log(`rodando na port ${port}`));
