@@ -110,6 +110,7 @@ function Cadastrar() {
                   Nome do Cliente*
                 </label>
                 <input
+                  required
                   type="text"
                   name="Nome"
                   onChange={(e) => setNome(e.target.value)}
@@ -125,6 +126,7 @@ function Cadastrar() {
                   CPF/CNPJ*
                 </label>
                 <input
+                  required
                   type="number"
                   name="CPF"
                   maxLength={14}
@@ -142,6 +144,7 @@ function Cadastrar() {
                   Telefone*
                 </label>
                 <input
+                  required
                   type="tel"
                   name="Telef"
                   placeholder="Somente números"
@@ -160,11 +163,12 @@ function Cadastrar() {
                   Serviço Feito*
                 </label>
                 <select
+                  required
                   name="Servi"
                   onChange={handleServicoChange}
                   className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
                 >
-                  <option value="" >
+                  <option value="" disabled selected>
                     Selecione um serviço
                   </option>
 
@@ -196,6 +200,7 @@ function Cadastrar() {
                 Placa*
               </label>
               <input
+                required
                 type="text"
                 name="placa"
                 maxLength={7}
@@ -212,6 +217,7 @@ function Cadastrar() {
                 Modelo*
               </label>
               <input
+                required
                 type="text"
                 name="modelo"
                 onChange={(e) => setModelo(e.target.value)}
@@ -227,6 +233,7 @@ function Cadastrar() {
                 Ano*
               </label>
               <input
+                required
                 type="number"
                 name="ano"
                 maxLength={4}
@@ -243,6 +250,7 @@ function Cadastrar() {
                 Chassi*
               </label>
               <input
+                required
                 type="text"
                 name="chassi"
                 maxLength={17}
@@ -259,6 +267,7 @@ function Cadastrar() {
                 Cor*
               </label>
               <input
+                required
                 type="text"
                 name="cor"
                 onChange={(e) => setCor(e.target.value)}
