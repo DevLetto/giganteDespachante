@@ -1,5 +1,5 @@
 const express = require("express")
-const cadastro = require('../modelos/cadastrarCliente')
+const cadastro = require('../controle/controleCadastro')
 
 const router = express.Router()
 

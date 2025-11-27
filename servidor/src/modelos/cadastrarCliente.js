@@ -1,6 +1,6 @@
 const db = require('../dataBase/db');
 
-module.exports = function createClient(nome, cpf, telefone, servi, valorServ, placa, modelo, ano, chassi, cor ){
+module.exports = function createClient(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor ){
 
     try {
        
@@ -8,7 +8,7 @@ module.exports = function createClient(nome, cpf, telefone, servi, valorServ, pl
             'INSERT INTO clients(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
 
-        stmt.run(nome, cpf, telefone, servi, valorServ, placa, modelo, ano, chassi, cor);
+        stmt.run(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor);
         console.log(`Cliente ${nome} inserido com sucesso.`);
 
     } catch (error) {

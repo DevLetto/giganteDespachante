@@ -2,6 +2,8 @@ import { ArrowLeft, Bold } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ServicoData from "../data/Servicos.json";
 import { useState } from "react";
+import BackButton from '../components/BackBtn'
+import RegisterDone from '../components/RegisterDone'
 
 function Cadastrar() {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ function Cadastrar() {
   const [ano, setAno] = useState("");
   const [chassi, setChassi] = useState("");
   const [cor, setCor] = useState("");
+  const [cadasDone, setCadasDone] =useState(false)
 
   const servicos = ServicoData;
 
@@ -26,6 +29,12 @@ function Cadastrar() {
     const precoServico = selectedOption.dataset.price;
     setValorServ(precoServico);
   };
+
+  const verifyCPF_CNPJ = (e) => {
+    if(e.target.length == 11){
+
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +63,14 @@ function Cadastrar() {
 
       if (response.ok) {
         console.log("Cadastro realizado");
-        navigate(-1)
+        
+        setCadasDone(true)
+
+        setTimeout(() => {
+          setCadasDone(false)
+          navigate(-1)
+          
+        }, 2000);
       }
     } catch (error) {
       console.error("Erro", error);
@@ -62,14 +78,14 @@ function Cadastrar() {
   };
 
   return (
-    <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
+    <div className="w-screen h-screen bg-fundo flex  items-center flex-col relative ">
       <header className=" w-screen h-max ">
-        <button onClick={() => navigate(-1)}>
+        <BackButton onClick={() => navigate(-1)}>
           <ArrowLeft
             size={60}
             className="text-traco hover:bg-traco hover:text-white rounded-lg transition hover:cursor-pointer"
           />
-        </button>
+        </BackButton>
       </header>
 
       <form
@@ -91,7 +107,7 @@ function Cadastrar() {
                   htmlFor="Nome"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  Nome do Cliente
+                  Nome do Cliente*
                 </label>
                 <input
                   type="text"
@@ -106,13 +122,15 @@ function Cadastrar() {
                   htmlFor="CPF"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  CPF/CNPJ
+                  CPF/CNPJ*
                 </label>
                 <input
                   type="number"
                   name="CPF"
+                  maxLength={14}
+                  placeholder="Somente números"
                   onChange={(e) => setCpf(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
                 />
               </fieldset>
 
@@ -121,11 +139,14 @@ function Cadastrar() {
                   htmlFor="Telef"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  Telefone
+                  Telefone*
                 </label>
                 <input
                   type="tel"
                   name="Telef"
+                  placeholder="Somente números"
+                  maxLength={11}
+                  
                   onChange={(e) => setTelefone(e.target.value)}
                   className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
@@ -136,7 +157,7 @@ function Cadastrar() {
                   htmlFor="Servi"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  Serviço Feito
+                  Serviço Feito*
                 </label>
                 <select
                   name="Servi"
@@ -172,11 +193,12 @@ function Cadastrar() {
                 htmlFor="placa"
                 className="text-xl text-traco font-bold font-[Arial]"
               >
-                Placa
+                Placa*
               </label>
               <input
                 type="text"
                 name="placa"
+                maxLength={7}
                 onChange={(e) => setPlaca(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
@@ -187,7 +209,7 @@ function Cadastrar() {
                 htmlFor="modelo"
                 className="text-xl text-traco font-bold font-[Arial]"
               >
-                Modelo
+                Modelo*
               </label>
               <input
                 type="text"
@@ -202,13 +224,14 @@ function Cadastrar() {
                 htmlFor="ano"
                 className="text-xl text-traco font-bold font-[Arial]"
               >
-                Ano
+                Ano*
               </label>
               <input
                 type="number"
                 name="ano"
+                maxLength={4}
                 onChange={(e) => setAno(e.target.value)}
-                className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
+                className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
               />
             </fieldset>
 
@@ -217,11 +240,12 @@ function Cadastrar() {
                 htmlFor="chassi"
                 className="text-xl text-traco font-bold font-[Arial]"
               >
-                Chassi
+                Chassi*
               </label>
               <input
                 type="text"
                 name="chassi"
+                maxLength={17}
                 onChange={(e) => setChassi(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />
@@ -232,7 +256,7 @@ function Cadastrar() {
                 htmlFor="cor"
                 className="text-xl text-traco font-bold font-[Arial]"
               >
-                Cor
+                Cor*
               </label>
               <input
                 type="text"
@@ -249,6 +273,11 @@ function Cadastrar() {
           className="self-center bg-white  h-12 rounded-lg w-[30%] text-3xl font-bold p-1 text-traco hover:bg-traco hover:text-white transition hover:cursor-pointer"
         />
       </form>
+
+      <div className={`${!cadasDone? "hidden" : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-transparent backdrop-blur-sm flex items-center justify-center"}`}>
+        <RegisterDone />
+        {/* <h1>aga</h1> */}
+      </div>
     </div>
   );
 }
