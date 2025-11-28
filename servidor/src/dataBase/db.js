@@ -34,7 +34,7 @@ const dados = `
 
 try{
     db.exec(dados)
-    console.log("Taela criada")
+    console.log("Tabela Criada!")
 }catch(err){
     console.log("error", err)
 }

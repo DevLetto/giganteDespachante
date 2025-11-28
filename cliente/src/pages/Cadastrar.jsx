@@ -113,6 +113,7 @@ function Cadastrar() {
                   required
                   type="text"
                   name="Nome"
+                  autoComplete="off"
                   onChange={(e) => setNome(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
@@ -130,6 +131,7 @@ function Cadastrar() {
                   type="number"
                   name="CPF"
                   maxLength={14}
+                  autoComplete="off"
                   placeholder="Somente números"
                   onChange={(e) => setCpf(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
@@ -149,7 +151,7 @@ function Cadastrar() {
                   name="Telef"
                   placeholder="Somente números"
                   maxLength={11}
-                  
+                  autoComplete="off"
                   onChange={(e) => setTelefone(e.target.value)}
                   className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
@@ -204,6 +206,7 @@ function Cadastrar() {
                 type="text"
                 name="placa"
                 maxLength={7}
+                autoComplete="off"
                 onChange={(e) => setPlaca(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
@@ -220,6 +223,7 @@ function Cadastrar() {
                 required
                 type="text"
                 name="modelo"
+                autoComplete="off"
                 onChange={(e) => setModelo(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />
@@ -237,6 +241,7 @@ function Cadastrar() {
                 type="number"
                 name="ano"
                 maxLength={4}
+                autoComplete="off"
                 onChange={(e) => setAno(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
               />
@@ -253,6 +258,7 @@ function Cadastrar() {
                 required
                 type="text"
                 name="chassi"
+                autoComplete="off"
                 maxLength={17}
                 onChange={(e) => setChassi(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
@@ -270,6 +276,7 @@ function Cadastrar() {
                 required
                 type="text"
                 name="cor"
+                autoComplete="off"
                 onChange={(e) => setCor(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
@@ -283,7 +290,7 @@ function Cadastrar() {
         />
       </form>
 
-      <div className={`${!cadasDone? "hidden" : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-transparent backdrop-blur-sm flex items-center justify-center"}`}>
+      <div className={`${!cadasDone? "hidden" : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-transparent backdrop-blur-sm flex items-center justify-center "}`}>
         <RegisterDone />
         {/* <h1>aga</h1> */}
       </div>
