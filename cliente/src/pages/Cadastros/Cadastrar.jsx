@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import BackButton from '../../components/BackBtn'
 import CadastroCliente from "./CadastroCliente";
+import CadastroVendedor from "./cadastroVendedor";
+import { useEffect } from "react";
 
 function Cadastrar() {
+
+  const [step, setStep] = useState(1)
+
   const navigate = useNavigate();
+  // States do cliente
   const [nome, setNome] = useState("");
   const [cpf_cnpj, setCpf] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -17,15 +23,16 @@ function Cadastrar() {
   const [chassi, setChassi] = useState("");
   const [cor, setCor] = useState("");
 
+  // States do Vendedor
+  const [nomeVendedor, setNomeVendedor] = useState('')
+  const [cpf_cnpjVendedor, setCpfVendedor] = useState('')
+  const [emailVendedor, setEmailVendedor] = useState('')
+  const [enderecoVendedor, setEnderecoVendedor] = useState('')
 
-  const handleServicoChange = (e) => {
-    const selectedOption = e.target.options[e.target.selectedIndex];
-    const nomeServico = e.target.value;
-    setServi(nomeServico);
 
-    const precoServico = selectedOption.dataset.price;
-    setValorServ(precoServico);
-  };
+
+
+  
 
  
 
@@ -57,11 +64,11 @@ function Cadastrar() {
       if (response.ok) {
         console.log("Cadastro realizado");
         
-        setCadasDone(true)
 
         setTimeout(() => {
-          setCadasDone(false)
-          navigate(-1)
+          console.log("Saindo...")
+          navigate('/menu')
+
           
         }, 2000);
       }
@@ -69,6 +76,14 @@ function Cadastrar() {
       console.error("Erro", error);
     }
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden"; // desativa scroll na página
+
+    return () => {
+      document.body.style.overflow = "auto"; // volta ao normal ao sair do componente
+    };
+  }, []);
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col relative ">
@@ -80,35 +95,46 @@ function Cadastrar() {
           />
         </BackButton>
       </header>
-
+      
+ 
       <form
         onSubmit={handleSubmit}
         action=""
-        className="w-[70%] h-[80%] justify-between flex flex-col "
       >
-        <CadastroCliente 
-        nome = {nome}
-        setNome = {setNome}
-        cpf_cnpj = {cpf_cnpj}
-        setCpf = {setCpf}
-        telefone = {telefone}
-        setTelefone = {setTelefone}
-        servico = {servico}
-        setServi = {setServi}
-        valor_servico = {valor_servico}
-        setValorServ = {setValorServ}
-        placa = {placa}
-        setPlaca = {setPlaca}
-        modelo = {setModelo}
-        ano = {ano}
-        setAno = {setAno}
-        chassi = {chassi}
-        setChassi = {setChassi}
-        cor = {cor}
-        setCor = {setCor} 
-        onSubmit = {handleSubmit}
-        handleServicoChange = {handleServicoChange}
-        />
+
+        {step === 1 &&(
+          <CadastroVendedor />
+        )}
+
+        {step === 2 &&(
+          <CadastroCliente 
+            nome = {nome}
+            setNome = {setNome}
+            cpf_cnpj = {cpf_cnpj}
+            setCpf = {setCpf}
+            telefone = {telefone}
+            setTelefone = {setTelefone}
+            servico = {servico}
+            setServi = {setServi}
+            valor_servico = {valor_servico}
+            setValorServ = {setValorServ}
+            placa = {placa}
+            setPlaca = {setPlaca}
+            modelo = {modelo}
+            setModelo = {setModelo}
+            ano = {ano}
+            setAno = {setAno}
+            chassi = {chassi}
+            setChassi = {setChassi}
+            cor = {cor}
+            setCor = {setCor} 
+            onSubmit = {handleSubmit}
+          />
+        )}
+
+        
+
+
       </form>
 
       
