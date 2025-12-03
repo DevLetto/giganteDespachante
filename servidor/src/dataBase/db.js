@@ -1,5 +1,5 @@
 const Database = require('better-sqlite3')
-const db = new Database('./dbs.sqlite')
+const db = new Database('./db.sqlite')
 
 const dados = `
     CREATE TABLE IF NOT EXISTS users(
@@ -9,7 +9,14 @@ const dados = `
     );
 
     CREATE TABLE IF NOT EXISTS clients(
+    
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+        nomeVendedor TEXT NOT NULL,
+        cpf_cnpjVendedor TEXT NOT NULL,
+        emailVendedor TEXT NOT NULL,
+        enderecoVendedor TEXT NOT NULL,
+        
         nome TEXT NOT NULL,
         cpf_cnpj TEXT NOT NULL,
         telefone TEXT NOT NULL,
@@ -20,6 +27,7 @@ const dados = `
         ano INTEGER NOT NULL,
         chassi TEXT NOT NULL,
         cor TEXT NOT NULL,
+
         data_emissao DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
     );
 

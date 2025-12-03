@@ -1,7 +1,12 @@
 import ServicoData from "../../data/Servicos.json";
+import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { X } from "lucide-react";
+import SureConfirmation from "../../components/SureConfirmation";
 
-function CadastroCliente(
-  {nome,
+function CadastroCliente({
+  nome,
   setNome,
   cpf_cnpj,
   setCpf,
@@ -22,9 +27,10 @@ function CadastroCliente(
   cor,
   setCor,
   handleSubmit,
-  onPrev}
-) {
+  onPrev,
+}) {
 
+  const navigate = useNavigate()
   const servicos = ServicoData;
 
   const handleServicoChange = (e) => {
@@ -36,9 +42,38 @@ function CadastroCliente(
     setValorServ(precoServico);
   };
 
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const algumCampoPreenchido =
+    nome ||
+    cpf_cnpj ||
+    telefone ||
+    servico ||
+    placa ||
+    modelo ||
+    ano ||
+    chassi ||
+    cor;
+
+  const handleBack = () => {
+    if (algumCampoPreenchido) {
+      console.log("cade");
+      setShowConfirm(true); // abre a tela de confirmação
+    } else {
+      navigate("/menu"); // volta normalmente
+    }
+  };
+
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
-      
+      <Header navigate={() => setShowConfirm(true)} icon={X} color={"text-red-500"} />
+
+      {showConfirm && (
+        <SureConfirmation
+          onYes={() => navigate("/menu")}
+          onNo={() => setShowConfirm(false)}
+        />
+      )}
       <div className="w-[70%] h-[80%] justify-between flex flex-col ">
         <main className="flex justify-between   ">
           <div>
@@ -59,7 +94,7 @@ function CadastroCliente(
                   required
                   type="text"
                   name="Nome"
-                  value = {nome}
+                  value={nome}
                   autoComplete="off"
                   onChange={(e) => setNome(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
@@ -76,7 +111,7 @@ function CadastroCliente(
                   required
                   type="number"
                   name="CPF"
-                  value = {cpf_cnpj}
+                  value={cpf_cnpj}
                   maxLength={14}
                   autoComplete="off"
                   placeholder="Somente números"
@@ -95,7 +130,7 @@ function CadastroCliente(
                   required
                   type="tel"
                   name="Telef"
-                  value = {telefone}
+                  value={telefone}
                   placeholder="Somente números"
                   maxLength={11}
                   autoComplete="off"
@@ -113,7 +148,7 @@ function CadastroCliente(
                 <select
                   required
                   name="Servi"
-                  value = {servico}
+                  value={servico}
                   onChange={handleServicoChange}
                   className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
                 >
@@ -150,7 +185,7 @@ function CadastroCliente(
                 required
                 type="text"
                 name="placa"
-                value = {placa}
+                value={placa}
                 maxLength={7}
                 autoComplete="off"
                 onChange={(e) => setPlaca(e.target.value)}
@@ -168,7 +203,7 @@ function CadastroCliente(
                 required
                 type="text"
                 name="modelo"
-                value = {modelo}
+                value={modelo}
                 autoComplete="off"
                 onChange={(e) => setModelo(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
@@ -185,7 +220,7 @@ function CadastroCliente(
                 required
                 type="number"
                 name="ano"
-                value = {ano}
+                value={ano}
                 maxLength={4}
                 autoComplete="off"
                 onChange={(e) => setAno(e.target.value)}
@@ -203,7 +238,7 @@ function CadastroCliente(
                 required
                 type="text"
                 name="chassi"
-                value = {chassi}
+                value={chassi}
                 autoComplete="off"
                 maxLength={17}
                 onChange={(e) => setChassi(e.target.value)}
@@ -221,7 +256,7 @@ function CadastroCliente(
                 required
                 type="text"
                 name="cor"
-                value = {cor}
+                value={cor}
                 autoComplete="off"
                 onChange={(e) => setCor(e.target.value)}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"

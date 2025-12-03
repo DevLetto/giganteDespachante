@@ -1,3 +1,10 @@
+import Header from "../../components/Header";
+import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import SureConfirmation from "../../components/SureConfirmation";
+
 function CadastroVendedor({
   nome,
   setNome,
@@ -7,9 +14,40 @@ function CadastroVendedor({
   setEmail,
   endereco,
   setEndereco,
+  isFormValid,
+  onNext,
 }) {
+  const navigate = useNavigate();
+
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const algumCampoPreenchido =
+    nome || cpf_cnpj || email || endereco;
+
+  const handleBack = () => {
+    if (algumCampoPreenchido) {
+      console.log("cade")
+      setShowConfirm(true); // abre a tela de confirmação
+    } else {
+      navigate("/menu"); // volta normalmente
+    }
+  };
+
   return (
     <div className="w-screen h-screen bg-fundo flex items-center flex-col ">
+      <Header
+        navigate={handleBack}
+        icon={X}
+        color={"text-red-500"}
+      />
+
+      {showConfirm && (
+        <SureConfirmation
+          onYes={() => navigate("/menu")}
+          onNo={() => setShowConfirm(false)}
+        />
+      )}
+
       <main className="flex flex-col justify-between gap-15">
         <div>
           <div className="border-b border-traco  ml-8 mr-8 text-center">
@@ -30,7 +68,7 @@ function CadastroVendedor({
               required
               type="text"
               name="Nome"
-              value = {nome}
+              value={nome}
               autoComplete="off"
               onChange={(e) => setNome(e.target.value)}
               className="bg-white w-full h-12 rounded-lg p-1 text-traco"
@@ -47,9 +85,11 @@ function CadastroVendedor({
               required
               type="number"
               name="CPF"
+              value={cpf_cnpj}
               maxLength={14}
               autoComplete="off"
               placeholder="Somente números"
+              onChange={(e) => setCpf(e.target.value)}
               className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
             />
           </fieldset>
@@ -64,8 +104,9 @@ function CadastroVendedor({
               required
               type="email"
               name="email"
-              maxLength={11}
+              value={email}
               autoComplete="off"
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
             />
           </fieldset>
@@ -83,6 +124,7 @@ function CadastroVendedor({
               name="endereco"
               value={endereco}
               autoComplete="off"
+              onChange={(e) => setEndereco(e.target.value)}
               className="bg-white w-full h-12 rounded-lg p-1 text-traco"
             />
           </fieldset>
@@ -90,6 +132,8 @@ function CadastroVendedor({
         <input
           type="submit"
           value="Prosseguir"
+          disabled={!isFormValid}
+          onClick={onNext}
           className="self-center bg-white  h-12 rounded-lg w-[60%] text-3xl font-bold p-1 text-traco hover:bg-traco hover:text-white transition hover:cursor-pointer"
         />
       </main>

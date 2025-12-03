@@ -5,6 +5,7 @@ import BackButton from '../../components/BackBtn'
 import CadastroCliente from "./CadastroCliente";
 import CadastroVendedor from "./cadastroVendedor";
 import { useEffect } from "react";
+import Header from "../../components/Header";
 
 function Cadastrar() {
 
@@ -31,7 +32,7 @@ function Cadastrar() {
 
 
 
-
+const isFormValid = nomeVendedor && cpf_cnpjVendedor && emailVendedor && enderecoVendedor
   
 
  
@@ -40,6 +41,11 @@ function Cadastrar() {
     e.preventDefault();
 
     const dadosCadastro = {
+      
+      nomeVendedor,
+      cpf_cnpjVendedor,
+      emailVendedor,
+      enderecoVendedor,
       nome,
       cpf_cnpj,
       telefone,
@@ -87,14 +93,7 @@ function Cadastrar() {
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col relative ">
-      <header className=" w-screen h-max ">
-        <BackButton onClick={() => navigate(-1)}>
-          <ArrowLeft
-            size={60}
-            className="text-traco hover:bg-traco hover:text-white rounded-lg transition hover:cursor-pointer"
-          />
-        </BackButton>
-      </header>
+      
       
  
       <form
@@ -103,7 +102,20 @@ function Cadastrar() {
       >
 
         {step === 1 &&(
-          <CadastroVendedor />
+          <CadastroVendedor
+            nome = {nomeVendedor}
+            setNome = {setNomeVendedor}
+            cpf_cnpj={cpf_cnpjVendedor}
+            setCpf={setCpfVendedor}
+            email={emailVendedor}
+            setEmail={setEmailVendedor}
+            endereco={enderecoVendedor}
+            setEndereco={setEnderecoVendedor}
+            onNext={() => setStep(2)}
+            isFormValid ={isFormValid}
+
+
+          />
         )}
 
         {step === 2 &&(

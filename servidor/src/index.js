@@ -14,21 +14,6 @@ const rotaCadastro = require('./rotas/rotaCliente');
 app.use(express.json());
 app.use(cors());
 
-// db.prepare(
-//   `INSERT INTO clients(nome, cpf_cnpj, telefone, servico, valor_servico, placa, modelo, ano, chassi, cor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-// ).run(
-//   "Gabriel",
-//   "123.123.123.123",
-//   "1234567890",
-//   "transferencia",
-//   "190.00",
-//   "ONH_AHA",
-//   "impala",
-//   1967,
-//   "asdasdasdasd",
-//   "preto"
-// );
-
 
 
 
