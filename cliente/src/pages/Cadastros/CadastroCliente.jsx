@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { X } from "lucide-react";
 import SureConfirmation from "../../components/SureConfirmation";
+import { ArrowLeft, Bold } from "lucide-react";
+
 
 function CadastroCliente({
   nome,
@@ -74,7 +76,10 @@ function CadastroCliente({
           onNo={() => setShowConfirm(false)}
         />
       )}
-      <div className="w-[70%] h-[80%] justify-between flex flex-col ">
+      <div className="w-[70%] h-[80%] justify-between flex flex-col  relative">
+        <button type="button" onClick={onPrev} className="absolute top-70 left-[-18em] text-traco hover:bg-traco hover:text-white rounded-lg">
+            <ArrowLeft size={60} className="text-traco hover:bg-traco hover:text-white rounded-lg"/>
+        </button>
         <main className="flex justify-between   ">
           <div>
             <div className="border-b border-traco mb-20 ml-8 mr-8  text-center ">

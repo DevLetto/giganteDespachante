@@ -2,7 +2,7 @@ import {TriangleAlert} from "lucide-react"
 
 function SureConfirmation({ onYes, onNo }) {
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[10]">
       <div className="bg-fundo w-lg h-80 p-6 rounded-xl flex flex-col items-center border-2 border-traco gap-7" >
         <TriangleAlert 
         size = {100}

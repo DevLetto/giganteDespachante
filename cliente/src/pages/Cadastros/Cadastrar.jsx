@@ -141,6 +141,7 @@ const isFormValid = nomeVendedor && cpf_cnpjVendedor && emailVendedor && enderec
             cor = {cor}
             setCor = {setCor} 
             onSubmit = {handleSubmit}
+            onPrev={() => setStep(1)}
           />
         )}
 
