@@ -1,17 +1,17 @@
-import { ArrowLeft, Bold } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import BackButton from '../../components/BackBtn'
 import CadastroCliente from "./CadastroCliente";
 import CadastroVendedor from "./cadastroVendedor";
 import { useEffect } from "react";
-import Header from "../../components/Header";
+import CadastroDone from "../../components/CadastroDone";
 
 function Cadastrar() {
 
   const [step, setStep] = useState(1)
+  const [cadasDone, setCadasDone] = useState(false)
 
   const navigate = useNavigate();
+
   // States do cliente
   const [nome, setNome] = useState("");
   const [cpf_cnpj, setCpf] = useState("");
@@ -69,11 +69,13 @@ const isFormValid = nomeVendedor && cpf_cnpjVendedor && emailVendedor && enderec
 
       if (response.ok) {
         console.log("Cadastro realizado");
+        console.log("Saindo...")
+        setCadasDone(true)
         
 
         setTimeout(() => {
-          console.log("Saindo...")
           navigate('/menu')
+
 
           
         }, 2000);
@@ -144,6 +146,8 @@ const isFormValid = nomeVendedor && cpf_cnpjVendedor && emailVendedor && enderec
             onPrev={() => setStep(1)}
           />
         )}
+
+        {cadasDone && <CadastroDone/>}
 
         
 

@@ -39,6 +39,7 @@ function CadastroVendedor({
         navigate={handleBack}
         icon={X}
         color={"text-red-500"}
+        text={"Cancelar"}
       />
 
       {showConfirm && (

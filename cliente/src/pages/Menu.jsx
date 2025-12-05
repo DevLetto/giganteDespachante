@@ -1,6 +1,9 @@
-import {User} from "lucide-react"
+import {Clock, User, UserRoundPlus} from "lucide-react"
 import Logo from '../assets/LogoGiganteDespachante.png'
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+
+
 
 
 
@@ -16,33 +19,41 @@ function Menu(){
     navigate('/pesquisar')
     }
 
+    useEffect(() => {
+        document.body.style.overflow = "hidden"; // desativa scroll na página
+    
+        return () => {
+          document.body.style.overflow = "auto"; // volta ao normal ao sair do componente
+        };
+      }, []);
+
     return(
         <div className='w-screen h-screen bg-fundo flex gap-70 items-center flex-col  '>
             <header className="  w-screen flex flex-row justify-between">
                 <img src={Logo} alt="Logo Gigante Despachante" className=" w-2xs" />
-               <button className=" text-traco hover:text-white hover:bg-traco transition rounded-bl-lg rounded-tl-lg hover:cursor-pointer" >
+               <button className=" text-traco hover:text-white hover:bg-traco transition rounded-bl-lg rounded-tl-lg hover:cursor-pointer flex flex-col items-center p-2" >
                    <User   size={60}/>
+                   <p className=" text-2xl font-bold font-[Arial]">Perfil</p>
                </button> 
             </header>
-            <main className="w-[500px] h-[350px] border-2 border-traco flex flex-col items-center justify-around  rounded-lg shadow-2xl">  
+            <main className="w-[500px] h-[350px] bg-fundo flex flex-col items-center justify-around  border-3 border-traco shadow-2xl rounded-lg ">  
 
                 <button onClick={() => navigate('/cadastrar')}
 
-                className="w-[90%] h-[60px] bg-white rounded-lg text-2xl text-traco hover:bg-traco hover:text-white transition hover:cursor-pointer">
-                    Cadastrar Cliente
+                className="w-[90%] h-25 bg-traco rounded-lg text-3xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8" >
+                    <UserRoundPlus size={60} className=""/> Iniciar Cadastro
                 
                 </button>
 
 
                 <button onClick={() => navigate('/pesquisar')}
-                 className="w-[90%] h-[60px] bg-white rounded-lg text-2xl text-traco hover:bg-traco hover:text-white transition hover:cursor-pointer">
-                    Pesquisar Serviço
+                 className="w-[90%] h-25 bg-traco rounded-lg text-3xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8">
+                    <Clock size={60} className=""/> Histórico de Serviços
                 </button>
 
             </main>
           </div>
     )
-
 } 
 
 export default Menu;

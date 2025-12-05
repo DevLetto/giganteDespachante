@@ -6,7 +6,6 @@ import { X } from "lucide-react";
 import SureConfirmation from "../../components/SureConfirmation";
 import { ArrowLeft, Bold } from "lucide-react";
 
-
 function CadastroCliente({
   nome,
   setNome,
@@ -31,8 +30,7 @@ function CadastroCliente({
   handleSubmit,
   onPrev,
 }) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const servicos = ServicoData;
 
   const handleServicoChange = (e) => {
@@ -68,7 +66,12 @@ function CadastroCliente({
 
   return (
     <div className="w-screen h-screen bg-fundo flex  items-center flex-col  ">
-      <Header navigate={() => setShowConfirm(true)} icon={X} color={"text-red-500"} />
+      <Header
+        navigate={() => setShowConfirm(true)}
+        icon={X}
+        color={"text-red-500"}
+        text={"Cancelar"}
+      />
 
       {showConfirm && (
         <SureConfirmation
@@ -77,8 +80,16 @@ function CadastroCliente({
         />
       )}
       <div className="w-[70%] h-[80%] justify-between flex flex-col  relative">
-        <button type="button" onClick={onPrev} className="absolute top-70 left-[-18em] text-traco hover:bg-traco hover:text-white rounded-lg">
-            <ArrowLeft size={60} className="text-traco hover:bg-traco hover:text-white rounded-lg"/>
+        <button
+          type="button"
+          onClick={onPrev}
+          className="absolute top-70 left-[-18em] text-traco hover:bg-traco hover:text-white rounded-lg p-1"
+        >
+          <ArrowLeft
+            size={60}
+            className="text-traco hover:bg-traco hover:text-white rounded-lg"
+          />
+          <p className="text-2xl font-bold font-[Arial]">Voltar</p>
         </button>
         <main className="flex justify-between   ">
           <div>
