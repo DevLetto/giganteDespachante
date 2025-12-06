@@ -284,7 +284,7 @@ function CadastroCliente({
           type="submit"
           value="Finalizar"
           onSubmit={handleSubmit}
-          className="self-center bg-white  h-12 rounded-lg w-[30%] text-3xl font-bold p-1 text-traco hover:bg-traco hover:text-white transition hover:cursor-pointer"
+          className="self-center bg-traco  h-12 rounded-lg w-[30%] text-3xl font-bold p-1 text-white hover:bg-white hover:text-traco transition hover:cursor-pointer"
         />
       </div>
     </div>
