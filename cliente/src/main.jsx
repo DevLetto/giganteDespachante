@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from "./pages/Login"
 import Menu from "./pages/Menu.jsx"
 import Cadastrar from "./pages/Cadastros/Cadastrar.jsx"
-import Pesquisar from "./pages/Pesquisar.jsx"
+import Pesquisar from "./pages/Historico/Pesquisar.jsx"
 import NotFound from './pages/NotFound.jsx'
 
 const router = createBrowserRouter([
