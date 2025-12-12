@@ -7,9 +7,10 @@ const port = 8080;
 const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
 const rotaCadastro = require('./rotas/rotaCliente');
+const rotaHistorico = require('./rotas/rotaHistorico')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("User", "1234")
+// createUser("User2", "1234")
 
 app.use(express.json());
 app.use(cors());
@@ -30,5 +31,6 @@ try {
 
 app.use('/', rotaCadastro)
 app.use('/', rotaLogin)
+app.use('/', rotaHistorico)
 
 app.listen(port, () => console.log(`rodando na port ${port}`));

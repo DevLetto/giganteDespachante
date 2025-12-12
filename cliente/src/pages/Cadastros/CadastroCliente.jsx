@@ -5,6 +5,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import SureConfirmation from "../../components/SureConfirmation";
 import { ArrowLeft, Bold } from "lucide-react";
+import { formatarCpfCnpj, formatarTelefone, formatarPlaca, formatarAno, formatarChassi} from "../../utils/mascara";
 
 function CadastroCliente({
   nome,
@@ -125,13 +126,13 @@ function CadastroCliente({
                 </label>
                 <input
                   required
-                  type="number"
+                  type="text"
                   name="CPF"
                   value={cpf_cnpj}
-                  maxLength={14}
+                  maxLength={18}
                   autoComplete="off"
                   placeholder="Somente números"
-                  onChange={(e) => setCpf(e.target.value)}
+                  onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
                 />
               </fieldset>
@@ -144,13 +145,13 @@ function CadastroCliente({
                 </label>
                 <input
                   required
-                  type="tel"
+                  type="text"
                   name="Telef"
                   value={telefone}
                   placeholder="Somente números"
-                  maxLength={11}
+                  maxLength={13}
                   autoComplete="off"
-                  onChange={(e) => setTelefone(e.target.value)}
+                  onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
                   className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
               </fieldset>
@@ -202,9 +203,9 @@ function CadastroCliente({
                 type="text"
                 name="placa"
                 value={placa}
-                maxLength={7}
+                maxLength={8}
                 autoComplete="off"
-                onChange={(e) => setPlaca(e.target.value)}
+                onChange={(e) => setPlaca(formatarPlaca(e.target.value))}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
               />
             </fieldset>
@@ -234,12 +235,12 @@ function CadastroCliente({
               </label>
               <input
                 required
-                type="number"
+                type="text"
                 name="ano"
                 value={ano}
                 maxLength={4}
                 autoComplete="off"
-                onChange={(e) => setAno(e.target.value)}
+                onChange={(e) => setAno(formatarAno(e.target.value))}
                 className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
               />
             </fieldset>
@@ -257,7 +258,7 @@ function CadastroCliente({
                 value={chassi}
                 autoComplete="off"
                 maxLength={17}
-                onChange={(e) => setChassi(e.target.value)}
+                onChange={(e) => setChassi(formatarChassi(e.target.value))}
                 className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
               />
             </fieldset>

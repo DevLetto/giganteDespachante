@@ -1,5 +1,5 @@
 const Database = require('better-sqlite3')
-const db = new Database('./db.sqlite')
+const db = new Database('./dbs.sqlite')
 
 const dados = `
     CREATE TABLE IF NOT EXISTS users(

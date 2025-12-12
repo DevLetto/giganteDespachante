@@ -4,6 +4,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SureConfirmation from "../../components/SureConfirmation";
+import { formatarCpfCnpj } from "../../utils/mascara";
 
 function CadastroVendedor({
   nome,
@@ -84,13 +85,13 @@ function CadastroVendedor({
             </label>
             <input
               required
-              type="number"
+              type="text"
               name="CPF"
               value={cpf_cnpj}
-              maxLength={14}
+              maxLength={18}
               autoComplete="off"
               placeholder="Somente números"
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={(e) => setCpf(formatarCpfCnpj (e.target.value))}
               className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
             />
           </fieldset>
