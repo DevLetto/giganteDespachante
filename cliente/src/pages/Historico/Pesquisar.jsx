@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Buscas from "./Buscas";
 import Tabela from "./Tabela";
+import InfoCadastro from "./InfoCadastro";
 
 function Pesquisar() {
   const navigate = useNavigate();
@@ -73,6 +74,8 @@ function Pesquisar() {
       
       lista={lista}
       />
+
+      
     </div>
   );
 }
