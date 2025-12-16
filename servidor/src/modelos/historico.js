@@ -1,32 +1,58 @@
-const db = require('../dataBase/db')
+const db = require("../dataBase/db");
 
-module.exports = async function listaCadastros(){
+module.exports = async function listaCadastros(filtros = {}) {
+  let sql = "SELECT data_emissao, servico, placa, id FROM clients";
+  const params = [];
+  const where = [];
 
-    try{
-        const stmt = await db.prepare(`SELECT *, datetime(data_emissao, 'localtime') AS data_emissao_local FROM clients ORDER BY data_emissao DESC`).all()
+  
 
-        const listaFormatada = stmt.map(item =>{
-            const dt = new Date(item.data_emissao + "Z"); // adiciona 'Z' para tratar como UTC
+  if (filtros.placa) {
+    where.push("placa LIKE ?");
+    params.push(`%${filtros.placa}%`);
+  }
 
-        // formata BR
-            const dataBR = dt.toLocaleDateString("pt-BR");                // "10/01/2025"
-        const horaBR = dt.toLocaleTimeString("pt-BR", {               // "14:32"
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-        });
+  if (filtros.servico) {
+    where.push("servico = ?");
+    params.push(filtros.servico);
+  }
 
-        return {
-            ...item,
-            data: dataBR,
-            hora: horaBR
-        }
-        })
+  if (filtros.dataInicial) {
+    where.push("DATE(data_emissao) >= DATE(?)");
+    params.push(filtros.dataInicial);
+  }
 
-        return listaFormatada
+  if (filtros.dataFinal) {
+    where.push("DATE(data_emissao) <= DATE(?)");
+    params.push(filtros.dataFinal);
+  }
 
-    } catch(error){
-        console.error("Erro ao pegar o cadastro no banco de dados:", error);
-        throw error; 
-    }
-}
+  if (where.length > 0) {
+    sql += " WHERE " + where.join(" AND ");
+  }
+
+ 
+
+  sql += " ORDER BY data_emissao DESC";
+
+  const listaCrua = db.prepare(sql).all(params);
+
+  const listaFormatada = listaCrua.map((item) => {
+    const dt = new Date(item.data_emissao + "Z");
+
+    const dataBR = dt.toLocaleDateString("pt-BR");
+    const horaBR = dt.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false, 
+    });
+
+    return {
+      ...item,
+      data: dataBR, 
+      hora: horaBR, 
+    };
+  });
+
+  return listaFormatada; 
+};

@@ -1,10 +1,9 @@
 import Header from "../../components/Header";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react"; 
 import Buscas from "./Buscas";
 import Tabela from "./Tabela";
-import InfoCadastro from "./InfoCadastro";
 import Filtros from "./Filtros";
 
 function Pesquisar() {
@@ -12,52 +11,108 @@ function Pesquisar() {
 
   const [placa, setPlaca] = useState("");
   const [lista, setLista] = useState([]);
-  const [servico, setServico] = useState("")
-  const [valorServ, setValorServ] = useState("")
-  const [dataInicial, setDataInicial] = useState("")
-  const [dataFinal, setDataFinal] = useState("")
-  const [sempre, setSempre] = useState(false)
-                                                                
-  useEffect(() => {
-    document.body.style.overflow = "hidden"; // desativa scroll na página
+  const [servico, setServico] = useState("");
+  const [valorServ, setValorServ] = useState("");
+  const [dataInicial, setDataInicial] = useState("");
+  const [dataFinal, setDataFinal] = useState("");
+  const [sempre, setSempre] = useState(false);
+  
+  const [filtrosAplicados, setFiltrosAplicados] = useState({
+      servico: "",
+      valorServ: "",
+      dataInicial: "",
+      dataFinal: "",
+  });
 
+
+  const buscarHistorico = useCallback(async (filtrosOverride = {}) => {
+    try {
+      const currentFiltros = { ...filtrosAplicados, ...filtrosOverride };
+      
+      const queryParams = new URLSearchParams();
+      
+      if (placa) {
+        queryParams.append("placa", placa);
+      }
+
+      if (currentFiltros.servico) {
+        queryParams.append("servico", currentFiltros.servico);
+      }
+      if (currentFiltros.valorServ) {
+        queryParams.append("valorServ", currentFiltros.valorServ);
+      }
+      if (currentFiltros.dataInicial) {
+        queryParams.append("dataInicial", currentFiltros.dataInicial);
+      }
+      if (currentFiltros.dataFinal) {
+        queryParams.append("dataFinal", currentFiltros.dataFinal);
+      }
+
+      const url = `http://localhost:8080/historico?${queryParams.toString()}`;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        console.error("Erro ao carregar historico. Status:", response.status);
+        setLista([]);
+        return;
+      }
+
+      const dados = await response.json();
+      setLista(Array.isArray(dados) ? dados : []);
+    } catch (error) {
+      console.error("Erro ao executar requisição", error);
+      setLista([]);
+    }
+  }, [placa, filtrosAplicados]); 
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "auto"; // volta ao normal ao sair do componente
+      document.body.style.overflow = "auto";
     };
   }, []);
 
   useEffect(() => {
-    async function pegarDados() {
-
-        try{
-            const response = await fetch("http://localhost:8080/historico");
-
-            if(!response.ok){
-                console.error("Erro ao carregar historico. Status:", response.status)
-                setLista([])
-                return
-            }
-
-            const dados = await response.json()
-            console.log("DADOS: ", dados )
-
-            if(Array.isArray(dados)){
-                setLista(dados)
-                
-            }else{
-                console.error("Dados recebidos não são arrays:", dados)
-                setLista([]);
-            }
-            
-
-        }catch(error){
-            console.error("Erro ao executar requisição", error)
-            setLista([])
-        }
+    if (!placa) {
+        buscarHistorico(); 
+        return;
     }
 
-    pegarDados()
-  }, []);
+    const handler = setTimeout(() => {
+      buscarHistorico();
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [placa, buscarHistorico]);
+
+  const aplicarFiltros = () => {
+      setFiltrosAplicados({
+          servico,
+          valorServ,
+          dataInicial,
+          dataFinal,
+      });
+
+  };
+
+  const removerFiltros = () => {
+      setServico("");
+      setValorServ("");
+      setDataInicial("");
+      setDataFinal("");
+      
+      setFiltrosAplicados({
+          servico: "",
+          valorServ: "",
+          dataInicial: "",
+          dataFinal: "",
+      });
+      
+  };
+
 
   return (
     <div className="w-screen h-screen bg-fundo flex gap-5 items-center flex-col relative ">
@@ -71,26 +126,25 @@ function Pesquisar() {
             text={"Voltar"}
           />
         </div>
-        <Buscas 
-        placa={placa}
-        setPlaca={setPlaca}
-        />
+        {}
+        <Buscas placa={placa} setPlaca={setPlaca} />
       </div>
-      <Tabela 
-      
-      lista={lista}
-      />
+      <Tabela lista={lista} />
 
       <div className="absolute right-50 top-10 ">
-        <Filtros 
+        <Filtros
           servico={servico}
           setServi={setServico}
           valorServ={valorServ}
           setValorServ={setValorServ}
+          dataInicial={dataInicial}
+          setDataInicial={setDataInicial}
+          dataFinal={dataFinal}
+          setDataFinal={setDataFinal}
+          aplicarFiltros={aplicarFiltros}
+          removerFiltros={removerFiltros}
         />
       </div>
-
-      
     </div>
   );
 }
