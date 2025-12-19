@@ -10,7 +10,7 @@ const rotaCadastro = require('./rotas/rotaCliente');
 const rotaHistorico = require('./rotas/rotaHistorico')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("User2", "1234")
+// createUser("User1", "1234")
 
 app.use(express.json());
 app.use(cors());
