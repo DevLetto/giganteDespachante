@@ -15,6 +15,7 @@
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "nodemon": "^3.1.11",
+    "pdfkit": "^0.17.2",
     "react-input-mask": "^2.0.4"
   }
 }

@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import Buscas from "./Buscas";
 import Tabela from "./Tabela";
 import Filtros from "./Filtros";
+import MostrarUsuario from "../../components/mostrarUsuario";
 
 function Pesquisar() {
   const navigate = useNavigate();
@@ -131,7 +132,7 @@ function Pesquisar() {
       </div>
       <Tabela lista={lista} />
 
-      <div className="absolute right-50 top-10 ">
+      {/* <div className="absolute right-50 top-10 ">
         <Filtros
           servico={servico}
           setServi={setServico}
@@ -144,7 +145,10 @@ function Pesquisar() {
           aplicarFiltros={aplicarFiltros}
           removerFiltros={removerFiltros}
         />
-      </div>
+      </div> */}
+
+      <MostrarUsuario />
+
     </div>
   );
 }

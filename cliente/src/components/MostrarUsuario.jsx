@@ -1,8 +1,9 @@
-import Header from "../../components/Header";
+import Header from "./Header";
 import { ArrowLeft } from "lucide-react";
 
-function InfoCadastro(){
-    return(
+function MostrarUsuario(){
+    return (
+        
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-10">
             <main className="w-200 h-200 bg-fundo rounded-lg">
                 <Header
@@ -16,7 +17,8 @@ function InfoCadastro(){
             </main>
 
         </div>
+    
     )
 }
 
-export default InfoCadastro;
+export default MostrarUsuario

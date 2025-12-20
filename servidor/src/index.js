@@ -8,6 +8,7 @@ const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
 const rotaCadastro = require('./rotas/rotaCliente');
 const rotaHistorico = require('./rotas/rotaHistorico')
+const procuracao = require('./rotas/rotaProcuracao')
 // const createUser = require('./modelos/criarUsuario')
 
 // createUser("User1", "1234")
@@ -32,5 +33,6 @@ try {
 app.use('/', rotaCadastro)
 app.use('/', rotaLogin)
 app.use('/', rotaHistorico)
+app.use('/', procuracao)
 
 app.listen(port, () => console.log(`rodando na port ${port}`));

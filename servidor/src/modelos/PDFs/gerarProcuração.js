@@ -1,32 +1,14 @@
 const PDFDocument = require("pdfkit");
-const fs = require("fs");
-const db = require("../dataBase/db");
+
 
 module.exports = function GerarProcuração(dados) {
   const doc = new PDFDocument({
     size: "A4",
     margin: { top: 50, bottom: 45, left: 10, right: 10 },
   });
-  doc.pipe(fs.createWriteStream("Procuração.pdf"));
 
 
-  // Dados fictícios para demonstração
-  const Nome = "Roberto Peidor Reiro";
-  const Bairro = "Peidolandia";
-  const Cidade = "Peido City";
-  const CEP = "00000-000";
-  const Identidade = "00.000.000-0";
-  const OrgaoEmissor = "SSP";
-  const CPF = "000.000.000-00";
-  const CNPJ = "00.000.000/0000-00";
-
-  const MarcaModelo = "Fiat Uno";
-  const AnoFabricacao = "2020";
-  const AnoModelo = "2021";
-  const Placas = "AAA-0000";
-  const Cor = "Prata";
-  const Chassi = "9BWZZZ377VT004251";
-
+  
   // Início do conteúdo do PDF
 
   // CONF GERAL
@@ -68,17 +50,17 @@ module.exports = function GerarProcuração(dados) {
 
   doc.font("Arial-Italic").text("Residente á", { align: "justify" });
   doc.moveDown(0.1);
-  doc.text(`Bairro: ${dadosCliente.bairro} Cidade: ${dadosCliente.cidade} CEP: ${dadosCliente.cep}`, {
+  doc.text(`Bairro:  Cidade:  CEP: `, {
     align: "justify",
   });
 
   doc.moveDown(0.1);
   doc.text(
-    `Portador da carteira de identidade: ${dadosCliente.identidade} ORGÃO EMISSOR: ${dadosCliente.orgaoEmissor}`,
+    `Portador da carteira de identidade: ORGÃO EMISSOR: `,
     { align: "justify" }
   );
   doc.moveDown(0.1);
-  doc.text(`CPF: ${dadosCliente.cpf}, ou CNPJ: ${dadosCliente.cnpj}`, { align: "justify" });
+  doc.text(`CPF: ${dados.cpf}, ou CNPJ: `, { align: "justify" });
   //Texto 1
   doc.moveDown(2);
 
@@ -115,7 +97,7 @@ module.exports = function GerarProcuração(dados) {
   doc
     .font("Arial-BoldItalic")
     .fontSize(13)
-    .text(`Marca/Modelo: ${dadosCliente.modelo} , Placa: ${dadosCliente.placa} , Chassi: ${dadosCliente.chassi} .`,);
+    .text(`Marca/Modelo: ${dados.modelo} , Placa: ${dados.placa} , Chassi: ${dados.chassi} .`,);
   doc.moveDown(0.1);
 
   doc
@@ -207,4 +189,5 @@ module.exports = function GerarProcuração(dados) {
     .text("GRAZIELE DE SOUZA FERREIRA", 400, 782);
 
   doc.end();
+  return doc
 };

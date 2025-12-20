@@ -1,7 +1,5 @@
 
 const PDFDocument = require ("pdfkit");
-const fs =  require ("fs");
-const db = require("../../dataBase/db");
 
 module.exports = function GerarIntencaoDeVenda(dados) {
 
@@ -10,52 +8,9 @@ module.exports = function GerarIntencaoDeVenda(dados) {
     margin: { top: 50, bottom: 45, left: 30, right: 30 },
   });
 
-  doc.pipe(fs.createWriteStream("IntencaoDeVenda.pdf"));
 
 
-  //Variaveis
-
-  //Vendedor
-//   const outorganteNome = dadosCliente.nome;
-//   const outorganteEstadoCivil = dadosCliente.estadoCivil;
-//   const outorganteRG = dadosCliente.identidade;
-//   const outorganteOrgaoExpedidor = dadosCliente.orgaoEmissor;
-//   const outorganteCPF = dadosCliente.cpf;
-//   const outorganteEndereco = dadosCliente.endereco;
-//   const outorganteQuadra = dadosCliente.quadra;
-//   const outorganteLote = dadosCliente.lote;
-//   const outorganteNumero = dadosCliente.numero;
-//   const outorganteBairro = dadosCliente.bairro;  
-//   const outorganteMunicipio = dadosCliente.cidade;
-//   const outorganteEstadoCivil = dadosCliente.estadoCivil;
-//   const outorganteRG = dadosCliente.identidade;
-//   const outorganteOrgaoExpedidor = dadosCliente.orgaoEmissor;
-//   const outorganteCPF = dadosCliente.cpf;
-//   const outorganteEndereco = dadosCliente.endereco;
-//   const outorganteQuadra = dadosCliente.quadra;
-//   const outorganteLote = dadosCliente.lote;
-//   const outorganteNumero = dadosCliente.numero;
-//   const outorganteBairro = dadosCliente.bairro;  
-//   const outorganteMunicipio = dadosCliente.cidade;
-//   const outorganteUF = "UF";
-//   const outorganteCEP = "00000-000";
-//   const outorganteEmail = "email@dominio.com";
-//   const outorganteCelular = "(00) 00000-0000";
-
-//   //Veículo
-//   const veiculoMarcaModelo = "Marca Modelo";
-//   const veiculoAnoFabricacaoModelo = "0000/0000";
-//   const veiculoPlaca = "XXX-0000";
-//   const veiculoChassi = "00000000000000000";
-
-//   //Comprador
-//   const compradorNome = "Nome do Comprador";
-//   const compradorRG = "00.000.000-0";
-//   const compradorCPF = "000.000.000-00";
-//   const compradorEndereco = "Endereço Completo do Comprador";
-//   const compradorEmail = "email@dominio.com";
-//   const compradorValor = "0.000,00";
-
+ 
 
 
 
@@ -259,4 +214,5 @@ module.exports = function GerarIntencaoDeVenda(dados) {
 
   // FINAL
   doc.end();
+  return doc
 }
