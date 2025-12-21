@@ -1,6 +1,6 @@
 function GerarProcuração(){
-    function(
-        
+    return(
+        <div></div>
     )
 }
 

@@ -17,6 +17,8 @@ function Pesquisar() {
   const [dataInicial, setDataInicial] = useState("");
   const [dataFinal, setDataFinal] = useState("");
   const [sempre, setSempre] = useState(false);
+  const [showDetails, setShowDetails] = useState(false)
+  const [idCliente, setIdCliente] = useState("")
   
   const [filtrosAplicados, setFiltrosAplicados] = useState({
       servico: "",
@@ -114,6 +116,13 @@ function Pesquisar() {
       
   };
 
+  const mostrarInfoUser = (id) =>{
+    setIdCliente(id)
+    setShowDetails(true)
+    console.log(id)
+
+  }
+
 
   return (
     <div className="w-screen h-screen bg-fundo flex gap-5 items-center flex-col relative ">
@@ -130,9 +139,9 @@ function Pesquisar() {
         {}
         <Buscas placa={placa} setPlaca={setPlaca} />
       </div>
-      <Tabela lista={lista} />
+      <Tabela lista={lista} verDetalhe={mostrarInfoUser}/>
 
-      {/* <div className="absolute right-50 top-10 ">
+      <div className="absolute right-50 top-10 ">
         <Filtros
           servico={servico}
           setServi={setServico}
@@ -145,9 +154,10 @@ function Pesquisar() {
           aplicarFiltros={aplicarFiltros}
           removerFiltros={removerFiltros}
         />
-      </div> */}
+      </div>
 
-      <MostrarUsuario />
+      {showDetails && (<MostrarUsuario id={idCliente} voltar={() => setShowDetails(false)} />)}  
+      
 
     </div>
   );

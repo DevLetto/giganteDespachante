@@ -1,11 +1,14 @@
 const db = require("../dataBase/db");
 
 module.exports = async function listaCadastros(filtros = {}) {
-  let sql = "SELECT data_emissao, servico, placa, id FROM clients";
+  let sql = "SELECT * FROM clients";
   const params = [];
   const where = [];
 
-  
+  if(filtros.id !== undefined){
+    where.push("id = ?")
+    params.push(filtros.id)
+  }
 
   if (filtros.placa) {
     where.push("placa LIKE ?");

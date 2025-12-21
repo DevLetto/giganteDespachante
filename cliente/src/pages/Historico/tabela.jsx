@@ -1,4 +1,11 @@
 function Tabela({ lista, verDetalhe }) {
+
+  function verDetalhes(item){
+    console.log(item)
+    verDetalhe(item)
+    
+  }
+
   return (
     <div className=" w-2xl h-200 bg-white rounded-lg overflow-auto custom-scroll">
       <ul>
@@ -15,7 +22,7 @@ function Tabela({ lista, verDetalhe }) {
             <div className="flex flex-row w-full justify-between">
               <p>{item.servico}</p>
               <button
-                onClick={verDetalhe}
+                onClick={() => {verDetalhes(item.id)}}
                 className="text-traco hover:cursor-pointer hover:text-[#012e5f]"
               >
                 Ver detalhes...
