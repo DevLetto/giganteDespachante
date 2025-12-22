@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react"; 
+import { useState, useEffect, useCallback } from "react";
 import Buscas from "./Buscas";
 import Tabela from "./Tabela";
 import Filtros from "./Filtros";
@@ -17,57 +17,60 @@ function Pesquisar() {
   const [dataInicial, setDataInicial] = useState("");
   const [dataFinal, setDataFinal] = useState("");
   const [sempre, setSempre] = useState(false);
-  const [showDetails, setShowDetails] = useState(false)
-  const [idCliente, setIdCliente] = useState("")
-  
+  const [showDetails, setShowDetails] = useState(false);
+  const [showFiltro, setShowFiltro] = useState(false);
+  const [idCliente, setIdCliente] = useState("");
+
   const [filtrosAplicados, setFiltrosAplicados] = useState({
-      servico: "",
-      valorServ: "",
-      dataInicial: "",
-      dataFinal: "",
+    servico: "",
+    valorServ: "",
+    dataInicial: "",
+    dataFinal: "",
   });
 
+  const buscarHistorico = useCallback(
+    async (filtrosOverride = {}) => {
+      try {
+        const currentFiltros = { ...filtrosAplicados, ...filtrosOverride };
 
-  const buscarHistorico = useCallback(async (filtrosOverride = {}) => {
-    try {
-      const currentFiltros = { ...filtrosAplicados, ...filtrosOverride };
-      
-      const queryParams = new URLSearchParams();
-      
-      if (placa) {
-        queryParams.append("placa", placa);
-      }
+        const queryParams = new URLSearchParams();
 
-      if (currentFiltros.servico) {
-        queryParams.append("servico", currentFiltros.servico);
-      }
-      if (currentFiltros.valorServ) {
-        queryParams.append("valorServ", currentFiltros.valorServ);
-      }
-      if (currentFiltros.dataInicial) {
-        queryParams.append("dataInicial", currentFiltros.dataInicial);
-      }
-      if (currentFiltros.dataFinal) {
-        queryParams.append("dataFinal", currentFiltros.dataFinal);
-      }
+        if (placa) {
+          queryParams.append("placa", placa);
+        }
 
-      const url = `http://localhost:8080/historico?${queryParams.toString()}`;
+        if (currentFiltros.servico) {
+          queryParams.append("servico", currentFiltros.servico);
+        }
+        if (currentFiltros.valorServ) {
+          queryParams.append("valorServ", currentFiltros.valorServ);
+        }
+        if (currentFiltros.dataInicial) {
+          queryParams.append("dataInicial", currentFiltros.dataInicial);
+        }
+        if (currentFiltros.dataFinal) {
+          queryParams.append("dataFinal", currentFiltros.dataFinal);
+        }
 
-      const response = await fetch(url);
+        const url = `http://localhost:8080/historico?${queryParams.toString()}`;
 
-      if (!response.ok) {
-        console.error("Erro ao carregar historico. Status:", response.status);
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          console.error("Erro ao carregar historico. Status:", response.status);
+          setLista([]);
+          return;
+        }
+
+        const dados = await response.json();
+        setLista(Array.isArray(dados) ? dados : []);
+      } catch (error) {
+        console.error("Erro ao executar requisição", error);
         setLista([]);
-        return;
       }
-
-      const dados = await response.json();
-      setLista(Array.isArray(dados) ? dados : []);
-    } catch (error) {
-      console.error("Erro ao executar requisição", error);
-      setLista([]);
-    }
-  }, [placa, filtrosAplicados]); 
+    },
+    [placa, filtrosAplicados]
+  );
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -78,8 +81,8 @@ function Pesquisar() {
 
   useEffect(() => {
     if (!placa) {
-        buscarHistorico(); 
-        return;
+      buscarHistorico();
+      return;
     }
 
     const handler = setTimeout(() => {
@@ -92,37 +95,37 @@ function Pesquisar() {
   }, [placa, buscarHistorico]);
 
   const aplicarFiltros = () => {
-      setFiltrosAplicados({
-          servico,
-          valorServ,
-          dataInicial,
-          dataFinal,
-      });
-
+    setFiltrosAplicados({
+      servico,
+      valorServ,
+      dataInicial,
+      dataFinal,
+    });
   };
 
   const removerFiltros = () => {
-      setServico("");
-      setValorServ("");
-      setDataInicial("");
-      setDataFinal("");
-      
-      setFiltrosAplicados({
-          servico: "",
-          valorServ: "",
-          dataInicial: "",
-          dataFinal: "",
-      });
-      
+    setServico("");
+    setValorServ("");
+    setDataInicial("");
+    setDataFinal("");
+
+    setFiltrosAplicados({
+      servico: "",
+      valorServ: "",
+      dataInicial: "",
+      dataFinal: "",
+    });
   };
 
-  const mostrarInfoUser = (id) =>{
-    setIdCliente(id)
-    setShowDetails(true)
-    console.log(id)
+  const mostrarInfoUser = (id) => {
+    setIdCliente(id);
+    setShowDetails(true);
+    console.log(id);
+  };
 
+  const handleShowFiltro = () =>{
+    setShowFiltro(!showFiltro)
   }
-
 
   return (
     <div className="w-screen h-screen bg-fundo flex gap-5 items-center flex-col relative ">
@@ -137,28 +140,33 @@ function Pesquisar() {
           />
         </div>
         {}
-        <Buscas placa={placa} setPlaca={setPlaca} />
-      </div>
-      <Tabela lista={lista} verDetalhe={mostrarInfoUser}/>
-
-      <div className="absolute right-50 top-10 ">
-        <Filtros
-          servico={servico}
-          setServi={setServico}
-          valorServ={valorServ}
-          setValorServ={setValorServ}
-          dataInicial={dataInicial}
-          setDataInicial={setDataInicial}
-          dataFinal={dataFinal}
-          setDataFinal={setDataFinal}
-          aplicarFiltros={aplicarFiltros}
-          removerFiltros={removerFiltros}
+        <Buscas
+          placa={placa}
+          setPlaca={setPlaca}
+          filtro={handleShowFiltro}
         />
       </div>
+      <Tabela lista={lista} verDetalhe={mostrarInfoUser} />
 
-      {showDetails && (<MostrarUsuario id={idCliente} voltar={() => setShowDetails(false)} />)}  
-      
-
+      {showFiltro && (
+        <div className="absolute right-50 top-10 ">
+          <Filtros
+            servico={servico}
+            setServi={setServico}
+            valorServ={valorServ}
+            setValorServ={setValorServ}
+            dataInicial={dataInicial}
+            setDataInicial={setDataInicial}
+            dataFinal={dataFinal}
+            setDataFinal={setDataFinal}
+            aplicarFiltros={aplicarFiltros}
+            removerFiltros={removerFiltros}
+          />
+        </div>
+      )}
+      {showDetails && (
+        <MostrarUsuario id={idCliente} voltar={() => setShowDetails(false)} />
+      )}
     </div>
   );
 }

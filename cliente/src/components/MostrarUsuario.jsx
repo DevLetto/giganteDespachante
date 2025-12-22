@@ -36,7 +36,7 @@ function MostrarUsuario({ id, voltar }) {
   }, [id]);
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-10 ">
+    <div onClick={voltar} className="fixed inset-0 bg-black/60 flex items-center justify-center z-10  ">
       <main className="w-200 h-200 bg-fundo rounded-lg overflow-auto custom-scroll">
         <Header
           navigate={voltar}
@@ -63,6 +63,8 @@ function MostrarUsuario({ id, voltar }) {
                 <p>
                   <strong className="text-traco">Nome:</strong> {dados.nomeVendedor}
                 </p>
+                <p><strong className="text-traco">Estado Civil:</strong> {dados.estadoCivilVendedor}</p>
+                <p><strong className="text-traco">RG</strong> {dados.rgVendedor}</p>
                 <p>
                   <strong className="text-traco">CPF/CNPJ:</strong> {dados.cpf_cnpjVendedor}
                 </p>

@@ -12,8 +12,14 @@ function CadastroCliente({
   setNome,
   cpf_cnpj,
   setCpf,
+  rg,
+  setRg,
   telefone,
   setTelefone,
+  endereco,
+  setEndereco,
+  email,
+  setEmail,
   servico,
   setServi,
   valor_servico,
@@ -28,6 +34,8 @@ function CadastroCliente({
   setChassi,
   cor,
   setCor,
+  obsarvacao,
+  setObservacao,
   handleSubmit,
   onPrev,
 }) {
@@ -93,6 +101,8 @@ function CadastroCliente({
           <p className="text-2xl font-bold font-[Arial]">Voltar</p>
         </button>
         <main className="flex justify-between   ">
+
+          {/* PRIMEIRA COLUNA */}
           <div>
             <div className="border-b border-traco mb-20 ml-8 mr-8  text-center ">
               <h1 className="text-traco text-6xl font-[Arial] font-bold">
@@ -131,7 +141,6 @@ function CadastroCliente({
                   value={cpf_cnpj}
                   maxLength={18}
                   autoComplete="off"
-                  placeholder="Somente números"
                   onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
                 />
@@ -148,7 +157,6 @@ function CadastroCliente({
                   type="text"
                   name="Telef"
                   value={telefone}
-                  placeholder="Somente números"
                   maxLength={13}
                   autoComplete="off"
                   onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
@@ -190,6 +198,81 @@ function CadastroCliente({
               </fieldset>
             </section>
           </div>
+          {/* SEGUNDA COLUNA */}
+          <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3 self-end">
+            <fieldset className="w-[98%]">
+                <label
+                  htmlFor="RG"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  RG*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="RG"
+                  value={rg}
+                  autoComplete="off"
+                  onChange={(e) => setRg(e.target.value)}
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                />
+              </fieldset>
+
+              <fieldset className="w-[98%]">
+                <label
+                  htmlFor="email"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  E-Mail*
+                </label>
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  value={email}
+                  autoComplete="off"
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                />
+              </fieldset>    
+
+              <fieldset className="w-[98%]">
+                <label
+                  htmlFor="endereco"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Endereço*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="endereco"
+                  value={endereco}
+                  autoComplete="off"
+                  onChange={(e) => setEndereco(e.target.value)}
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                />
+              </fieldset>
+
+              <fieldset className="w-[98%]">
+                <label
+                  htmlFor="observacao"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Observação
+                </label>
+                <input
+                  type="text"
+                  name="observacao"
+                  value={obsarvacao}
+                  autoComplete="off"
+                  onChange={(e) => setObservacao(e.target.value)}
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                />
+              </fieldset>
+          </section>
+
+          {/* TERCEIRA COLUNA */}
           <section className="border-2 border-traco flex flex-col items-center w-100 gap-10 pt-6">
             <fieldset className="w-[98%] flex flex-col">
               <label
