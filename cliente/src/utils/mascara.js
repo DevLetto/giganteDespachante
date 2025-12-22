@@ -74,3 +74,35 @@ export function formatarChassi(valor) {
 
     return v;
 }
+
+export function formatarRG(valor) {
+    // Remove tudo que não é dígito ou a letra X (comum em SP)
+    valor = valor.replace(/[^0-9xX]/g, "");
+    valor = valor.toUpperCase();
+
+    // Limita ao tamanho padrão de 9 dígitos (ex: 12.345.678-9)
+    valor = valor.substring(0, 9);
+
+    return valor
+        .replace(/(\d{2})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})([\dX])$/, "$1-$2");
+}
+
+export function formatarCEP(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    // Limita a 8 dígitos
+    valor = valor.substring(0, 8);
+
+    return valor
+        .replace(/(\d{5})(\d)/, "$1-$2");
+}
+
+export function formatarUF(valor) {
+    // Remove qualquer coisa que não seja letra
+    valor = valor.replace(/[^a-zA-Z]/g, "");
+
+    // Transforma em maiúsculo e limita a 2 caracteres
+    return valor.toUpperCase().substring(0, 2);
+}

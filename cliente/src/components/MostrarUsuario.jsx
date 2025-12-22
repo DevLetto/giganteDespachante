@@ -53,6 +53,8 @@ function MostrarUsuario({ id, voltar }) {
 
         {dados && (
           <section className="h-90   border-blue-600 pl-5 pr-5">
+
+            {/* OUTORGANTE */}
             <div className="w-full text-center mb-3">
               <h1 className="text-3xl text-traco font-bold font-[Arial] underline">
                 Outorgante
@@ -79,6 +81,8 @@ function MostrarUsuario({ id, voltar }) {
                 <p>p</p>
               </div>
             </div>
+
+            {/* OUTORGADO */}
             <div className="w-full text-center mb-3">
               <h1 className="text-3xl text-traco font-bold font-[Arial] underline">
                 Outorgado
@@ -103,10 +107,12 @@ function MostrarUsuario({ id, voltar }) {
                 </p>
               </div>
               <div className="h-full w-[50%]  break-all">
-                <p>p</p>
+                <p>..{dados.observacao}</p>
               </div>
             </div>
 
+
+            {/* VEICULO */}
             <div className="w-full text-center mb-3">
               <h1 className="text-3xl text-traco font-bold font-[Arial] underline">
                 Veículo

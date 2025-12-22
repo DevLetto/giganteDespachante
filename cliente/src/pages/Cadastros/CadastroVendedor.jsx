@@ -4,7 +4,13 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SureConfirmation from "../../components/SureConfirmation";
-import { formatarCpfCnpj } from "../../utils/mascara";
+import {
+  formatarCpfCnpj,
+  formatarTelefone,
+  formatarCEP,
+  formatarRG,
+  formatarUF,
+} from "../../utils/mascara";
 
 function CadastroVendedor({
   nome,
@@ -59,7 +65,22 @@ function CadastroVendedor({
 
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const algumCampoPreenchido = nome || cpf_cnpj || rg || email ;
+  const algumCampoPreenchido =
+    nome ||
+    estadoCivil ||
+    rg ||
+    orgaoexpedidor ||
+    cpf_cnpj ||
+    email ||
+    celular ||
+    rua_av ||
+    quadra ||
+    lote ||
+    numero_endereco ||
+    bairro ||
+    municipio ||
+    uf ||
+    cep;
 
   const handleBack = () => {
     if (algumCampoPreenchido) {
@@ -68,6 +89,14 @@ function CadastroVendedor({
     } else {
       navigate("/menu"); // volta normalmente
     }
+  };
+
+   const handleEstadoChange = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const nomeEstado = e.target.value;
+    setEstadoCivil(nomeEstado);
+
+    
   };
 
   return (
@@ -135,7 +164,7 @@ function CadastroVendedor({
                 className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
               />
             </fieldset>
-          
+
             <fieldset className="w-[98%] flex gap-5">
               <div className="w-[45%]">
                 <label
@@ -149,8 +178,9 @@ function CadastroVendedor({
                   type="text"
                   name="rg"
                   value={rg}
+                  maxLength={12}
                   autoComplete="off"
-                  onChange={(e) => setRg(e.target.value)}
+                  onChange={(e) => setRg(formatarRG(e.target.value))}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
               </div>
@@ -170,11 +200,8 @@ function CadastroVendedor({
                   onChange={(e) => setOrgaoExpedidor(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
-
               </div>
-
             </fieldset>
-            
           </section>
 
           {/* Coluna 2 */}
@@ -193,10 +220,12 @@ function CadastroVendedor({
                 name="email"
                 value={estadoCivil}
                 autoComplete="off"
-                onChange={(e) => setEstadoCivil(e.target.value)}
+                onChange={handleEstadoChange}
                 className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
               >
-                <option value="valor">Pato</option>
+                <option value="">selecione um valor</option>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
               </select>
             </fieldset>
             <fieldset className="w-[98%]">
@@ -211,8 +240,9 @@ function CadastroVendedor({
                 type="text"
                 name="celular"
                 value={celular}
+                maxLength={13}
                 autoComplete="off"
-                onChange={(e) => setCelular(e.target.value)}
+                onChange={(e) => setCelular(formatarTelefone(e.target.value))}
                 className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
               />
             </fieldset>
@@ -233,12 +263,31 @@ function CadastroVendedor({
                 className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
               />
             </fieldset>
-
-            
           </section>
 
           {/* Coluna 3 */}
           <section className="border-2 border-traco flex flex-col items-center w-150 h-[460px] gap-10 p-2">
+            <fieldset className="w-[98%] flex justify-between">
+              <div className="w-full">
+                <label
+                  htmlFor="cep"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  CEP*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="cep"
+                  value={cep}
+                  maxLength={9}
+                  autoComplete="off"
+                  onChange={(e) => setCep(formatarCEP(e.target.value))}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+            </fieldset>
+
             <fieldset className="w-[98%] flex justify-between">
               <div className="w-[48%] ">
                 <label
@@ -275,11 +324,104 @@ function CadastroVendedor({
                 />
               </div>
             </fieldset>
+
+            <fieldset className="w-[98%] flex justify-between">
+              <div className="w-[35%] ">
+                <label
+                  htmlFor="quadra"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Quadra*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="quadra"
+                  value={quadra}
+                  autoComplete="off"
+                  onChange={(e) => setQuadra(e.target.value)}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+              <div className="w-[35%]">
+                <label
+                  htmlFor="lote"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Lote*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="lote"
+                  value={lote}
+                  autoComplete="off"
+                  onChange={(e) => setLote(e.target.value)}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+
+              <div className="w-[18%]">
+                <label
+                  htmlFor="numero"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Nº*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="numero"
+                  value={numero_endereco}
+                  autoComplete="off"
+                  onChange={(e) => setNumeroEndereco(e.target.value)}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset className="w-[98%] flex justify-between">
+              <div className="w-[68%] ">
+                <label
+                  htmlFor="municipio"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Municipio*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="municipio"
+                  value={municipio}
+                  autoComplete="off"
+                  onChange={(e) => setMunicipio(e.target.value)}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+              <div className="w-[28%] ">
+                <label
+                  htmlFor="uf"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  UF*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="uf"
+                  value={uf}
+                  maxLength={2}
+                  autoComplete="off"
+                  onChange={(e) => setUf(formatarUF(e.target.value))}
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                />
+              </div>
+            </fieldset>
           </section>
         </div>
 
         <input
-          type="submit"
+          type="button"
           value="Prosseguir"
           disabled={!isFormValid}
           onClick={onNext}

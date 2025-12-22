@@ -5,7 +5,14 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import SureConfirmation from "../../components/SureConfirmation";
 import { ArrowLeft, Bold } from "lucide-react";
-import { formatarCpfCnpj, formatarTelefone, formatarPlaca, formatarAno, formatarChassi} from "../../utils/mascara";
+import {
+  formatarCpfCnpj,
+  formatarTelefone,
+  formatarPlaca,
+  formatarAno,
+  formatarChassi,
+  formatarRG,
+} from "../../utils/mascara";
 
 function CadastroCliente({
   nome,
@@ -34,7 +41,7 @@ function CadastroCliente({
   setChassi,
   cor,
   setCor,
-  obsarvacao,
+  observacao,
   setObservacao,
   handleSubmit,
   onPrev,
@@ -56,7 +63,9 @@ function CadastroCliente({
   const algumCampoPreenchido =
     nome ||
     cpf_cnpj ||
+    rg ||
     telefone ||
+    email ||
     servico ||
     placa ||
     modelo ||
@@ -100,15 +109,15 @@ function CadastroCliente({
           />
           <p className="text-2xl font-bold font-[Arial]">Voltar</p>
         </button>
-        <main className="flex justify-between   ">
-
-          {/* PRIMEIRA COLUNA */}
-          <div>
-            <div className="border-b border-traco mb-20 ml-8 mr-8  text-center ">
+        <main className="flex justify-between flex-col gap-20  items-center">
+          <div className="border-b border-traco text-center w-[40%]">
               <h1 className="text-traco text-6xl font-[Arial] font-bold">
                 Cliente
               </h1>
             </div>
+          <div className="flex justify-between gap-20">
+            
+          {/* PRIMEIRA COLUNA */}
             <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3">
               <fieldset className="w-[98%]">
                 <label
@@ -145,24 +154,26 @@ function CadastroCliente({
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
                 />
               </fieldset>
+              {/* rg */}
               <fieldset className="w-[98%]">
                 <label
-                  htmlFor="Telef"
+                  htmlFor="RG"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  Telefone*
+                  RG*
                 </label>
                 <input
                   required
                   type="text"
-                  name="Telef"
-                  value={telefone}
-                  maxLength={13}
+                  name="RG"
+                  value={rg}
+                  maxLength={12}
                   autoComplete="off"
-                  onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
-                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                  onChange={(e) => setRg(formatarRG(e.target.value))}
+                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
               </fieldset>
+
               <fieldset className="w-[98%]">
                 <label
                   htmlFor="Servi"
@@ -197,24 +208,28 @@ function CadastroCliente({
                 </select>
               </fieldset>
             </section>
-          </div>
-          {/* SEGUNDA COLUNA */}
-          <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3 self-end">
-            <fieldset className="w-[98%]">
+
+            {/* SEGUNDA COLUNA */}
+            <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3 self-end">
+              {/* telefone */}
+              <fieldset className="w-[98%]">
                 <label
-                  htmlFor="RG"
+                  htmlFor="Telef"
                   className="text-xl text-traco font-bold font-[Arial]"
                 >
-                  RG*
+                  Telefone*
                 </label>
                 <input
                   required
                   type="text"
-                  name="RG"
-                  value={rg}
+                  name="Telef"
+                  value={telefone}
+                  maxLength={13}
                   autoComplete="off"
-                  onChange={(e) => setRg(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  onChange={(e) =>
+                    setTelefone(formatarTelefone(e.target.value))
+                  }
+                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -234,7 +249,7 @@ function CadastroCliente({
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
-              </fieldset>    
+              </fieldset>
 
               <fieldset className="w-[98%]">
                 <label
@@ -264,105 +279,109 @@ function CadastroCliente({
                 <input
                   type="text"
                   name="observacao"
-                  value={obsarvacao}
+                  value={observacao}
                   autoComplete="off"
                   onChange={(e) => setObservacao(e.target.value)}
                   className="bg-white w-full h-12 rounded-lg p-1 text-traco"
                 />
               </fieldset>
-          </section>
+            </section>
 
-          {/* TERCEIRA COLUNA */}
-          <section className="border-2 border-traco flex flex-col items-center w-100 gap-10 pt-6">
-            <fieldset className="w-[98%] flex flex-col">
-              <label
-                htmlFor="placa"
-                className="text-xl text-traco font-bold font-[Arial]"
-              >
-                Placa*
-              </label>
-              <input
-                required
-                type="text"
-                name="placa"
-                value={placa}
-                maxLength={8}
-                autoComplete="off"
-                onChange={(e) => setPlaca(formatarPlaca(e.target.value))}
-                className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
-              />
-            </fieldset>
-            <fieldset className="w-[98%]">
-              <label
-                htmlFor="modelo"
-                className="text-xl text-traco font-bold font-[Arial]"
-              >
-                Modelo*
-              </label>
-              <input
-                required
-                type="text"
-                name="modelo"
-                value={modelo}
-                autoComplete="off"
-                onChange={(e) => setModelo(e.target.value)}
-                className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
-              />
-            </fieldset>
-            <fieldset className="w-[98%] flex flex-col">
-              <label
-                htmlFor="ano"
-                className="text-xl text-traco font-bold font-[Arial]"
-              >
-                Ano*
-              </label>
-              <input
-                required
-                type="text"
-                name="ano"
-                value={ano}
-                maxLength={4}
-                autoComplete="off"
-                onChange={(e) => setAno(formatarAno(e.target.value))}
-                className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-              />
-            </fieldset>
-            <fieldset className="w-[98%]">
-              <label
-                htmlFor="chassi"
-                className="text-xl text-traco font-bold font-[Arial]"
-              >
-                Chassi*
-              </label>
-              <input
-                required
-                type="text"
-                name="chassi"
-                value={chassi}
-                autoComplete="off"
-                maxLength={17}
-                onChange={(e) => setChassi(formatarChassi(e.target.value))}
-                className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
-              />
-            </fieldset>
-            <fieldset className="w-[98%] flex flex-col">
-              <label
-                htmlFor="cor"
-                className="text-xl text-traco font-bold font-[Arial]"
-              >
-                Cor*
-              </label>
-              <input
-                required
-                type="text"
-                name="cor"
-                value={cor}
-                autoComplete="off"
-                onChange={(e) => setCor(e.target.value)}
-                className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
-              />
-            </fieldset>
-          </section>
+            {/* TERCEIRA COLUNA */}
+            <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px]  gap-10 pt-3 self-end">
+              <fieldset className="w-[98%] flex flex-col">
+                <label
+                  htmlFor="placa"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Placa*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="placa"
+                  value={placa}
+                  maxLength={8}
+                  autoComplete="off"
+                  onChange={(e) => setPlaca(formatarPlaca(e.target.value))}
+                  className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
+                />
+              </fieldset>
+              <fieldset className="w-[98%]">
+                <label
+                  htmlFor="chassi"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Chassi*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="chassi"
+                  value={chassi}
+                  autoComplete="off"
+                  maxLength={17}
+                  onChange={(e) => setChassi(formatarChassi(e.target.value))}
+                  className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                />
+              </fieldset>
+              <fieldset className="w-[98%]">
+                <label
+                  htmlFor="modelo"
+                  className="text-xl text-traco font-bold font-[Arial]"
+                >
+                  Modelo*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="modelo"
+                  value={modelo}
+                  autoComplete="off"
+                  onChange={(e) => setModelo(e.target.value)}
+                  className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                />
+              </fieldset>
+
+              <fieldset className="w-[98%] flex flex-row justify-between">
+                <div className="w-[48%]">
+                  <label
+                    htmlFor="ano"
+                    className="text-xl text-traco font-bold font-[Arial]"
+                  >
+                    Ano*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="ano"
+                    value={ano}
+                    maxLength={4}
+                    autoComplete="off"
+                    onChange={(e) => setAno(formatarAno(e.target.value))}
+                    className="bg-white  h-12 rounded-lg w-full  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                  />
+                </div>
+                <div className="w-[48%]">
+                  <label
+                    htmlFor="cor"
+                    className="text-xl text-traco font-bold font-[Arial]"
+                  >
+                    Cor*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="cor"
+                    value={cor}
+                    autoComplete="off"
+                    onChange={(e) => setCor(e.target.value)}
+                    className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                  />
+                </div>
+              </fieldset>
+            </section>
+          </div>
         </main>
         <input
           type="submit"

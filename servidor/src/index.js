@@ -11,7 +11,7 @@ const rotaHistorico = require('./rotas/rotaHistorico')
 const procuracao = require('./rotas/rotaProcuracao')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("User1", "1234")
+// createUser("Brenda", "castidade10")
 
 app.use(express.json());
 app.use(cors());

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CadastroCliente from "./CadastroCliente";
-import CadastroVendedor from "./cadastroVendedor";
+import CadastroVendedor from "./CadastroVendedor";
 import { useEffect } from "react";
 import CadastroDone from "../../components/CadastroDone";
 
@@ -44,8 +44,22 @@ function Cadastrar() {
   const [ufVendedor, setUfVendedor] = useState("");
   const [cepVendedor, setCepVendedor] = useState("");
 
-  const isFormValid =
-    nomeVendedor && cpf_cnpjVendedor && emailVendedor && loteVendedor;
+  const isFormValid = Boolean(
+    nomeVendedor &&
+    estadoCivilVendedor &&
+    rgVendedor &&
+    orgaoexpedidorVendedor &&
+    cpf_cnpjVendedor &&
+    emailVendedor &&
+    celularVendedor &&
+    rua_avVendedor &&
+    quadraVendedor &&
+    loteVendedor &&
+    numero_enderecoVendedor &&
+    bairroVendedor &&
+    municipioVendedor &&
+    ufVendedor &&
+    cepVendedor);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
