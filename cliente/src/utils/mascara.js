@@ -30,29 +30,15 @@ export function formatarTelefone(valor){
 
 
 export function formatarPlaca(valor) {
-    
     let v = valor.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
 
-    
     v = v.substring(0, 7);
 
-  
-
-    if (v.length >= 4) {
-        v = v.replace(/^([A-Z]{3})([0-9A-Z]+)/, '$1-$2');
+    
+    if (v.length === 7 && /^[A-Z]{3}[0-9]{4}$/.test(v)) {
+        return v.replace(/^([A-Z]{3})(\d{4})$/, "$1-$2");
     }
 
-
-    if (v.length === 8) { 
-        v = v.split('').map((char, index) => {
-            if (index === 4) {
-                return isNaN(parseInt(char)) ? char : '0';
-            }
-            return char;
-        }).join('');
-    }
-    
-    
     return v;
 }
 
@@ -76,17 +62,35 @@ export function formatarChassi(valor) {
 }
 
 export function formatarRG(valor) {
-    // Remove tudo que não é dígito ou a letra X (comum em SP)
-    valor = valor.replace(/[^0-9xX]/g, "");
-    valor = valor.toUpperCase();
+    // Remove tudo que não é número ou a letra X
+    valor = valor.replace(/[^0-9xX]/g, "").toUpperCase();
 
-    // Limita ao tamanho padrão de 9 dígitos (ex: 12.345.678-9)
+    // Limita ao máximo de 9 caracteres numéricos
     valor = valor.substring(0, 9);
 
-    return valor
-        .replace(/(\d{2})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})([\dX])$/, "$1-$2");
+    const qtd = valor.length;
+
+    // RG com 7 dígitos (Ex: 0-000.000)
+    if (qtd <= 7) {
+        return valor
+            .replace(/(\d{1})(\d)/, "$1-$2")
+            .replace(/(\d{1})-(\d{3})(\d)/, "$1-$2.$3");
+    } 
+    
+    // RG com 8 dígitos (Ex: 00.000.000)
+    else if (qtd === 8) {
+        return valor
+            .replace(/(\d{2})(\d)/, "$1.$2")
+            .replace(/(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+    } 
+    
+    // RG com 9 dígitos (Ex: 00.000.000-0)
+    else {
+        return valor
+            .replace(/^(\d{2})(\d)/, "$1.$2")
+            .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/(\d{3})([\dX])$/, "$1-$2");
+    }
 }
 
 export function formatarCEP(valor) {

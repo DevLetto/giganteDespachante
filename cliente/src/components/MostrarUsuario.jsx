@@ -60,7 +60,7 @@ function MostrarUsuario({ id, voltar }) {
                 Outorgante
               </h1>
             </div>
-            <div className="flex flex-row h-80 ">
+            <div className="flex flex-row h-80 mb-10">
               <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
                 <p>
                   <strong className="text-traco">Nome:</strong> {dados.nomeVendedor}
@@ -71,14 +71,41 @@ function MostrarUsuario({ id, voltar }) {
                   <strong className="text-traco">CPF/CNPJ:</strong> {dados.cpf_cnpjVendedor}
                 </p>
                 <p>
-                  <strong className="text-traco">E-mail:</strong> {dados.emailVendedor}
+                  <strong className="text-traco">Orgão Expedidor:</strong> {dados.orgaoexpedidorVendedor}
                 </p>
                 <p>
-                  <strong className="text-traco">Endereço:</strong> {dados.enderecoVendedor}
+                  <strong className="text-traco">Telefone:</strong> {dados.celularVendedor}
                 </p>
+                <p>
+                  <strong className="text-traco">E-mail:</strong> {dados.emailVendedor}
+                </p>
+                
               </div>
-              <div className="h-full w-[50%]  break-all">
-                <p>p</p>
+              <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
+                <p>
+                  <strong className="text-traco">CEP:</strong> {dados.cepVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">UF:</strong> {dados.ufVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">Municipio:</strong> {dados.municipioVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">bairro:</strong> {dados.bairroVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">Rua/Av:</strong> {dados.rua_avVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">Quadra:</strong> {dados.quadraVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">Lote:</strong> {dados.loteVendedor}
+                </p>
+                <p>
+                  <strong className="text-traco">Numero:</strong> {dados.numero_enderecoVendedor}
+                </p>
               </div>
             </div>
 
@@ -88,7 +115,7 @@ function MostrarUsuario({ id, voltar }) {
                 Outorgado
               </h1>
             </div>
-            <div className="flex flex-row h-80 ">
+            <div className="flex flex-row h-60 ">
               <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
                 <p>
                   <strong className="text-traco">Nome:</strong> {dados.nome}
@@ -97,7 +124,7 @@ function MostrarUsuario({ id, voltar }) {
                   <strong className="text-traco">CPF/CNPJ:</strong> {dados.cpf_cnpj}
                 </p>
                 <p>
-                  <strong className="text-traco">Telefone:</strong> {dados.telefone}
+                  <strong className="text-traco">RG:</strong> {dados.rg}
                 </p>
                 <p>
                   <strong className="text-traco">Servico:</strong> {dados.servico}
@@ -106,8 +133,19 @@ function MostrarUsuario({ id, voltar }) {
                   <strong className="text-traco">Valor:</strong> R${dados.valor_servico}
                 </p>
               </div>
-              <div className="h-full w-[50%]  break-all">
-                <p>..{dados.observacao}</p>
+              <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
+                <p>
+                  <strong className="text-traco">Telefone:</strong> {dados.telefone}
+                </p>
+                <p>
+                  <strong className="text-traco">E-Mail:</strong> {dados.email}
+                </p>
+                <p>
+                  <strong className="text-traco">Endereço:</strong> {dados.endereco}
+                </p>
+                <p>
+                  <strong className="text-traco">Observação:</strong> {dados.observacao}
+                </p>
               </div>
             </div>
 

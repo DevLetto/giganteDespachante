@@ -91,12 +91,10 @@ function CadastroVendedor({
     }
   };
 
-   const handleEstadoChange = (e) => {
+  const handleEstadoChange = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
     const nomeEstado = e.target.value;
     setEstadoCivil(nomeEstado);
-
-    
   };
 
   return (
@@ -223,9 +221,12 @@ function CadastroVendedor({
                 onChange={handleEstadoChange}
                 className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
               >
-                <option value="">selecione um valor</option>
-                <option value="soltero">Soltero</option>
-                <option value="casado">Casado</option>
+                <option value="" disabled selected></option>
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viúvo(a)">Viúvo(a)</option>
+                <option value="União Estável">União Estável</option>
               </select>
             </fieldset>
             <fieldset className="w-[98%]">
