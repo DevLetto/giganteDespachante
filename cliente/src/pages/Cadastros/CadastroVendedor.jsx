@@ -10,6 +10,7 @@ import {
   formatarCEP,
   formatarRG,
   formatarUF,
+  formatarAno,
 } from "../../utils/mascara";
 
 function CadastroVendedor({
@@ -157,7 +158,6 @@ function CadastroVendedor({
                 value={cpf_cnpj}
                 maxLength={18}
                 autoComplete="off"
-                placeholder="Somente números"
                 onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
                 className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
               />
@@ -375,7 +375,7 @@ function CadastroVendedor({
                   name="numero"
                   value={numero_endereco}
                   autoComplete="off"
-                  onChange={(e) => setNumeroEndereco(e.target.value)}
+                  onChange={(e) => setNumeroEndereco(formatarAno(e.target.value))}
                   className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
                 />
               </div>
