@@ -7,7 +7,7 @@ function Tabela({ lista, verDetalhe }) {
   }
 
   return (
-    <div className=" w-2xl h-200 bg-white rounded-lg overflow-auto custom-scroll">
+    <div className=" 2xl:w-2xl w-xl h-screen bg-white rounded-lg overflow-auto custom-scroll">
       <ul>
         {lista.map((item) => (
           <li  key={item.id} className="w-full h-25 bg-fundo border-2 rounded-lg flex flex-col justify-between p-2 font-semibold mb-2">

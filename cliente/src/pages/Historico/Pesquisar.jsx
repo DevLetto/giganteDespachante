@@ -123,14 +123,14 @@ function Pesquisar() {
     console.log(id);
   };
 
-  const handleShowFiltro = () =>{
-    setShowFiltro(!showFiltro)
-  }
+  const handleShowFiltro = () => {
+    setShowFiltro(!showFiltro);
+  };
 
   return (
-    <div className="w-screen h-screen bg-fundo flex gap-5 items-center flex-col relative ">
-      <div className=" w-full flex ">
-        <div className="w-[31%] ">
+    <div className="w-screen h-screen bg-fundo flex gap-5 items-center flex-col  ">
+      <div className=" w-full flex justify-center  relative pt-2">
+        <div className="absolute  top-0 left-0 ">
           <Header
             navigate={() => navigate("/menu")}
             icon={ArrowLeft}
@@ -140,30 +140,29 @@ function Pesquisar() {
           />
         </div>
         {}
-        <Buscas
-          placa={placa}
-          setPlaca={setPlaca}
-          filtro={handleShowFiltro}
-        />
+        <div className="w-max h-max relative">
+          <Buscas placa={placa} setPlaca={setPlaca} filtro={handleShowFiltro} />
+
+          {showFiltro && (
+            <div className="absolute 2xl:right-[-56%] right-[-30%] 2xl:top-[60%] top-[110%] ">
+              <Filtros
+                servico={servico}
+                setServi={setServico}
+                valorServ={valorServ}
+                setValorServ={setValorServ}
+                dataInicial={dataInicial}
+                setDataInicial={setDataInicial}
+                dataFinal={dataFinal}
+                setDataFinal={setDataFinal}
+                aplicarFiltros={aplicarFiltros}
+                removerFiltros={removerFiltros}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <Tabela lista={lista} verDetalhe={mostrarInfoUser} />
 
-      {showFiltro && (
-        <div className="absolute right-50 top-10 ">
-          <Filtros
-            servico={servico}
-            setServi={setServico}
-            valorServ={valorServ}
-            setValorServ={setValorServ}
-            dataInicial={dataInicial}
-            setDataInicial={setDataInicial}
-            dataFinal={dataFinal}
-            setDataFinal={setDataFinal}
-            aplicarFiltros={aplicarFiltros}
-            removerFiltros={removerFiltros}
-          />
-        </div>
-      )}
       {showDetails && (
         <MostrarUsuario id={idCliente} voltar={() => setShowDetails(false)} />
       )}

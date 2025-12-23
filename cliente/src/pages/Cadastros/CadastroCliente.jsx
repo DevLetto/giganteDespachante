@@ -98,10 +98,11 @@ function CadastroCliente({
         />
       )}
       <div className="w-[70%] h-[80%] justify-between flex flex-col  relative">
+
         <button
           type="button"
           onClick={onPrev}
-          className="absolute top-70 left-[-18em] text-traco hover:bg-traco hover:text-white rounded-lg p-1"
+          className=" absolute top-[40%] right-[115%] text-traco hover:bg-traco hover:text-white rounded-lg p-1"
         >
           <ArrowLeft
             size={60}
@@ -109,16 +110,17 @@ function CadastroCliente({
           />
           <p className="text-2xl font-bold font-[Arial]">Voltar</p>
         </button>
-        <main className="flex justify-between flex-col gap-20  items-center">
+
+        <main className="flex  flex-col 2xl:gap-20 gap-10   items-center  w-full ">
           <div className="border-b border-traco text-center w-[40%]">
-              <h1 className="text-traco text-6xl font-[Arial] font-bold">
+              <h1 className="text-traco 2xl:text-6xl text-5xl font-[Arial] font-bold">
                 Cliente
               </h1>
             </div>
-          <div className="flex justify-between gap-20">
+          <div className="flex justify-between gap-12">
             
           {/* PRIMEIRA COLUNA */}
-            <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3">
+            <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[460px] h-[300px] gap-2 2xl:gap-10 p-2">
               <fieldset className="w-[98%]">
                 <label
                   htmlFor="Nome"
@@ -133,7 +135,7 @@ function CadastroCliente({
                   value={nome}
                   autoComplete="off"
                   onChange={(e) => setNome(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
               <fieldset className="w-[98%]">
@@ -151,7 +153,7 @@ function CadastroCliente({
                   maxLength={18}
                   autoComplete="off"
                   onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
                 />
               </fieldset>
               {/* rg */}
@@ -170,7 +172,7 @@ function CadastroCliente({
                   maxLength={12}
                   autoComplete="off"
                   onChange={(e) => setRg(formatarRG(e.target.value))}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -186,7 +188,7 @@ function CadastroCliente({
                   name="Servi"
                   value={servico}
                   onChange={handleServicoChange}
-                  className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 >
                   <option value="" disabled selected>
                     Selecione um serviço
@@ -210,7 +212,7 @@ function CadastroCliente({
             </section>
 
             {/* SEGUNDA COLUNA */}
-            <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px] gap-10 pt-3 self-end">
+            <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[460px] h-[300px] gap-2 2xl:gap-10 p-2 self-end">
               {/* telefone */}
               <fieldset className="w-[98%]">
                 <label
@@ -229,7 +231,7 @@ function CadastroCliente({
                   onChange={(e) =>
                     setTelefone(formatarTelefone(e.target.value))
                   }
-                  className="bg-white  h-12 w-full rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -247,7 +249,7 @@ function CadastroCliente({
                   value={email}
                   autoComplete="off"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -265,7 +267,7 @@ function CadastroCliente({
                   value={endereco}
                   autoComplete="off"
                   onChange={(e) => setEndereco(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -282,17 +284,17 @@ function CadastroCliente({
                   value={observacao}
                   autoComplete="off"
                   onChange={(e) => setObservacao(e.target.value)}
-                  className="bg-white w-full h-12 rounded-lg p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
             </section>
 
             {/* TERCEIRA COLUNA */}
-            <section className="border-2 border-traco flex flex-col items-center w-100 h-[460px]  gap-10 pt-3 self-end">
+            <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[460px] h-[300px] gap-2 2xl:gap-10 p-2 self-end">
               <fieldset className="w-[98%] flex flex-col">
                 <label
                   htmlFor="placa"
-                  className="text-xl text-traco font-bold font-[Arial]"
+                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                 >
                   Placa*
                 </label>
@@ -304,13 +306,13 @@ function CadastroCliente({
                   maxLength={8}
                   autoComplete="off"
                   onChange={(e) => setPlaca(formatarPlaca(e.target.value))}
-                  className="bg-white  h-12 rounded-lg w-[50%]  p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
               <fieldset className="w-[98%]">
                 <label
                   htmlFor="chassi"
-                  className="text-xl text-traco font-bold font-[Arial]"
+                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                 >
                   Chassi*
                 </label>
@@ -322,13 +324,13 @@ function CadastroCliente({
                   autoComplete="off"
                   maxLength={17}
                   onChange={(e) => setChassi(formatarChassi(e.target.value))}
-                  className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
               <fieldset className="w-[98%]">
                 <label
                   htmlFor="modelo"
-                  className="text-xl text-traco font-bold font-[Arial]"
+                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                 >
                   Modelo*
                 </label>
@@ -339,7 +341,7 @@ function CadastroCliente({
                   value={modelo}
                   autoComplete="off"
                   onChange={(e) => setModelo(e.target.value)}
-                  className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
 
@@ -347,7 +349,7 @@ function CadastroCliente({
                 <div className="w-[48%]">
                   <label
                     htmlFor="ano"
-                    className="text-xl text-traco font-bold font-[Arial]"
+                    className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                   >
                     Ano*
                   </label>
@@ -359,13 +361,13 @@ function CadastroCliente({
                     maxLength={4}
                     autoComplete="off"
                     onChange={(e) => setAno(formatarAno(e.target.value))}
-                    className="bg-white  h-12 rounded-lg w-full  p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                   />
                 </div>
                 <div className="w-[48%]">
                   <label
                     htmlFor="cor"
-                    className="text-xl text-traco font-bold font-[Arial]"
+                    className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                   >
                     Cor*
                   </label>
@@ -376,7 +378,7 @@ function CadastroCliente({
                     value={cor}
                     autoComplete="off"
                     onChange={(e) => setCor(e.target.value)}
-                    className="bg-white  h-12 rounded-lg w-full  p-1 text-traco"
+                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                   />
                 </div>
               </fieldset>

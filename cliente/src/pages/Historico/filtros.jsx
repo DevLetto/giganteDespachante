@@ -13,8 +13,8 @@ function Filtros({ servico, setServi, setValorServ, setDataInicial, setDataFinal
   };
 
   return (
-    <div className="w-100 h-75 p-2 bg-fundo border border-traco rounded-lg shadow-2xl flex flex-col gap-8 ">
-      <fieldset className="w-[98%]">
+    <div className="2xl:w-100 w-70 2xl:h-75 h-80 p-2 bg-fundo border border-traco rounded-lg shadow-2xl flex flex-col gap-8 ">
+      <fieldset className="w-[98%] px-0.1">
         <label
           htmlFor="Servi"
           className="text-xl text-traco font-bold font-[Arial]"
@@ -39,7 +39,7 @@ function Filtros({ servico, setServi, setValorServ, setDataInicial, setDataFinal
                   value={opc.nome}
                   data-price={opc.preco}
                 >
-                  {" "}
+                  
                   {opc.nome}
                 </option>
               ))}
@@ -51,7 +51,7 @@ function Filtros({ servico, setServi, setValorServ, setDataInicial, setDataFinal
       <fieldset className="w-[98%] text-xl text-traco font-bold font-[Arial] flex flex-col gap-2">
         <p>Data:</p>
         
-        <div className="flex flex-row gap-2">
+        <div className="flex 2xl:flex-row flex-col gap-2">
           <div className=" flex flex-row items-center gap-2">
             <label htmlFor="dataIncial">De</label>
             <input type="date" onChange={(e) => setDataInicial(e.target.value)} name="dataInicial" className="text-lg bg-white rounded-lg w-33 hover:cursor-pointer" />
@@ -63,7 +63,7 @@ function Filtros({ servico, setServi, setValorServ, setDataInicial, setDataFinal
         </div>
       </fieldset>
 
-      <fieldset className="w-[98%] flex gap-4 items-center justify-center mt-5">
+      <fieldset className="w-[98%] flex gap-4 items-center justify-center 2xl:mt-5 mt-2">
         <button onClick={aplicarFiltros} className="w-[50%] h-12 bg-traco hover:bg-white text-white hover:text-traco font-bold rounded-lg border border-traco"> Aplicar Filtros</button>
         <button onClick={removerFiltros} className="w-[50%] h-12 bg-red-600 hover:bg-white text-white hover:text-red-600 font-bold rounded-lg border border-red-600"> Remover Filtros</button>
       </fieldset>

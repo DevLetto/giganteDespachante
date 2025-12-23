@@ -41,7 +41,7 @@ function MostrarUsuario({ id, voltar }) {
       onClick={voltar}
       className="fixed inset-0 bg-black/60 flex items-center justify-center z-10  "
     >
-      <main onClick={(e) => e.stopPropagation()} className="w-200 h-200 bg-fundo rounded-lg overflow-auto custom-scroll flex flex-col z-11">
+      <main onClick={(e) => e.stopPropagation()} className="w-200 2xl:h-200 h-180 bg-fundo rounded-lg overflow-auto custom-scroll flex flex-col z-11">
         <Header
           navigate={voltar}
           icon={ArrowLeft}
