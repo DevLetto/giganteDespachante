@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/LogoGiganteDespachante.png";
 import Bolas from "../assets/bolinhas.png";
 import { useState } from "react";
-// import axios from "axios";
 
 function Login() {
   const [usuario, setUser] = useState("");
@@ -12,9 +11,7 @@ function Login() {
 
   const navigate = useNavigate();
 
-  // function onSubmitClick() {
-  //   navigate("/menu");
-  // }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,16 +44,20 @@ function Login() {
   };
 
   return (
-    <div className="w-screen h-screen bg-fundo flex justify-between gap-35 items-center flex-col p-4 ">
-      <img src={Logo} alt="" className="w-[700px] h-[250px]" />
+    <div className="w-screen h-screen bg-fundo flex  2xl:gap-35 gap-15 items-center flex-col p-4 ">
+
+      {/* LOGO */}
+      <header className=" 2xl:w-2xl 2xl:h-62 w-lg h-40  ">
+        <img src={Logo} alt="" className="w-full h-full " />
+      </header>
 
       <form
         onSubmit={handleSubmit}
         action="post"
-        className="w-[400px] h-[616px] flex flex-col items-center  gap-15"
+        className="2xl:w-[400px] 2xl:h-[616px] w-[350px] h-[370px] flex flex-col items-center  2xl:gap-15 gap-10   "
       >
         <fieldset
-          className={`w-full h-[330px] border-2 ${
+          className={`w-full 2xl:h-[330px] h-[300px] border-2 ${
             erro ? "border-red-600 " : "border-traco"
           } ${
             tremer ? "shake" : ""
@@ -70,7 +71,7 @@ function Login() {
           <div className="w-[95%] text-start">
             <label
               htmlFor="User"
-              className="text-2xl text-traco text-start
+              className="2xl:text-2xl  text-xl  text-traco text-start
           font-[arial]  "
             >
               Usuário
@@ -80,14 +81,14 @@ function Login() {
             type="text"
             name="User"
             onChange={(e) => setUser(e.target.value)}
-            className="bg-white w-[95%] h-10 rounded-[10px] mb-[50px] p-1 text-traco focus: outline-traco"
+            className="bg-white w-[95%] 2xl:h-10 h-8 rounded-[10px] mb-[50px] p-1 text-traco focus: outline-traco"
             required
           />
 
           <div className="w-[95%] text-start">
             <label
               htmlFor="Password"
-              className="text-2xl text-traco text-start font-[arial]"
+              className="2xl:text-2xl text-xl text-traco text-start font-[arial]"
             >
               Senha
             </label>
@@ -96,7 +97,7 @@ function Login() {
             type="password"
             name="Password"
             onChange={(e) => setSenha(e.target.value)}
-            className="bg-white w-[95%] h-10 rounded-[10px] p-1 text-traco focus: outline-traco"
+            className="bg-white w-[95%] 2xl:h-10 h-8 rounded-[10px] p-1 text-traco focus: outline-traco"
             required
           />
         </fieldset>
