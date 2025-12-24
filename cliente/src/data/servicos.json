@@ -3,7 +3,7 @@
     "grupo": "Alterações",
     "servicos": [
       {
-        "nome": "ALTERA ENDEREÇO (SEM TAXA)",
+        "nome": "ALTERAR ENDEREÇO (SEM TAXA)",
         "preco": 130.0,
         "valor": "ALTERA_ENDERECO_SEM_TAXA"
       },

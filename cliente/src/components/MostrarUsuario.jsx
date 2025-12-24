@@ -41,7 +41,7 @@ function MostrarUsuario({ id, voltar }) {
       onClick={voltar}
       className="fixed inset-0 bg-black/60 flex items-center justify-center z-10  "
     >
-      <main onClick={(e) => e.stopPropagation()} className="w-200 2xl:h-200 h-180 bg-fundo rounded-lg overflow-auto custom-scroll flex flex-col z-11">
+      <main onClick={(e) => e.stopPropagation()} className="w-200 2xl:h-200 h-180 bg-fundo rounded-lg overflow-auto custom-scroll flex flex-col z-11  ">
         <Header
           navigate={voltar}
           icon={ArrowLeft}
@@ -202,7 +202,7 @@ function MostrarUsuario({ id, voltar }) {
               </div>
             </div>
 
-            <div className="w-full h-20 flex justify-between">
+            <div className=" w-[calc(100%+2.5rem)] bg-fundo h-20 flex justify-between  sticky bottom-0 border-t-2 -mx-5 px-5 pt-2">
               <GerarProcuração />
               <GerarIntecaoDeVenda />
             </div>

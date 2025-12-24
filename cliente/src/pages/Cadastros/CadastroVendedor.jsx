@@ -114,7 +114,7 @@ function CadastroVendedor({
         />
       )}
 
-      <main className="flex flex-col justify-between items-center 2xl:w-360 w-260 gap-8  ">
+      <main className="flex flex-col justify-between items-center 2xl:w-360 w-260 2xl:gap-20 gap-8  ">
         {/* div cabeçalho */}
         <div className="flex items-center justify-center w-full ">
           <div className="border-b border-traco w-[50%]  text-center">
