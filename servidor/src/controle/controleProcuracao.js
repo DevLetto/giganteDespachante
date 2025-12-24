@@ -1,5 +1,5 @@
 const gerarProcuração = require('../modelos/PDFs/gerarProcuração')
-const {buscarClientePorId} = require('../modelos/clientesModel')
+const buscarClientePorId = require('../modelos/clientesModel')
 
 function normalizarNome(nome) {
   return nome
@@ -12,7 +12,7 @@ function normalizarNome(nome) {
 
 module.exports = async function controleProcuração(req,res){
     try{
-        const{id} = req.params
+        const{id} = req.query
 
         const cliente = await buscarClientePorId(id)
 
@@ -30,7 +30,9 @@ module.exports = async function controleProcuração(req,res){
     
         const doc = gerarProcuração(cliente);
         doc.pipe(res);
+        
     } catch (error) {
+        console.error(error)
         res.status(500).json({ error: "erro interno ao gerar pdf" });
         
 

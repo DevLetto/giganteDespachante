@@ -1,4 +1,4 @@
-function GerarProcuração({ id, nome }) {
+function GerarIntencaoDeVenda({id, nome}) {
 
   const normalizarNome = (nome) => {
     return nome
@@ -11,9 +11,9 @@ function GerarProcuração({ id, nome }) {
 
   const gerarPdf = async () => {
     try {
-      console.log("Gerando PDF para o ID: ", id);
+      console.log("Gerando Intenção de Venda para o ID: ", id);
 
-      const response = await fetch(`http://localhost:8080/procuracao?id=${id}`);
+      const response = await fetch(`http://localhost:8080/intencaoDeVenda?id=${id}`);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -27,7 +27,7 @@ function GerarProcuração({ id, nome }) {
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = `procuracao_${nomeNormalizado}.pdf`;
+      link.download = `intencaoDeVenda_${nomeNormalizado}.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -38,14 +38,11 @@ function GerarProcuração({ id, nome }) {
 
   return (
     <div className=" w-max">
-      <button
-        onClick={gerarPdf}
-        className=" bg-traco  h-12 rounded-lg w-full text-3xl font-bold p-1 text-white hover:bg-white hover:text-traco transition hover:cursor-pointer"
-      >
-        Gerar Procuração
+      <button onClick={gerarPdf} className=" bg-traco  h-12 rounded-lg w-full text-3xl font-bold p-1 text-white hover:bg-white hover:text-traco transition hover:cursor-pointer">
+        Gerar Intenção de Venda
       </button>
     </div>
   );
 }
 
-export default GerarProcuração;
+export default GerarIntencaoDeVenda;

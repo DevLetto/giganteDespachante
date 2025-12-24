@@ -1,4 +1,5 @@
 const PDFDocument = require("pdfkit");
+const path = require('path')
 
 
 module.exports = function GerarProcuração(dados) {
@@ -18,12 +19,14 @@ module.exports = function GerarProcuração(dados) {
   const lineHeight = 20;
 
   // FONTES
-  doc.registerFont("Algerian", "fontes/algerian.ttf");
-  doc.registerFont("Arial", "fontes/ARIAL.ttf");
-  doc.registerFont("Arial-Bold", "fontes/ARIALBD.ttf");
-  doc.registerFont("Arial-Italic", "fontes/ARIALI.ttf");
-  doc.registerFont("Arial-BoldItalic", "fontes/ARIALNBI.ttf");
-  doc.registerFont("Arial-Bolder", "fontes/ARIBLK.ttf");
+  const fontesPath = path.join(__dirname, "fontes")
+
+  doc.registerFont("Algerian", path.join(fontesPath, "algerian.ttf"));
+  doc.registerFont("Arial", path.join(fontesPath, "ARIAL.ttf"));
+  doc.registerFont("Arial-Bold", path.join(fontesPath, "ARIALBD.ttf"));
+  doc.registerFont("Arial-Italic", path.join(fontesPath, "ARIALI.ttf"));
+  doc.registerFont("Arial-BoldItalic", path.join(fontesPath, "ARIALNBI.ttf"));
+  doc.registerFont("Arial-Bolder", path.join(fontesPath, "ARIBLK.ttf"));
 
   // TÍTULO  PDF
   doc
@@ -40,7 +43,7 @@ module.exports = function GerarProcuração(dados) {
     .font("Arial-Italic")
     .fontSize(9)
     .text(
-      `         Pelo presente instrumento de procuração o (a) Outorgante: ${Nome}`,
+      `         Pelo presente instrumento de procuração o (a) Outorgante: ${dados.nomeVendedor}`,
       { align: "justify" }
     );
 
@@ -50,17 +53,17 @@ module.exports = function GerarProcuração(dados) {
 
   doc.font("Arial-Italic").text("Residente á", { align: "justify" });
   doc.moveDown(0.1);
-  doc.text(`Bairro:  Cidade:  CEP: `, {
+  doc.text(`Bairro: ${dados.bairroVendedor} Cidade: ${dados.municipioVendedor}  CEP: ${dados.cepVendedor} `, {
     align: "justify",
   });
 
   doc.moveDown(0.1);
   doc.text(
-    `Portador da carteira de identidade: ORGÃO EMISSOR: `,
+    `Portador da carteira de identidade: ${dados.rgVendedor} ORGÃO EMISSOR: ${dados.orgaoexpedidorVendedor} `,
     { align: "justify" }
   );
   doc.moveDown(0.1);
-  doc.text(`CPF: ${dados.cpf}, ou CNPJ: `, { align: "justify" });
+  doc.text(`CPF: ${dados.cpf_cnpjVendedor}, ou CNPJ: `, { align: "justify" });
   //Texto 1
   doc.moveDown(2);
 
@@ -97,14 +100,14 @@ module.exports = function GerarProcuração(dados) {
   doc
     .font("Arial-BoldItalic")
     .fontSize(13)
-    .text(`Marca/Modelo: ${dados.modelo} , Placa: ${dados.placa} , Chassi: ${dados.chassi} .`,);
+    .text(`Marca/Modelo: ${dados.modelo}`);
   doc.moveDown(0.1);
 
   doc
     .font("Arial-Italic")
     .fontSize(9.5)
     .text(
-      `Ano de fabricação: ${dadosCliente.anoFabricacao}, Ano modelo : ${dadosCliente.anoModelo}, PLACAS: ${dadosCliente.placas}, Cor: ${dadosCliente.cor}, Chassi: ${dadosCliente.chassi}, podendo para tanto assinar o de acordo como adquirente do constante do ATPV, receber e entregar CNH apreendida na comissão de apreensão e pontuação deste órgão. Podendo ainda, requerer e assinar o que for necessário for fazer pagamentos, receber e dar quitações, alegar, concordar, discordar, presta, declarações, e informações, desistir, enfim, dado por firme e valioso.`,
+      `Ano de fabricação: ${dados.ano}, Ano modelo : ${dados.ano}, PLACAS: ${dados.placa}, Cor: ${dados.cor}, Chassi: ${dados.chassi}, podendo para tanto assinar o de acordo como adquirente do constante do ATPV, receber e entregar CNH apreendida na comissão de apreensão e pontuação deste órgão. Podendo ainda, requerer e assinar o que for necessário for fazer pagamentos, receber e dar quitações, alegar, concordar, discordar, presta, declarações, e informações, desistir, enfim, dado por firme e valioso.`,
       { align: "justify" }
     );
 

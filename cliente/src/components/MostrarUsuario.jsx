@@ -2,7 +2,7 @@ import Header from "./Header";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import GerarProcuração from "./GerarProcuração";
-import GerarIntecaoDeVenda from "./GerarIntecaoDeVenda";
+import GerarIntencaoDeVenda from "./GerarIntencaoDeVenda";
 
 function MostrarUsuario({ id, voltar }) {
   const [dados, setDados] = useState(null);
@@ -203,8 +203,8 @@ function MostrarUsuario({ id, voltar }) {
             </div>
 
             <div className=" w-[calc(100%+2.5rem)] bg-fundo h-20 flex justify-between  sticky bottom-0 border-t-2 -mx-5 px-5 pt-2">
-              <GerarProcuração />
-              <GerarIntecaoDeVenda />
+              <GerarProcuração id={id} nome={dados.placa}/>
+              <GerarIntencaoDeVenda id={id} nome={dados.placa}/>
             </div>
           </section>
         )}
