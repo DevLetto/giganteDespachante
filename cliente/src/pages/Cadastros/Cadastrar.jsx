@@ -35,6 +35,7 @@ function Cadastrar() {
   const [cpf_cnpjVendedor, setCpfVendedor] = useState("");
   const [emailVendedor, setEmailVendedor] = useState("");
   const [celularVendedor, setCelularVendedor] = useState("");
+  const [cidadeVendedor, setCidadeVendedor] = useState("")
   const [rua_avVendedor, setRuaAvVendedor] = useState("");
   const [quadraVendedor, setQuadraVendedor] = useState("");
   const [loteVendedor, setLoteVendedor] = useState("");
@@ -52,6 +53,7 @@ function Cadastrar() {
     cpf_cnpjVendedor &&
     emailVendedor &&
     celularVendedor &&
+    cidadeVendedor &&
     rua_avVendedor &&
     quadraVendedor &&
     loteVendedor &&
@@ -72,6 +74,7 @@ function Cadastrar() {
       cpf_cnpjVendedor,
       emailVendedor,
       celularVendedor,
+      cidadeVendedor,
       rua_avVendedor,
       quadraVendedor,
       loteVendedor,
@@ -146,6 +149,8 @@ function Cadastrar() {
             setEmail={setEmailVendedor}
             celular={celularVendedor}
             setCelular={setCelularVendedor}
+            cidade={cidadeVendedor}
+            setCidade={setCidadeVendedor}
             rua_av={rua_avVendedor}
             setRuaAv={setRuaAvVendedor}
             quadra={quadraVendedor}

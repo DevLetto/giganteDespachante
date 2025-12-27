@@ -19,6 +19,7 @@ const dados = `
         cpf_cnpjVendedor TEXT NOT NULL,
         emailVendedor TEXT NOT NULL,
         celularVendedor TEXT NOT NULL,
+        cidadeVendedor TEXT NOT NULL,
         rua_avVendedor TEXT NOT NULL,
         quadraVendedor TEXT NOT NULL,
         loteVendedor TEXT NOT NULL,

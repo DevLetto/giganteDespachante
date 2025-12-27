@@ -53,7 +53,7 @@ module.exports = function GerarProcuração(dados) {
 
   doc.font("Arial-Italic").text("Residente á", { align: "justify" });
   doc.moveDown(0.1);
-  doc.text(`Bairro: ${dados.bairroVendedor} Cidade: ${dados.municipioVendedor}  CEP: ${dados.cepVendedor} `, {
+  doc.text(`Bairro: ${dados.bairroVendedor} Cidade: ${dados.cidadeVendedor}  CEP: ${dados.cepVendedor} `, {
     align: "justify",
   });
 

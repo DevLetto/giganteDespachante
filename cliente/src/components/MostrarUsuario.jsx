@@ -92,6 +92,10 @@ function MostrarUsuario({ id, voltar }) {
                   <strong className="text-traco">E-mail:</strong>{" "}
                   {dados.emailVendedor}
                 </p>
+                <p>
+                  <strong className="text-traco">Cidade:</strong>{" "}
+                  {dados.cidadeVendedor}
+                </p>
               </div>
               <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
                 <p>

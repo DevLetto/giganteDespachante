@@ -38,6 +38,9 @@ function CadastroVendedor({
   rua_av,
   setRuaAv,
 
+  cidade,
+  setCidade,
+
   quadra,
   setQuadra,
 
@@ -74,6 +77,7 @@ function CadastroVendedor({
     cpf_cnpj ||
     email ||
     celular ||
+    cidade ||
     rua_av ||
     quadra ||
     lote ||
@@ -269,7 +273,7 @@ function CadastroVendedor({
           {/* Coluna 3 */}
           <section className="border-2 border-traco flex flex-col items-center 2xl:w-150 w-100 2xl:h-[460px] h-[300px] 2xl:gap-10 gap-2 p-2">
             <fieldset className="w-[98%] flex justify-between">
-              <div className="w-full">
+              <div className="w-[45%]">
                 <label
                   htmlFor="cep"
                   className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
@@ -284,6 +288,23 @@ function CadastroVendedor({
                   maxLength={9}
                   autoComplete="off"
                   onChange={(e) => setCep(formatarCEP(e.target.value))}
+                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                />
+              </div>
+              <div className="w-[48%]">
+                <label
+                  htmlFor="cidade"
+                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
+                >
+                  Cidade*
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="cidade"
+                  value={cidade}
+                  autoComplete="off"
+                  onChange={(e) => setCidade(e.target.value)}
                   className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </div>
@@ -375,7 +396,9 @@ function CadastroVendedor({
                   name="numero"
                   value={numero_endereco}
                   autoComplete="off"
-                  onChange={(e) => setNumeroEndereco(formatarAno(e.target.value))}
+                  onChange={(e) =>
+                    setNumeroEndereco(formatarAno(e.target.value))
+                  }
                   className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </div>
