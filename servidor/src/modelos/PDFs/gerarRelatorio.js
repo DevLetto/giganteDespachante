@@ -1,14 +1,22 @@
 const PDFDocument = require("pdfkit");
-const path = require('path')
+const path = require("path");
+const db = require("../../dataBase/db");
 
-const dbPath = path.resolve(__dirname, "../../dataBase/db.js")
-const db = require(dbPath)
+module.exports = async function gerarRelatorio({ meses, ano }) {
+  const placeholders = meses.map(() => "?").join(",");
 
-
-
-// ================= GERAR RELATÓRIO =================
-module.exports = async function gerarRelatorio() {
-  const dados = db.prepare('SELECT * FROM clients').all()
+  const dados = db
+    .prepare(`
+      SELECT *
+      FROM clients
+      WHERE strftime('%m', data_emissao) IN (${placeholders})
+      AND strftime('%Y', data_emissao) = ?
+      ORDER BY data_emissao ASC
+    `)
+    .all(
+      ...meses.map(m => String(m).padStart(2, "0")),
+      String(ano)
+    );
 
   const doc = new PDFDocument({ size: "A4", margin: 40 });
 
@@ -18,7 +26,6 @@ module.exports = async function gerarRelatorio() {
   let totalValor = 0;
   let contador = 1;
 
-  // 🔹 COLUNAS (IGUAL AO PDF)
   const colunas = [
     { label: "QUANT.", x: 40, width: 35 },
     { label: "DATA", x: 75, width: 55 },
@@ -29,24 +36,28 @@ module.exports = async function gerarRelatorio() {
     { label: "OBS.", x: 490, width: 60 },
   ];
 
-  // ================= FUNÇÕES =================
-
   function cabecalho() {
     doc.fontSize(14).text("GIGANTE DESPACHANTE", { align: "left" });
     doc.moveDown(0.3);
-    doc.fontSize(10).text("PLANILHA DE SERVIÇOS", { align: "center" });
+
+    doc
+      .fontSize(10)
+      .text(
+        `RELATÓRIO ECOP ENGENHARIA — ${meses
+          .map(m => `${m}/${ano}`)
+          .join(", ")}`,
+        { align: "center" }
+      );
+
     doc.moveDown(2);
   }
 
   function desenharLinha(y, valores, header = false) {
-    // linha superior
     doc.moveTo(40, y).lineTo(550, y).stroke();
 
     colunas.forEach((col, i) => {
-      // linha vertical
       doc.moveTo(col.x, y).lineTo(col.x, y + alturaLinha).stroke();
 
-      // texto
       doc
         .font(header ? "Helvetica-Bold" : "Helvetica")
         .fontSize(8.5)
@@ -57,10 +68,7 @@ module.exports = async function gerarRelatorio() {
         });
     });
 
-    // linha direita final
     doc.moveTo(550, y).lineTo(550, y + alturaLinha).stroke();
-
-    // linha inferior
     doc.moveTo(40, y + alturaLinha).lineTo(550, y + alturaLinha).stroke();
   }
 
@@ -73,11 +81,9 @@ module.exports = async function gerarRelatorio() {
     y += alturaLinha;
   }
 
-  // ================= INÍCIO =================
   cabecalho();
   cabecalhoTabela();
 
-  // ================= DADOS =================
   dados.forEach(item => {
     if (y + alturaLinha > limitePagina) {
       doc.addPage();
@@ -89,27 +95,25 @@ module.exports = async function gerarRelatorio() {
     totalValor += valor;
 
     desenharLinha(y, [
-      contador++,                        // QUANT
-      item.placa || "--/--/----",    // DATA
-      item.placa || "---",            // PLACA
-      item.modelo || "---", // VEÍCULO
-      item.servico || "---",              // SERVIÇO
-      `R$ ${valor.toFixed(2)}`,          // VALOR
-      item.observacao || "",                  // OBS
+      contador++,
+      item.data_emissao?.slice(0, 10) || "--/--/----",
+      item.placa || "---",
+      item.modelo || "---",
+      item.servico || "---",
+      `R$ ${valor.toFixed(2)}`,
+      item.observacao || "",
     ]);
 
     y += alturaLinha;
   });
 
-  // ================= TOTAL =================
   y += 10;
   desenharLinha(
     y,
-    ["", "", "", "TOTAL GERAL", "", `R$ ${totalValor.toFixed(2)}`, ""],
+    ["", "", "", "TOTAL A PAGAR", "", `R$ ${totalValor.toFixed(2)}`, ""],
     true
   );
 
   doc.end();
-  console.log("Planilha gerada com sucesso");
-  return doc
-}
+  return doc;
+};
