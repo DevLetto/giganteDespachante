@@ -2,6 +2,7 @@ import {Clock, User, UserRoundPlus} from "lucide-react"
 import Logo from '../assets/LogoGiganteDespachante.png'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
+import GerarRelatorio from "../components/gerarRelatorio";
 
 
 
@@ -50,6 +51,8 @@ function Menu(){
                  className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8">
                     <Clock size={60} className=""/> Histórico de Serviços
                 </button>
+
+                <GerarRelatorio />
 
             </main>
           </div>

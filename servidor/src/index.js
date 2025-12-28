@@ -10,6 +10,7 @@ const rotaCadastro = require('./rotas/rotaCliente');
 const rotaHistorico = require('./rotas/rotaHistorico')
 const procuracao = require('./rotas/rotaProcuracao')
 const intencaoDeVenda = require('./rotas/rotaIntecaoDeVenda')
+const relatorio = require('./rotas/rotaRelatorio')
 // const createUser = require('./modelos/criarUsuario')
 
 // createUser("User", "1234")
@@ -36,5 +37,6 @@ app.use('/', rotaLogin)
 app.use('/', rotaHistorico)
 app.use('/', procuracao)
 app.use('/', intencaoDeVenda )
+app.use('/', relatorio);
 
 app.listen(port, () => console.log(`rodando na port ${port}`));
