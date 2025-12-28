@@ -8,6 +8,7 @@ import Menu from "./pages/Menu.jsx"
 import Cadastrar from "./pages/Cadastros/Cadastrar.jsx"
 import Pesquisar from "./pages/Historico/Pesquisar.jsx"
 import NotFound from './pages/NotFound.jsx'
+import Relatorio from './pages/Relatorio.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   },
   {  path: "*",
     element: <NotFound />
+  },
+  {
+    path: "/relatorio",
+    element: <Relatorio />
   }
 ])
 
