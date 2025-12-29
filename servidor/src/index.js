@@ -6,11 +6,14 @@ const cors = require("cors");
 const port = 8080;
 const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
-const rotaCadastro = require('./rotas/rotaCliente');
+const rotaCadastro = require('./rotas/rotaCadastro');
 const rotaHistorico = require('./rotas/rotaHistorico')
 const procuracao = require('./rotas/rotaProcuracao')
 const intencaoDeVenda = require('./rotas/rotaIntecaoDeVenda')
 const relatorio = require('./rotas/rotaRelatorio')
+const clientes = require("./rotas/rotaClientes.js");
+const detalhesClientes = require("./rotas/rotaClienteDetalhado.js")
+const relatorioCliente = require("./rotas/rotaRelatorioCliente.js")
 // const createUser = require('./modelos/criarUsuario')
 
 // createUser("User", "1234")
@@ -152,8 +155,8 @@ app.use(cors());
 
 
 try {
-  const clientes = db.prepare("SELECT * FROM clients").all();
-  console.log(clientes);
+  const allclientes = db.prepare("SELECT * FROM clients").all();
+  console.log(allclientes);
   const usarios = db.prepare("SELECT * FROM users").all();
   console.log(usarios);
 } catch (err) {
@@ -167,5 +170,8 @@ app.use('/', rotaHistorico)
 app.use('/', procuracao)
 app.use('/', intencaoDeVenda )
 app.use('/', relatorio);
+app.use("/", clientes);
+app.use('/', detalhesClientes)
+app.use('/', relatorioCliente)
 
 app.listen(port, () => console.log(`rodando na port ${port}`));

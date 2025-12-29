@@ -1,22 +1,25 @@
-const searchUser = require('../modelos/modeloUsuario')
+const searchUser = require('../modelos/modeloUsuario');
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
+module.exports = async function login(req, res) {
+  const { usuario, senha } = req.body;
 
-module.exports = async function login(req, res){
-    const {usuario, senha} = req.body;
+  const user = await searchUser(usuario);
+  if (!user) {
+    return res.status(401).json({ error: "Usuário não encontrado" });
+  }
 
-    const user = await searchUser(usuario)
+  const match = await bcrypt.compare(senha, user.senha);
+  if (!match) {
+    return res.status(401).json({ error: "Senha incorreta" });
+  }
 
-    if(!user){
-        return res.status(401).json({error: "Usuário não encontrado"})
-    }
+  const token = jwt.sign(
+    { id: user.id, usuario: user.usuario },
+    "SEGREDO_SUPER_SECRETO",
+    { expiresIn: "8h" }
+  );
 
-    const match = await bcrypt.compare(senha, user.senha)
-
-    if(!match){
-        return res.status(401).json({error: "Senha incorreta"})
-    }
-
-    res.json({message: "Login bem sucedido"})
-
-}
+  res.json({ token, usuario: user.usuario });
+};

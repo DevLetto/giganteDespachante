@@ -93,7 +93,7 @@ module.exports = function GerarProcuração(dados) {
     );
   doc
     .font("Arial-Italic")
-    .text("para a solicitação dos serviços de:", { align: "justify" });
+    .text(`para a solicitação dos serviços de: ${dados.servico}`, { align: "justify" });
 
   // Dados do Veículo
   doc.moveDown(1);

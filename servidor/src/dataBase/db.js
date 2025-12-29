@@ -11,6 +11,7 @@ const dados = `
     CREATE TABLE IF NOT EXISTS clients(
     
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        usuario_id INTEGER NOT NULL,
 
         nomeVendedor TEXT NOT NULL,
         estadoCivilVendedor TEXT NOT NULL,
@@ -63,6 +64,8 @@ try{
 }catch(err){
     console.log("error", err)
 }
+
+
 
 
 
