@@ -18,28 +18,49 @@ const router = createBrowserRouter([
   },
   {
     path: "/menu",
-    element: <Menu />
+    element: (
+      <PrivateRoute>
+        <Menu />
+      </PrivateRoute>
+    )
   },
   {
     path: "/cadastrar",
-    element : <Cadastrar />
+    element: (
+      <PrivateRoute>
+        <Cadastrar />
+      </PrivateRoute>
+    )
   },
   {
     path: "/pesquisar",
-    element: <Pesquisar />
-  },
-  {  path: "*",
-    element: <NotFound />
-  },
-  {
-    path: "/relatorio",
-    element: <Relatorio />
+    element: (
+      <PrivateRoute>
+        <Pesquisar />
+      </PrivateRoute>
+    )
   },
   {
     path: "/clientes",
-    element: <Clientes />
+    element: (
+      <PrivateRoute>
+        <Clientes />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "/relatorio",
+    element: (
+      <PrivateRoute>
+        <Relatorio />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
-])
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

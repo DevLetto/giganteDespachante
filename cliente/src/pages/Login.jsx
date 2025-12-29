@@ -11,8 +11,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,6 +26,7 @@ function Login() {
       });
 
       if (response.ok) {
+        localStorage.setItem("token", "logado"); // depois vira JWT
         navigate("/menu");
       } else {
         setErro(true);
@@ -45,7 +44,6 @@ function Login() {
 
   return (
     <div className="w-screen h-screen bg-fundo flex  2xl:gap-35 gap-15 items-center flex-col p-4 ">
-
       {/* LOGO */}
       <header className=" 2xl:w-2xl 2xl:h-62 w-lg h-40  ">
         <img src={Logo} alt="" className="w-full h-full " />

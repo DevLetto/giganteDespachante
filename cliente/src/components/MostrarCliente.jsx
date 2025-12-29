@@ -70,6 +70,9 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
 
         {/* 🔹 VEÍCULOS */}
         <section className="px-5 mb-6">
+          <h2 className="text-2xl font-bold text-traco mb-2">
+            Veículo(s)
+          </h2>
           <ul className="flex flex-col gap-2">
             {dados?.veiculos?.map((v, i) => (
               <li key={i} className="bg-white rounded-lg p-3 border">
@@ -85,7 +88,7 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
             Serviços Realizados
           </h2>
 
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-2 ">
             {dados?.servicos?.map((s) => (
               <li
                 key={s.id}
@@ -103,10 +106,12 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
 
         {/* 🔹 AÇÕES */}
         <div className="sticky bottom-0 bg-fundo border-t flex justify-between p-4">
-          <button onClick={gerarRelatorio} className="w-full  2xl:h-25 h-15 bg-traco rounded-lg 2xl:text-3xl text-xl text-white  hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center justify-center gap-8">
+          <button
+            onClick={gerarRelatorio}
+            className="w-full  2xl:h-25 h-15 bg-traco rounded-lg 2xl:text-3xl text-xl text-white  hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center justify-center gap-8"
+          >
             Gerar Relatório
           </button>
-          
         </div>
       </main>
     </div>

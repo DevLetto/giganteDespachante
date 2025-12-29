@@ -1,70 +1,78 @@
-import {Clock, User, UserRoundPlus, NotebookText, List} from "lucide-react"
-import Logo from '../assets/LogoGiganteDespachante.png'
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
+import { Clock, User, UserRoundPlus, NotebookText, List } from "lucide-react";
+import Logo from "../assets/LogoGiganteDespachante.png";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import GerarRelatorio from "../components/gerarRelatorio";
+import LogoutBtn from "../components/LogoutBtn";
 
+function Menu() {
+  const navigate = useNavigate();
 
+  const [showLogout, setShowLogout] = useState(false)
 
+  function handleShowLogout(){
+    setShowLogout(!showLogout)
+  }
 
-function Menu(){
+  useEffect(() => {
+    document.body.style.overflow = "hidden"; // desativa scroll na página
 
-    const navigate = useNavigate()
+    return () => {
+      document.body.style.overflow = "auto"; // volta ao normal ao sair do componente
+    };
+  }, []);
 
-    function onCadastrarClick(){
-    navigate('/cadastro')
-    }
+  return (
+    <div className="w-screen h-screen bg-fundo flex 2xl:gap-40 gap-10 items-center flex-col  ">
+      <header className="  w-screen flex  flex-row justify-between">
+        <img src={Logo} alt="Logo Gigante Despachante" className=" w-2xs" />
+        <div className="relative">
+            <button onClick={handleShowLogout} className=" text-traco hover:text-white hover:bg-traco transition rounded-bl-lg rounded-tl-lg hover:cursor-pointer flex flex-col items-center p-2">
+              <User size={60} />
+              <p className=" text-2xl font-bold font-[Arial]">Perfil</p>
+            </button>
 
-    function onPesquisarClick(){
-    navigate('/pesquisar')
-    }
+            
+            {showLogout &&(
+                <div className="absolute top-[110%] right-[10%] bg-white w-max h-max rounded-lg ">
+                    <LogoutBtn />
+                </div>
+            )}
 
-    useEffect(() => {
-        document.body.style.overflow = "hidden"; // desativa scroll na página
-    
-        return () => {
-          document.body.style.overflow = "auto"; // volta ao normal ao sair do componente
-        };
-      }, []);
+        </div>
 
-    return(
-        <div className='w-screen h-screen bg-fundo flex 2xl:gap-40 gap-10 items-center flex-col  '>
-            <header className="  w-screen flex  flex-row justify-between">
-                <img src={Logo} alt="Logo Gigante Despachante" className=" w-2xs" />
-               <button className=" text-traco hover:text-white hover:bg-traco transition rounded-bl-lg rounded-tl-lg hover:cursor-pointer flex flex-col items-center p-2" >
-                   <User   size={60}/>
-                   <p className=" text-2xl font-bold font-[Arial]">Perfil</p>
-               </button> 
-            </header>
-            <main className="2xl:w-[500px] 2xl:h-[550px] w-[400px] h-[450px] bg-fundo flex flex-col items-center justify-around  border-3 border-traco shadow-2xl rounded-lg ">  
+      </header>
+      <main className="2xl:w-[500px] 2xl:h-[550px] w-[400px] h-[450px] bg-fundo flex flex-col items-center justify-around  border-3 border-traco shadow-2xl rounded-lg ">
+        <button
+          onClick={() => navigate("/cadastrar")}
+          className="w-[90%] 2xl:h-25 h-20  bg-traco rounded-lg 2xl:text-3xl text-2xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8"
+        >
+          <UserRoundPlus size={60} /> Iniciar Cadastro
+        </button>
 
-                <button onClick={() => navigate('/cadastrar')}
+        <button
+          onClick={() => navigate("/pesquisar")}
+          className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8"
+        >
+          <Clock size={60} /> Histórico de Serviços
+        </button>
 
-                className="w-[90%] 2xl:h-25 h-20  bg-traco rounded-lg 2xl:text-3xl text-2xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8" >
-                    <UserRoundPlus size={60} /> Iniciar Cadastro
-                
-                </button>
+        <button
+          onClick={() => navigate("/clientes")}
+          className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8"
+        >
+          <List size={60} /> Lista de Clientes
+        </button>
 
-
-                <button onClick={() => navigate('/pesquisar')}
-                 className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8">
-                    <Clock size={60} /> Histórico de Serviços
-                </button>
-
-                <button onClick={() => navigate('/clientes')} className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8">
-                    <List size={60}/> Lista de Clientes
-
-                </button>
-
-                <button onClick={() => navigate('/relatorio')}
-                 className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8">
-                     <NotebookText size={60} /> Relatório
-                </button>
-
-
-            </main>
-          </div>
-    )
-} 
+        <button
+          onClick={() => navigate("/relatorio")}
+          className="w-[90%] 2xl:h-25 h-20 bg-traco rounded-lg 2xl:text-3xl text-xl text-white hover:bg-white hover:text-traco font-bold font-[Arial]  transition hover:cursor-pointer flex items-center pl-5 gap-8"
+        >
+          <NotebookText size={60} /> Relatório
+        </button>
+      </main>
+    </div>
+  );
+}
 
 export default Menu;

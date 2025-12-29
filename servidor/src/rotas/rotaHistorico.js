@@ -1,9 +1,8 @@
 const express = require("express");
 const lista = require("../controle/controleHistorico");
-const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.get("/historico", auth, lista);
+router.get("/historico", lista);
 
 module.exports = router;
