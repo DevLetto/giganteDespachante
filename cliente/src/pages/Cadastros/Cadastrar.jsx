@@ -8,6 +8,7 @@ import CadastroDone from "../../components/CadastroDone";
 function Cadastrar() {
   const [step, setStep] = useState(1);
   const [cadasDone, setCadasDone] = useState(false);
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
 
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ function Cadastrar() {
   const [cpf_cnpjVendedor, setCpfVendedor] = useState("");
   const [emailVendedor, setEmailVendedor] = useState("");
   const [celularVendedor, setCelularVendedor] = useState("");
-  const [cidadeVendedor, setCidadeVendedor] = useState("")
+  const [cidadeVendedor, setCidadeVendedor] = useState("");
   const [rua_avVendedor, setRuaAvVendedor] = useState("");
   const [quadraVendedor, setQuadraVendedor] = useState("");
   const [loteVendedor, setLoteVendedor] = useState("");
@@ -47,21 +48,22 @@ function Cadastrar() {
 
   const isFormValid = Boolean(
     nomeVendedor &&
-    estadoCivilVendedor &&
-    rgVendedor &&
-    orgaoexpedidorVendedor &&
-    cpf_cnpjVendedor &&
-    emailVendedor &&
-    celularVendedor &&
-    cidadeVendedor &&
-    rua_avVendedor &&
-    quadraVendedor &&
-    loteVendedor &&
-    numero_enderecoVendedor &&
-    bairroVendedor &&
-    municipioVendedor &&
-    ufVendedor &&
-    cepVendedor);
+      estadoCivilVendedor &&
+      rgVendedor &&
+      orgaoexpedidorVendedor &&
+      cpf_cnpjVendedor &&
+      emailVendedor &&
+      celularVendedor &&
+      cidadeVendedor &&
+      rua_avVendedor &&
+      quadraVendedor &&
+      loteVendedor &&
+      numero_enderecoVendedor &&
+      bairroVendedor &&
+      municipioVendedor &&
+      ufVendedor &&
+      cepVendedor
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,6 +99,7 @@ function Cadastrar() {
       chassi,
       cor,
       observacao,
+      usuario_Cadastro: usuarioLogado.usuario,
     };
 
     try {

@@ -26,9 +26,13 @@ function Login() {
       });
 
       if (response.ok) {
-        localStorage.setItem("token", "logado"); // depois vira JWT
+        const data = await response.json();
+
+        localStorage.setItem("token", "logado");
+        localStorage.setItem("usuario", JSON.stringify(data));
+
         navigate("/menu");
-      } else {
+      }else {
         setErro(true);
         setTremer(true);
 
