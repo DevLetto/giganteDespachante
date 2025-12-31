@@ -46,22 +46,22 @@ export default function Relatorio() {
       <div className="flex flex-col 2xl:gap-20 gap-8 text-center">
           <h1 className="text-traco 2xl:text-6xl text-5xl font-[Arial] font-bold">Relatório Mensal</h1>
 
-          <div className="bg-white  border-2 border-traco rounded-lg flex items-center flex-col gap-5 h-75 p-5">
-              <div className="w-full h-max font-[Arial] text-traco text-xl text-center">Escolha o mês</div>
+          <div className="bg-white  border-2 border-traco rounded-lg flex items-center flex-col gap-5 h-80 p-5">
+              <div className="w-full h-max font-[Arial] text-traco text-2xl text-center">Escolha o mês</div>
               <div className="grid grid-cols-4 gap-3">
                 {mesesLista.map((m) => (
-                  <label key={m.id} className="flex gap-2">
+                  <label key={m.id} className="flex gap-2 text-xl">
                     <input
                       type="checkbox"
                       checked={meses.includes(m.id)}
-                      className="accent-traco peer hover:cursor-pointer"
+                      className="accent-traco peer   hover:cursor-pointer"
                       onChange={() => toggleMes(m.id)}
                     />
                     {m.nome}
                   </label>
                 ))}
               </div>
-              <div className="w-full h-max font-[Arial] text-traco text-xl text-center">Escolha o ano</div>
+              <div className="w-full h-max font-[Arial] text-traco text-2xl text-center">Escolha o ano</div>
               <input
                 type="number"
                 value={ano}

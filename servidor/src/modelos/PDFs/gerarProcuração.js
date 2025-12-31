@@ -1,15 +1,29 @@
 const PDFDocument = require("pdfkit");
-const path = require('path')
-
+const path = require("path");
 
 module.exports = function GerarProcuração(dados) {
+
+  const cpf_cnpj = dados.cpf_cnpjVendedor || "";
+
+  let cpf = "";
+  let cnpj = "";
+
+  // remove máscara
+  const somenteNumeros = cpf_cnpj.replace(/\D/g, "");
+
+  if (somenteNumeros.length === 11) {
+    cpf = cpf_cnpj;
+  }
+
+  if (somenteNumeros.length === 14) {
+    cnpj = cpf_cnpj;
+  }
+
   const doc = new PDFDocument({
     size: "A4",
     margin: { top: 50, bottom: 45, left: 10, right: 10 },
   });
 
-
-  
   // Início do conteúdo do PDF
 
   // CONF GERAL
@@ -19,7 +33,7 @@ module.exports = function GerarProcuração(dados) {
   const lineHeight = 20;
 
   // FONTES
-  const fontesPath = path.join(__dirname, "fontes")
+  const fontesPath = path.join(__dirname, "fontes");
 
   doc.registerFont("Algerian", path.join(fontesPath, "algerian.ttf"));
   doc.registerFont("Arial", path.join(fontesPath, "ARIAL.ttf"));
@@ -53,9 +67,12 @@ module.exports = function GerarProcuração(dados) {
 
   doc.font("Arial-Italic").text("Residente á", { align: "justify" });
   doc.moveDown(0.1);
-  doc.text(`Bairro: ${dados.bairroVendedor} Cidade: ${dados.cidadeVendedor}  CEP: ${dados.cepVendedor} `, {
-    align: "justify",
-  });
+  doc.text(
+    `Bairro: ${dados.bairroVendedor} Cidade: ${dados.cidadeVendedor}  CEP: ${dados.cepVendedor} `,
+    {
+      align: "justify",
+    }
+  );
 
   doc.moveDown(0.1);
   doc.text(
@@ -63,7 +80,7 @@ module.exports = function GerarProcuração(dados) {
     { align: "justify" }
   );
   doc.moveDown(0.1);
-  doc.text(`CPF: ${dados.cpf_cnpjVendedor}, ou CNPJ: `, { align: "justify" });
+  doc.text(`CPF: ${cpf}, ou CNPJ: ${cnpj}`, { align: "justify" });
   //Texto 1
   doc.moveDown(2);
 
@@ -93,7 +110,9 @@ module.exports = function GerarProcuração(dados) {
     );
   doc
     .font("Arial-Italic")
-    .text(`para a solicitação dos serviços de: ${dados.servico}`, { align: "justify" });
+    .text(`para a solicitação dos serviços de: ${dados.servico}`, {
+      align: "justify",
+    });
 
   // Dados do Veículo
   doc.moveDown(1);
@@ -192,5 +211,5 @@ module.exports = function GerarProcuração(dados) {
     .text("GRAZIELE DE SOUZA FERREIRA", 400, 782);
 
   doc.end();
-  return doc
+  return doc;
 };

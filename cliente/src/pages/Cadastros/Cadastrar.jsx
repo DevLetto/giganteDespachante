@@ -4,6 +4,7 @@ import CadastroCliente from "./CadastroCliente";
 import CadastroVendedor from "./CadastroVendedor";
 import { useEffect } from "react";
 import CadastroDone from "../../components/CadastroDone";
+import { apiFetch } from "../../services/api";
 
 function Cadastrar() {
   const [step, setStep] = useState(1);
@@ -65,6 +66,8 @@ function Cadastrar() {
       cepVendedor
   );
 
+  // console.log("UsuarioLogado:", usuarioLogado )
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -103,11 +106,8 @@ function Cadastrar() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/cadastro", {
+      const response = await apiFetch("/cadastro", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(dadosCadastro),
       });
 

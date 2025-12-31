@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 // const bcrypt = require("bcrypt");
@@ -17,7 +18,7 @@ const relatorioCliente = require("./rotas/rotaRelatorioCliente.js")
 const atualizarUsuario = require('./rotas/rotaUsuario.js')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("User", "1234")
+// createUser("Brenda", "castidade10")
 
 app.use(express.json());
 app.use(cors());

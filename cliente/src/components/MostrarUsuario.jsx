@@ -57,6 +57,9 @@
 
           {dados && (
             <section className="h-90  pl-5 pr-5 ">
+              <div className="mt-5" >
+                <h1 className="text-traco font-[Arial]">Cadastro realizado por: <strong >{dados.usuario_cadastro}</strong> </h1>
+              </div>
               {/* OUTORGANTE */}
               <div className="w-full text-center mb-3">
                 <h1 className="text-3xl text-traco font-bold font-[Arial] underline">

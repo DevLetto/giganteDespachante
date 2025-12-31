@@ -10,7 +10,7 @@ function LogoutBtn() {
     navigate("/");
   }
 
-  return <button onClick={logout} className="w-25 h-15 bg-white text-red-700 hover:bg-red-600 hover:text-white text-2xl rounded-lg flex flex-row justify-center items-center gap-3"> <LogOut size={30} /> Sair</button>;
+  return <button onClick={logout} className="w-50 h-15 bg-fundo border border-red-500 text-red-700 hover:bg-red-600 hover:text-white text-2xl rounded-lg flex flex-row justify-center items-center gap-3"> <LogOut size={30} /> Sair</button>;
 }
 
 export default LogoutBtn;

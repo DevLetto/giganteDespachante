@@ -28,11 +28,11 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
 
-        localStorage.setItem("token", "logado");
-        localStorage.setItem("usuario", JSON.stringify(data));
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
         navigate("/menu");
-      }else {
+      } else {
         setErro(true);
         setTremer(true);
 

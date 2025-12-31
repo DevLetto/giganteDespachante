@@ -1,5 +1,6 @@
-const searchUser = require('../modelos/modeloUsuario')
+const searchUser = require("../modelos/modeloUsuario");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = async function login(req, res) {
   const { usuario, senha } = req.body;
@@ -16,9 +17,17 @@ module.exports = async function login(req, res) {
     return res.status(401).json({ error: "Senha incorreta" });
   }
 
-  // ⚠️ depois vira JWT
+  const token = jwt.sign(
+    { id: user.id, usuario: user.usuario },
+    process.env.JWT_SECRET, // <--- Aqui
+    { expiresIn: "8h" }
+  );
+
   res.json({
-    id: user.id,
-    usuario: user.usuario
+    token,
+    usuario: {
+      id: user.id,
+      usuario: user.usuario,
+    },
   });
 };

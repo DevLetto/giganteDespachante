@@ -1,8 +1,8 @@
 const cadastrarCliente = require("../modelos/cadastrarCliente");
 
 module.exports = async function cadastro(req, res) {
-  const usuario_id = req.userId;
-  const usuario_Cadastro = req.body.usuarioCadastro;
+  const usuario_id = req.user.id;
+  const usuario_cadastro = req.user.usuario
 
   const {
     nomeVendedor,
@@ -38,8 +38,9 @@ module.exports = async function cadastro(req, res) {
   } = req.body;
 
   try {
+
+    console.log("USUÁRIO LOGADO:", req.user);
     cadastrarCliente(
-      usuario_id,
       nomeVendedor,
       estadoCivilVendedor,
       rgVendedor,
@@ -70,7 +71,8 @@ module.exports = async function cadastro(req, res) {
       chassi,
       cor,
       observacao,
-      usuario_Cadastro
+      usuario_id,
+      usuario_cadastro
     );
     res.status(201).json({ message: "Cadastro Realizado!" });
   } catch (error) {

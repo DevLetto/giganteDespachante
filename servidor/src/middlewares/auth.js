@@ -10,10 +10,12 @@ module.exports = function auth(req, res, next) {
   const [, token] = authHeader.split(" ");
 
   try {
-    const decoded = jwt.verify(token, "SEGREDO_SUPER_SECRETO");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.userId = decoded.id;
-    req.usuario = decoded.usuario;
+    req.user = {
+      id: decoded.id,
+      usuario: decoded.usuario
+    };
 
     next();
   } catch (err) {
