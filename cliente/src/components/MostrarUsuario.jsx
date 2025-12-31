@@ -196,7 +196,7 @@
                     <strong className="text-traco">Placa:</strong> {dados.placa}
                   </p>
                   <p>
-                    <strong className="text-traco">Ano:</strong> {dados.ano}
+                    <strong className="text-traco">Ano Fabricação:</strong> {dados.ano_fabricacao}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 text-xl  h-full w-[50%] break-all">
@@ -205,6 +205,9 @@
                   </p>
                   <p>
                     <strong className="text-traco">Cor:</strong> {dados.cor}
+                  </p>
+                  <p>
+                    <strong className="text-traco">Ano Modelo:</strong> {dados.ano_modelo}
                   </p>
                 </div>
               </div>

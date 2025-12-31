@@ -65,7 +65,7 @@ module.exports = function GerarProcuração(dados) {
   doc.moveDown(1);
   doc.fontSize(9.5);
 
-  doc.font("Arial-Italic").text("Residente á", { align: "justify" });
+  doc.font("Arial-Italic").text(`Residente á ${dados.rua_avVendedor}`, { align: "justify" });
   doc.moveDown(0.1);
   doc.text(
     `Bairro: ${dados.bairroVendedor} Cidade: ${dados.cidadeVendedor}  CEP: ${dados.cepVendedor} `,
@@ -126,7 +126,7 @@ module.exports = function GerarProcuração(dados) {
     .font("Arial-Italic")
     .fontSize(9.5)
     .text(
-      `Ano de fabricação: ${dados.ano}, Ano modelo : ${dados.ano}, PLACAS: ${dados.placa}, Cor: ${dados.cor}, Chassi: ${dados.chassi}, podendo para tanto assinar o de acordo como adquirente do constante do ATPV, receber e entregar CNH apreendida na comissão de apreensão e pontuação deste órgão. Podendo ainda, requerer e assinar o que for necessário for fazer pagamentos, receber e dar quitações, alegar, concordar, discordar, presta, declarações, e informações, desistir, enfim, dado por firme e valioso.`,
+      `Ano de fabricação: ${dados.ano_fabricacao}, Ano modelo : ${dados.ano_modelo}, PLACAS: ${dados.placa}, Cor: ${dados.cor}, Chassi: ${dados.chassi}, podendo para tanto assinar o de acordo como adquirente do constante do ATPV, receber e entregar CNH apreendida na comissão de apreensão e pontuação deste órgão. Podendo ainda, requerer e assinar o que for necessário for fazer pagamentos, receber e dar quitações, alegar, concordar, discordar, presta, declarações, e informações, desistir, enfim, dado por firme e valioso.`,
       { align: "justify" }
     );
 

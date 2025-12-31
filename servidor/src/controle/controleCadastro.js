@@ -31,10 +31,11 @@ module.exports = async function cadastro(req, res) {
     valor_servico,
     placa,
     modelo,
-    ano,
+    ano_fabricacao,
     chassi,
     cor,
     observacao,
+    ano_modelo
   } = req.body;
 
   try {
@@ -67,12 +68,13 @@ module.exports = async function cadastro(req, res) {
       valor_servico,
       placa,
       modelo,
-      ano,
+      ano_fabricacao,
       chassi,
       cor,
       observacao,
       usuario_id,
-      usuario_cadastro
+      usuario_cadastro,
+      ano_modelo
     );
     res.status(201).json({ message: "Cadastro Realizado!" });
   } catch (error) {

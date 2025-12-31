@@ -24,7 +24,8 @@ function Cadastrar() {
   const [valor_servico, setValorServ] = useState("");
   const [placa, setPlaca] = useState("");
   const [modelo, setModelo] = useState("");
-  const [ano, setAno] = useState("");
+  const [ano_fabricacao, setAno_fabricacao] = useState("");
+  const [ano_modelo, setAno_modelo] = useState("")
   const [chassi, setChassi] = useState("");
   const [cor, setCor] = useState("");
   const [observacao, setObservacao] = useState("");
@@ -98,11 +99,12 @@ function Cadastrar() {
       valor_servico,
       placa,
       modelo,
-      ano,
+      ano_fabricacao,
       chassi,
       cor,
       observacao,
       usuario_Cadastro: usuarioLogado.usuario,
+      ano_modelo
     };
 
     try {
@@ -197,8 +199,10 @@ function Cadastrar() {
             setPlaca={setPlaca}
             modelo={modelo}
             setModelo={setModelo}
-            ano={ano}
-            setAno={setAno}
+            ano_fabricacao={ano_fabricacao}
+            ano_modelo={ano_modelo}
+            setAno_fabricacao={setAno_fabricacao}
+            setAno_modelo={setAno_modelo}
             chassi={chassi}
             setChassi={setChassi}
             cor={cor}

@@ -35,8 +35,10 @@ function CadastroCliente({
   setPlaca,
   modelo,
   setModelo,
-  ano,
-  setAno,
+  ano_fabricacao,
+  setAno_fabricacao,
+  ano_modelo,
+  setAno_modelo,
   chassi,
   setChassi,
   cor,
@@ -69,7 +71,8 @@ function CadastroCliente({
     servico ||
     placa ||
     modelo ||
-    ano ||
+    ano_fabricacao ||
+    ano_modelo ||
     chassi ||
     cor;
 
@@ -327,41 +330,24 @@ function CadastroCliente({
                   className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                 />
               </fieldset>
-              <fieldset className="w-[98%]">
-                <label
-                  htmlFor="modelo"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Modelo*
-                </label>
-                <input
-                  required
-                  type="text"
-                  name="modelo"
-                  value={modelo}
-                  autoComplete="off"
-                  onChange={(e) => setModelo(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
-                />
-              </fieldset>
+
 
               <fieldset className="w-[98%] flex flex-row justify-between">
                 <div className="w-[48%]">
                   <label
-                    htmlFor="ano"
+                    htmlFor="modelo"
                     className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
                   >
-                    Ano*
+                    Modelo*
                   </label>
                   <input
                     required
                     type="text"
-                    name="ano"
-                    value={ano}
-                    maxLength={4}
+                    name="modelo"
+                    value={modelo}
                     autoComplete="off"
-                    onChange={(e) => setAno(formatarAno(e.target.value))}
-                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                    onChange={(e) => setModelo(e.target.value)}
+                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                   />
                 </div>
                 <div className="w-[48%]">
@@ -381,6 +367,47 @@ function CadastroCliente({
                     className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
                   />
                 </div>
+              </fieldset>
+
+
+              <fieldset className="w-[98%] flex flex-row justify-between">
+                <div className="w-[48%]">
+                  <label
+                    htmlFor="anoFabricacao"
+                    className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
+                  >
+                    Ano Fabrição*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="anoFabricacao"
+                    value={ano_fabricacao}
+                    maxLength={4}
+                    autoComplete="off"
+                    onChange={(e) => setAno_fabricacao(formatarAno(e.target.value))}
+                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                  />
+                </div>
+                <div className="w-[48%]">
+                  <label
+                    htmlFor="anoModelo"
+                    className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
+                  >
+                    Ano Modelo*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="anoModelo"
+                    value={ano_modelo}
+                    maxLength={4}
+                    autoComplete="off"
+                    onChange={(e) => setAno_modelo(formatarAno(e.target.value))}
+                    className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                  />
+                </div>
+                
               </fieldset>
             </section>
           </div>
