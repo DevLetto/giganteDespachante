@@ -76,7 +76,7 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
           <ul className="flex flex-col gap-2">
             {dados?.veiculos?.map((v, i) => (
               <li key={i} className="bg-white rounded-lg p-3 border">
-                {v.placa} — {v.modelo} ({v.ano}) - {v.cor}
+                {v.placa} — {v.modelo} ({v.ano_fabricacao}) - {v.cor}
               </li>
             )) || <p>Nenhum veículo encontrado.</p>}
           </ul>

@@ -3,14 +3,12 @@ const db = require("../dataBase/db");
 
 module.exports = function buscarClienteDetalhado(idCliente) {
   try {
-    // 1. Verificar se o cliente existe
     const cliente = db.prepare(`SELECT * FROM clients WHERE id = ?`).get(idCliente);
 
     if (!cliente) return null;
 
-    // 2. Buscar veículos (Use o CPF para pegar todos os registros desse cliente)
     const veiculos = db.prepare(`
-      SELECT DISTINCT placa, modelo, ano, cor 
+      SELECT DISTINCT placa, modelo, ano_fabricacao, cor 
       FROM clients 
       WHERE cpf_cnpj = ?
     `).all(cliente.cpf_cnpj);
@@ -30,6 +28,6 @@ module.exports = function buscarClienteDetalhado(idCliente) {
     };
   } catch (error) {
     console.error("Erro no Banco de Dados:", error.message);
-    throw error; // Repassa para o controle tratar
+    throw error; 
   }
 };
