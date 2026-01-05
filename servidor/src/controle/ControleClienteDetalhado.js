@@ -1,13 +1,13 @@
 // arquivo: controle/ControleClienteDetalhado.js
 const buscarClienteDetalhado = require("../modelos/clienteDetalhado");
 
-module.exports = function controleClienteDetalhado(req, res) {
+module.exports = async function controleClienteDetalhado(req, res) {
   try {
     const { id } = req.params;
     
     console.log("Buscando detalhes para o ID:", id);
 
-    const dados = buscarClienteDetalhado(id);
+    const dados = await buscarClienteDetalhado(id);
 
     if (!dados) {
       return res.status(404).json({ error: "Cliente não encontrado" });

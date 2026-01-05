@@ -8,32 +8,33 @@ module.exports = async function atualizarUsuario(req, res) {
 
     let senhaHash = null;
 
-    // Só altera a senha se o usuário digitou uma nova
     if (senha && senha.trim() !== "") {
       senhaHash = await bcrypt.hash(senha, 10);
     }
 
     if (senhaHash) {
-      db.prepare(
+      await db.execute(
         `
         UPDATE users
         SET usuario = ?, senha = ?
         WHERE id = ?
-      `
-      ).run(usuario, senhaHash, userId);
+      `,
+        [usuario, senhaHash, userId]
+      );
     } else {
-      db.prepare(
+      await db.execute(
         `
         UPDATE users
         SET usuario = ?
         WHERE id = ?
-      `
-      ).run(usuario, userId);
+      `,
+        [usuario, userId]
+      );
     }
 
     res.json({ message: "Usuário atualizado com sucesso" });
   } catch (error) {
-    console.error(error);
+    console.error("Erro ao atualizar usuário no MariaDB:", error);
     res.status(500).json({ error: "Erro ao atualizar usuário" });
   }
 };

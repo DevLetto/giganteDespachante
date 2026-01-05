@@ -4,7 +4,7 @@ module.exports = async function controleRelatorioCliente(req, res) {
   try {
     const { id } = req.params;
 
-    const doc = gerarRelatorioCliente(id);
+    const doc = await gerarRelatorioCliente(id);
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(

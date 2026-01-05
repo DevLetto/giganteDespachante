@@ -5,18 +5,19 @@ const db = require("../../dataBase/db");
 module.exports = async function gerarRelatorio({ meses, ano }) {
   const placeholders = meses.map(() => "?").join(",");
 
-  const dados = db
-    .prepare(`
+  
+  const [dados] = await db.execute(`
       SELECT *
       FROM clients
-      WHERE strftime('%m', data_emissao) IN (${placeholders})
-      AND strftime('%Y', data_emissao) = ?
+      WHERE MONTH(data_emissao) IN (${placeholders})
+      AND YEAR(data_emissao) = ?
       ORDER BY data_emissao ASC
-    `)
-    .all(
-      ...meses.map(m => String(m).padStart(2, "0")),
-      String(ano)
-    );
+    `, 
+    [
+      ...meses.map(m => Number(m)), 
+      Number(ano)
+    ]
+  );
 
   const doc = new PDFDocument({ size: "A4", margin: 40 });
 
@@ -94,9 +95,13 @@ module.exports = async function gerarRelatorio({ meses, ano }) {
     const valor = Number(item.valor_servico) || 0;
     totalValor += valor;
 
+    const dataFormatada = item.data_emissao 
+      ? new Date(item.data_emissao).toLocaleDateString("pt-BR")
+      : "--/--/----";
+
     desenharLinha(y, [
       contador++,
-      item.data_emissao?.slice(0, 10) || "--/--/----",
+      dataFormatada,
       item.placa || "---",
       item.modelo || "---",
       item.servico || "---",

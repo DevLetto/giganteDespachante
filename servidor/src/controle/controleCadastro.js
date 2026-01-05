@@ -41,7 +41,7 @@ module.exports = async function cadastro(req, res) {
   try {
 
     console.log("USUÁRIO LOGADO:", req.user);
-    cadastrarCliente(
+    await cadastrarCliente(
       nomeVendedor,
       estadoCivilVendedor,
       rgVendedor,

@@ -1,21 +1,23 @@
 const PDFDocument = require("pdfkit");
 const db = require("../../dataBase/db");
 
-module.exports = function gerarRelatorioCliente(clienteId) {
+module.exports = async function gerarRelatorioCliente(clienteId) {
 
   // 🔹 1. Buscar o cliente pelo ID
-  const cliente = db.prepare(`
+  const [clientesEncontrados] = await db.execute(`
     SELECT nome, cpf_cnpj
     FROM clients
     WHERE id = ?
-  `).get(clienteId);
+  `, [clienteId])
+
+  const cliente = clientesEncontrados[0]
 
   if (!cliente) {
     throw new Error("Cliente não encontrado");
   }
 
   // 🔹 2. Buscar TODOS os serviços pelo CPF
-  const servicos = db.prepare(`
+  const [servicos] = await db.execute(`
     SELECT
       data_emissao,
       placa,
@@ -25,7 +27,7 @@ module.exports = function gerarRelatorioCliente(clienteId) {
     FROM clients
     WHERE cpf_cnpj = ?
     ORDER BY data_emissao ASC
-  `).all(cliente.cpf_cnpj);
+  `, [cliente.cpf_cnpj])
 
   const doc = new PDFDocument({ size: "A4", margin: 40 });
 
@@ -94,8 +96,9 @@ module.exports = function gerarRelatorioCliente(clienteId) {
     const valor = Number(item.valor_servico) || 0;
     total += valor;
 
-    const dataBR = new Date(item.data_emissao + "Z")
-      .toLocaleDateString("pt-BR");
+    const dataBR = item.data_emissao 
+      ? new Date(item.data_emissao).toLocaleDateString("pt-BR")
+      : "---";
 
     linha(y, [
       contador++,

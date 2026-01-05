@@ -1,11 +1,9 @@
 require('dotenv').config();
+const db = require("./dataBase/db.js");
 const express = require("express");
 const app = express();
-// const bcrypt = require("bcrypt");
-// const fs = require("fs");
 const cors = require("cors");
 const port = 8080;
-const db = require("./dataBase/db");
 const rotaLogin = require('./rotas/rotaLogin')
 const rotaCadastro = require('./rotas/rotaCadastro');
 const rotaHistorico = require('./rotas/rotaHistorico')
@@ -18,24 +16,33 @@ const relatorioCliente = require("./rotas/rotaRelatorioCliente.js")
 const atualizarUsuario = require('./rotas/rotaUsuario.js')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("Brenda", "castidade10")
+// createUser("User1", "1234")
+
+
 
 app.use(express.json());
 app.use(cors());
 
 
 
+async function testarConexao() {
+  try {
+    // Testando se consegue ler a tabela de clientes
+    const [allclientes] = await db.execute("SELECT * FROM clients LIMIT 1");
+    console.log("✅ Conexão com MariaDB estabelecida com sucesso!");
+    console.log("Exemplo de cliente:", allclientes[0] || "Nenhum cliente cadastrado ainda.");
 
-
-
-try {
-  const allclientes = db.prepare("SELECT * FROM clients").all();
-  console.log(allclientes);
-  const usarios = db.prepare("SELECT * FROM users").all();
-  console.log(usarios);
-} catch (err) {
-  console.log("error", err);
+    const [usuarios] = await db.execute("SELECT * FROM users LIMIT 1");
+    console.log("Exemplo de usuário:", usuarios[0] || "Nenhum usuário cadastrado.");
+  } catch (err) {
+    console.error("❌ Erro ao conectar no MariaDB (Verifique se o HD externo está ligado):", err.message);
+  }
 }
+
+testarConexao();
+
+
+
 
 
 app.use('/', rotaCadastro)
