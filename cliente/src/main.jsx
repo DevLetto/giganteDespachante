@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom"; 
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Login from "./pages/Login";
 import Menu from "./pages/Menu.jsx";
@@ -12,7 +12,7 @@ import Relatorio from "./pages/Relatorio.jsx";
 import Clientes from "./pages/HistoricoClientes.jsx/Clientes.jsx";
 import Perfil from "./pages/Perfil.jsx";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Login />,

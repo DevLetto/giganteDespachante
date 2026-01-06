@@ -3,8 +3,9 @@
   import { ArrowLeft } from "lucide-react";
   import GerarProcuração from "./GerarProcuração";
   import GerarIntencaoDeVenda from "./GerarIntencaoDeVenda";
+  import { apiFetch } from "../services/api";
 
-  function MostrarUsuario({ id, voltar }) {
+  function MostrarCadastro({ id, voltar }) {
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -15,8 +16,8 @@
         try {
           setLoading(true);
 
-          const response = await fetch(
-            `http://localhost:8080/historico?id=${id}`
+          const response = await apiFetch(
+            `/historico?id=${id}`
           );
 
           if (!response.ok) {
@@ -223,4 +224,4 @@
     );
   }
 
-  export default MostrarUsuario;
+  export default MostrarCadastro;

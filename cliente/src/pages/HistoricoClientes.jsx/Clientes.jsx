@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Buscas from "./BuscarCliente";
 import Tabela from "./TabelaClientes";
-import MostrarUsuario from "../../components/MostrarUsuario";
+import MostrarUsuario from "../../components/MostrarCadastro";
 import TabelaClientes from "./TabelaClientes";
 import MostrarCliente from "../../components/MostrarCliente";
+import { apiFetch } from "../../services/api";
 
 function Clientes() {
   const navigate = useNavigate();
@@ -15,15 +16,11 @@ function Clientes() {
   const [lista, setLista] = useState([]);
   const [clienteSelecionado, setClienteSelecionado] = useState(null);
 
-  // No arquivo Clientes.js
   async function buscarClientes() {
-    // A rota correta no seu backend é /clientes e não /historico/cliente
-    const url = busca
-      ? `http://localhost:8080/clientes?busca=${busca}`
-      : `http://localhost:8080/clientes`;
+    const url = busca ? `/clientes?busca=${busca}` : `/clientes`;
 
     try {
-      const response = await fetch(url);
+      const response = await apiFetch(url);
       const dados = await response.json();
       setLista(dados);
     } catch (error) {

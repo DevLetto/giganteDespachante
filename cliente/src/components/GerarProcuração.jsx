@@ -1,3 +1,5 @@
+import { apiFetch } from "../services/api";
+
 function GerarProcuração({ id, nome }) {
 
   const normalizarNome = (nome) => {
@@ -13,7 +15,7 @@ function GerarProcuração({ id, nome }) {
     try {
       console.log("Gerando PDF para o ID: ", id);
 
-      const response = await fetch(`http://localhost:8080/procuracao?id=${id}`);
+      const response = await apiFetch(`/procuracao?id=${id}`);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));

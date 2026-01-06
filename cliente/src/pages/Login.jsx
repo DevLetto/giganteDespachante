@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/LogoGiganteDespachante.png";
 import Bolas from "../assets/bolinhas.png";
 import { useState } from "react";
+import { apiFetch } from "../services/api";
 
 function Login() {
   const [usuario, setUser] = useState("");
@@ -17,7 +18,7 @@ function Login() {
     const dadosLogin = { usuario, senha };
 
     try {
-      const response = await fetch("http://localhost:8080/login", {
+      const response = await apiFetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

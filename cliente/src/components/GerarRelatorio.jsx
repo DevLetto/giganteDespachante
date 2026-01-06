@@ -1,3 +1,5 @@
+import { apiFetch } from "../services/api";
+
 function GerarRelatorio({ meses, ano }) {
   async function gerarPdf() {
     if (!meses.length) {
@@ -7,7 +9,7 @@ function GerarRelatorio({ meses, ano }) {
 
     const query = `meses=${meses.join(",")}&ano=${ano}`;
 
-    const response = await fetch(`http://localhost:8080/relatorio?${query}`);
+    const response = await apiFetch(`/relatorio?${query}`);
 
     if (!response.ok) {
       const erro = await response.json();

@@ -1,6 +1,7 @@
 import Header from "./Header";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
+import { apiFetch } from "../services/api";
 
 function MostrarCliente({ id, voltar, novoCadastro }) {
   const [dados, setDados] = useState(null);
@@ -10,7 +11,7 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
     async function carregar() {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8080/clientes/${id}`);
+        const response = await apiFetch(`/clientes/${id}`);
         const json = await response.json();
         setDados(json);
       } catch (err) {
@@ -34,8 +35,8 @@ function MostrarCliente({ id, voltar, novoCadastro }) {
   if (!dados || !dados.cliente) return null;
 
   const gerarRelatorio = async () => {
-    const response = await fetch(
-      `http://localhost:8080/relatorio/cliente/${id}`
+    const response = await apiFetch(
+      `/relatorio/cliente/${id}`
     );
 
     const blob = await response.blob();

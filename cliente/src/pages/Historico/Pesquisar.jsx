@@ -5,7 +5,8 @@ import { useState, useEffect, useCallback } from "react";
 import Buscas from "./Buscas";
 import Tabela from "./Tabela";
 import Filtros from "./Filtros";
-import MostrarUsuario from "../../components/mostrarUsuario";
+import MostrarCadastro from "../../components/MostrarCadastro";
+import { apiFetch } from "../../services/api";
 
 function Pesquisar() {
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ function Pesquisar() {
   const [valorServ, setValorServ] = useState("");
   const [dataInicial, setDataInicial] = useState("");
   const [dataFinal, setDataFinal] = useState("");
-  const [sempre, setSempre] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showFiltro, setShowFiltro] = useState(false);
   const [idCliente, setIdCliente] = useState("");
@@ -52,9 +52,9 @@ function Pesquisar() {
           queryParams.append("dataFinal", currentFiltros.dataFinal);
         }
 
-        const url = `http://localhost:8080/historico?${queryParams.toString()}`;
+        const url = `/historico?${queryParams.toString()}`;
 
-        const response = await fetch(url);
+        const response = await apiFetch(url);
 
         if (!response.ok) {
           console.error("Erro ao carregar historico. Status:", response.status);
@@ -164,7 +164,7 @@ function Pesquisar() {
       <Tabela lista={lista} verDetalhe={mostrarInfoUser} />
 
       {showDetails && (
-        <MostrarUsuario id={idCliente} voltar={() => setShowDetails(false)} />
+        <MostrarCadastro id={idCliente} voltar={() => setShowDetails(false)} />
       )}
     </div>
   );

@@ -1,3 +1,5 @@
+import { apiFetch } from "../services/api";
+
 function GerarIntencaoDeVenda({id, nome}) {
 
   const normalizarNome = (nome) => {
@@ -13,7 +15,7 @@ function GerarIntencaoDeVenda({id, nome}) {
     try {
       console.log("Gerando Intenção de Venda para o ID: ", id);
 
-      const response = await fetch(`http://localhost:8080/intencaoDeVenda?id=${id}`);
+      const response = await apiFetch(`/intencaoDeVenda?id=${id}`);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));

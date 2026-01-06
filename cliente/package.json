@@ -3,11 +3,27 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "main.cjs",
+  "build": {
+    "appId": "com.gigante.despachante",
+    "productName": "Gigante Despachante",
+    "win": {
+      "target": "portable",
+      "icon": "dist/favicon.ico"
+    },
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "package.json"
+    ]
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:start": "electron .",
+    "build-exe": "electron-builder"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
@@ -23,6 +39,8 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
+    "electron": "^39.2.7",
+    "electron-builder": "^26.4.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.24",

@@ -16,7 +16,7 @@ const relatorioCliente = require("./rotas/rotaRelatorioCliente.js")
 const atualizarUsuario = require('./rotas/rotaUsuario.js')
 // const createUser = require('./modelos/criarUsuario')
 
-// createUser("User1", "1234")
+// createUser("User3", "1234")
 
 
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { ArrowLeft } from "lucide-react";
+import { apiFetch } from "../services/api";
 
 function Perfil() {
 
@@ -17,7 +18,7 @@ function Perfil() {
 
     const token = localStorage.getItem("token"); 
 
-    const response = await fetch("http://localhost:8080/usuario", {
+    const response = await apiFetch("/usuario", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
