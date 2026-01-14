@@ -202,7 +202,7 @@ module.exports = function GerarIntencaoDeVenda(dados) {
     .stroke();
 
   doc.text("Ano de Fabricação/Modelo: ", startX, row(8), { continued: true });
-  doc.text(`      ${dados.ano_fabricacao}`);
+  doc.text(`      ${dados.ano_fabricacao}/${dados.ano_modelo}`);
   doc
     .moveTo(150, row(9) - 15)
     .lineTo(endX, row(9) - 15)

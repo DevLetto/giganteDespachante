@@ -2,20 +2,24 @@
   "name": "gigantedespachante",
   "private": true,
   "version": "0.0.0",
+  "main": "main.cjs", 
   "type": "module",
-  "main": "main.cjs",
-  "build": {
+ "build": {
     "appId": "com.gigante.despachante",
     "productName": "Gigante Despachante",
-    "win": {
-      "target": "portable",
-      "icon": "dist/favicon.ico"
+    "directories": {
+      "output": "build_exe"
     },
     "files": [
       "dist/**/*",
       "main.cjs",
       "package.json"
-    ]
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "dist/favicon.ico"
+    },
+    "asar": true
   },
   "scripts": {
     "dev": "vite",

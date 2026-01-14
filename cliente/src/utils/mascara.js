@@ -74,7 +74,7 @@ export function formatarRG(valor) {
     if (qtd <= 7) {
         return valor
             .replace(/(\d{1})(\d)/, "$1-$2")
-            .replace(/(\d{1})-(\d{3})(\d)/, "$1-$2.$3");
+            .replace(/(\d{1})-(\d{3})(\d)/, "$1.$2.$3");
     } 
     
     // RG com 8 dígitos (Ex: 00.000.000)

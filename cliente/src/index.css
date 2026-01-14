@@ -10,6 +10,7 @@
   --color-traco: #014892;
 }
 
+
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-4px); }
