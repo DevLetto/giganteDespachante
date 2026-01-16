@@ -1,4 +1,3 @@
-// arquivo: controle/ControleClienteDetalhado.js
 const buscarClienteDetalhado = require("../modelos/clienteDetalhado");
 
 module.exports = async function controleClienteDetalhado(req, res) {

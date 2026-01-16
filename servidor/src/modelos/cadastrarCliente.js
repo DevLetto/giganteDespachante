@@ -1,6 +1,7 @@
 const db = require("../dataBase/db");
 
 module.exports = async function createClient(
+  // Dados Vendedor
   nomeVendedor,
   estadoCivilVendedor,
   rgVendedor,
@@ -17,27 +18,45 @@ module.exports = async function createClient(
   municipioVendedor,
   ufVendedor,
   cepVendedor,
+  // Dados Cliente
   nome,
   cpf_cnpj,
   rg,
   telefone,
-  endereco,
   email,
   servico,
   valor_servico,
+  //Dados Veiculo
   placa,
   modelo,
   ano_fabricacao,
   chassi,
   cor,
+  //dados adcionais
   observacao,
   usuario_id,
   usuario_cadastro,
-  ano_modelo
+  ano_modelo,
+  rua,
+  bairro,
+  cidade,
+  cep
 ) {
   try {
-    await db.execute(
-      "INSERT INTO clients(nomeVendedor, estadoCivilVendedor, rgVendedor, orgaoexpedidorVendedor, cpf_cnpjVendedor, emailVendedor, celularVendedor, cidadeVendedor, rua_avVendedor, quadraVendedor, loteVendedor, numero_enderecoVendedor, bairroVendedor, municipioVendedor, ufVendedor, cepVendedor, nome, cpf_cnpj, rg, telefone, endereco, email, servico, valor_servico, placa, modelo, ano_fabricacao, chassi, cor, observacao, usuario_id, usuario_cadastro, ano_modelo ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [nomeVendedor,
+    const sql = `
+      INSERT INTO clients (
+        nomeVendedor, estadoCivilVendedor, rgVendedor, orgaoexpedidorVendedor, 
+        cpf_cnpjVendedor, emailVendedor, celularVendedor, cidadeVendedor, 
+        rua_avVendedor, quadraVendedor, loteVendedor, numero_enderecoVendedor, 
+        bairroVendedor, municipioVendedor, ufVendedor, cepVendedor, 
+        nome, cpf_cnpj, rg, telefone, email, 
+        servico, valor_servico, placa, modelo, 
+        ano_fabricacao, chassi, cor, observacao, 
+        usuario_id, usuario_cadastro, ano_modelo, rua, bairro, cidade, cep
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    const values = [
+      nomeVendedor,
       estadoCivilVendedor,
       rgVendedor,
       orgaoexpedidorVendedor,
@@ -57,7 +76,6 @@ module.exports = async function createClient(
       cpf_cnpj,
       rg,
       telefone,
-      endereco,
       email,
       servico,
       valor_servico,
@@ -69,15 +87,18 @@ module.exports = async function createClient(
       observacao,
       usuario_id,
       usuario_cadastro,
-      ano_modelo]
-    );
-      
-    
-    console.log(
-      `Vendedor ${nomeVendedor} e Cliente ${nome} inseridos com sucesso. Observação: ${observacao}`
-    );
+      ano_modelo,
+      rua,
+      bairro,
+      cidade,
+      cep
+    ];
+
+    await db.execute(sql, values);
+
+    console.log(`Sucesso: Vendedor ${nomeVendedor} | Cliente ${nome}`);
   } catch (error) {
-    console.error("Erro ao inserir o cadastro no banco de dados:", error);
+    console.error("Erro no Model cadastrarCliente:", error);
     throw error;
   }
 };

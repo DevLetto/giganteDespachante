@@ -23,10 +23,8 @@ function CadastroCliente({
   telefone,
   setTelefone,
   // Novos campos de endereço
-  logradouro,
-  setLogradouro,
-  numero,
-  setNumero,
+  rua,
+  setRua,
   bairro,
   setBairro,
   cidade,
@@ -115,15 +113,15 @@ function CadastroCliente({
           <p className="text-xl font-bold font-[Arial]">Voltar</p>
         </button>
 
-        <main className="flex flex-col gap-6 items-center w-full">
+        <main className="flex flex-col gap-6 items-center w-full ">
           <div className="border-b border-traco text-center w-[40%]">
             <h1 className="text-traco 2xl:text-6xl text-5xl font-[Arial] font-bold">
               Cliente
             </h1>
           </div>
 
-          <div className="flex justify-between gap-6 w-full min-w-0 overflow-hidden">
-            {/* COLUNA 1: DADOS BÁSICOS */}
+          <div className="flex justify-between gap-6 w-full min-w-0 overflow-hidden ">
+            {/* COLUNA 1*/}
             <section className="border-2 border-traco flex flex-col items-center flex-[0_0_33.333%] max-w-[33.333%] min-w-0 overflow-hidden h-[480px] gap-3 p-3 bg-white/30 rounded">
               <fieldset className="w-full">
                 <label className="text-xl text-traco font-bold font-[Arial]">
@@ -195,18 +193,18 @@ function CadastroCliente({
               </fieldset>
             </section>
 
-            {/* COLUNA 2: ENDEREÇO E SERVIÇOS (DROPDOWN) */}
-            <section className="border-2 border-traco flex flex-col items-center flex-[0_0_33.333%] max-w-[33.333%] min-w-0 overflow-hidden h-[480px] gap-3 p-3 bg-white/30 rounded-lg">
+            {/* COLUNA 2 */}
+            <section className="border-2 border-traco flex flex-col items-center flex-[0_0_33.333%] max-w-[33.333%] min-w-0 overflow-hidden h-[480px] gap-3 p-3 bg-white/30 rounded">
               <div className="flex gap-2 w-full">
                 <fieldset className="w-full">
                   <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
-                    Rua/Logradouro*
+                    Rua*
                   </label>
                   <input
                     required
                     type="text"
-                    value={logradouro}
-                    onChange={(e) => setLogradouro(e.target.value)}
+                    value={rua}
+                    onChange={(e) => setRua(e.target.value)}
                     className="bg-white w-full h-12 rounded-lg px-2 text-traco border border-gray-300"
                   />
                 </fieldset>
@@ -253,7 +251,7 @@ function CadastroCliente({
               </fieldset>
 
               {/* DROPDOWN CUSTOMIZADO QUE PARECE UM SELECT */}
-              <fieldset className="w-full " ref={dropdownRef}>
+              <fieldset className="w-full min-w-0 " ref={dropdownRef}>
                 <label className="text-xl text-traco font-bold font-[Arial]">
                   Serviços Selecionados*
                 </label>
@@ -322,7 +320,7 @@ function CadastroCliente({
             </section>
 
             {/* COLUNA 3: VEÍCULO */}
-            <section className="border-2 border-traco flex flex-col items-center flex-[0_0_33.333%] max-w-[33.333%] min-w-0 overflow-hidden h-[480px] gap-3 p-3 bg-white/30 rounded-lg">
+            <section className="border-2 border-traco flex flex-col items-center flex-[0_0_33.333%] max-w-[30.333%] min-w-0 overflow-hidden h-[480px] gap-3 p-3 bg-white/30 rounded">
               <div className="flex gap-2 w-full text-center">
                 <fieldset className="w-1/2">
                   <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">

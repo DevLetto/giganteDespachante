@@ -1,7 +1,6 @@
 import Header from "../../components/Header";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import { useState } from "react";
-import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SureConfirmation from "../../components/SureConfirmation";
 import {
@@ -10,100 +9,60 @@ import {
   formatarCEP,
   formatarRG,
   formatarUF,
-  formatarAno,
 } from "../../utils/mascara";
 
 function CadastroVendedor({
   nome,
   setNome,
-
   estadoCivil,
   setEstadoCivil,
-
   rg,
   setRg,
-
   orgaoexpedidor,
   setOrgaoExpedidor,
-
   cpf_cnpj,
   setCpf,
-
   email,
   setEmail,
-
   celular,
   setCelular,
-
   rua_av,
   setRuaAv,
-
   cidade,
   setCidade,
-
   quadra,
   setQuadra,
-
   lote,
   setLote,
-
   numero_endereco,
   setNumeroEndereco,
-
   bairro,
   setBairro,
-
   municipio,
   setMunicipio,
-
   uf,
   setUf,
-
   cep,
   setCep,
-
   isFormValid,
   onNext,
 }) {
   const navigate = useNavigate();
-
   const [showConfirm, setShowConfirm] = useState(false);
+  const [tipoPessoa, setTipoPessoa] = useState("PF");
 
-  const algumCampoPreenchido =
-    nome ||
-    estadoCivil ||
-    rg ||
-    orgaoexpedidor ||
-    cpf_cnpj ||
-    email ||
-    celular ||
-    cidade ||
-    rua_av ||
-    quadra ||
-    lote ||
-    numero_endereco ||
-    bairro ||
-    municipio ||
-    uf ||
-    cep;
+  const algumCampoPreenchido = nome || rg || cpf_cnpj || celular || cep;
 
   const handleBack = () => {
     if (algumCampoPreenchido) {
-      console.log("cade");
-      setShowConfirm(true); // abre a tela de confirmação
+      setShowConfirm(true);
     } else {
-      navigate("/menu"); // volta normalmente
+      navigate("/menu");
     }
   };
 
-  const handleEstadoChange = (e) => {
-    const selectedOption = e.target.options[e.target.selectedIndex];
-    const nomeEstado = e.target.value;
-    setEstadoCivil(nomeEstado);
-  };
-
   return (
-    <div className="w-screen h-screen bg-fundo flex items-center flex-col ">
+    <div className="w-screen h-screen bg-fundo flex items-center flex-col">
       <Header
         navigate={handleBack}
         icon={X}
@@ -118,329 +77,256 @@ function CadastroVendedor({
         />
       )}
 
-      <main className="flex flex-col justify-between items-center 2xl:w-360 w-260 2xl:gap-20 gap-8  ">
-        {/* div cabeçalho */}
-        <div className="flex items-center justify-center w-full ">
-          <div className="border-b border-traco w-[50%]  text-center">
+      <main className="flex flex-col justify-between items-center 2xl:w-360 w-260 2xl:gap-14 gap-8">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="border-b border-traco w-[50%] text-center">
             <h1 className="text-traco 2xl:text-6xl text-5xl font-[Arial] font-bold">
               Vendedor
             </h1>
           </div>
-        </div>
-        {/* div containers */}
-        <div className="flex flex-row gap-5 ">
-          {/* Coluna 1 */}
-          <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[460px] h-[300px] gap-10 p-2">
-            <fieldset className="w-[98%] ">
-              <label
-                htmlFor="Nome"
-                className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-              >
-                Nome do Vendedor*
-              </label>
+
+          <div className="flex gap-4 mt-4">
+            <label className="flex items-center gap-2 text-traco font-bold cursor-pointer">
               <input
-                required
-                type="text"
-                name="Nome"
-                value={nome}
-                autoComplete="off"
-                onChange={(e) => setNome(e.target.value)}
-                className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                type="radio"
+                name="tipo"
+                checked={tipoPessoa === "PF"}
+                onChange={() => setTipoPessoa("PF")}
+                className="accent-traco w-5 h-5"
               />
-            </fieldset>
+              Pessoa Física
+            </label>
+            <label className="flex items-center gap-2 text-traco font-bold cursor-pointer">
+              <input
+                type="radio"
+                name="tipo"
+                checked={tipoPessoa === "PJ"}
+                onChange={() => setTipoPessoa("PJ")}
+                className="accent-traco w-5 h-5"
+              />
+              Pessoa Jurídica
+            </label>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-5">
+          {/* Coluna 1 */}
+          <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[480px] h-[350px] gap-8 p-3 shadow-sm rounded-xl">
             <fieldset className="w-[98%]">
-              <label
-                htmlFor="CPF"
-                className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-              >
-                CPF/CNPJ*
+              <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
+                {tipoPessoa === "PF" ? "Nome Completo*" : "Razão Social*"}
               </label>
               <input
                 required
                 type="text"
-                name="CPF"
-                value={cpf_cnpj}
-                maxLength={18}
-                autoComplete="off"
-                onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
-                className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
               />
             </fieldset>
 
-            <fieldset className="w-[98%] flex gap-5">
-              <div className="w-[45%]">
-                <label
-                  htmlFor="rg"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]]"
-                >
-                  RG*
-                </label>
-                <input
-                  required
-                  type="text"
-                  name="rg"
-                  value={rg}
-                  maxLength={12}
-                  autoComplete="off"
-                  onChange={(e) => setRg(formatarRG(e.target.value))}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
-                />
-              </div>
-              <div className="w-[48%]">
-                <label
-                  htmlFor="expedidor"
-                  className="2xl:text-xl text-sm text-traco font-bold font-[Arial]"
-                >
-                  Orgão Expedidor*
-                </label>
-                <input
-                  required
-                  type="text"
-                  name="expedidor"
-                  value={orgaoexpedidor}
-                  autoComplete="off"
-                  onChange={(e) => setOrgaoExpedidor(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
-                />
-              </div>
+            <fieldset className="w-[98%]">
+              <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
+                {tipoPessoa === "PF" ? "CPF*" : "CNPJ*"}
+              </label>
+              <input
+                required
+                type="text"
+                value={cpf_cnpj}
+                maxLength={tipoPessoa === "PF" ? 14 : 18}
+                onChange={(e) => setCpf(formatarCpfCnpj(e.target.value))}
+                className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
+              />
             </fieldset>
+
+            {/* RG e Orgão só aparecem para PF */}
+            {tipoPessoa === "PF" && (
+              <fieldset className="w-[98%] flex gap-5">
+                <div className="w-[45%]">
+                  <label className="2xl:text-xl text-md text-traco font-bold">
+                    RG*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    value={rg}
+                    maxLength={12}
+                    onChange={(e) => setRg(formatarRG(e.target.value))}
+                    className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
+                  />
+                </div>
+                <div className="w-[48%]">
+                  <label className="2xl:text-xl text-xs text-traco font-bold">
+                    Orgão Expedidor*
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    value={orgaoexpedidor}
+                    onChange={(e) => setOrgaoExpedidor(e.target.value)}
+                    className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
+                  />
+                </div>
+              </fieldset>
+            )}
           </section>
 
           {/* Coluna 2 */}
+          <section className="border-2 border-traco flex flex-col items-center 2xl:w-100 w-75 2xl:h-[480px] h-[350px] gap-8 p-3 shadow-sm rounded-xl">
+            {/* Estado Civil só aparece para PF */}
+            {tipoPessoa === "PF" && (
+              <fieldset className="w-[98%]">
+                <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
+                  Estado Civil*
+                </label>
+                <select
+                  required
+                  value={estadoCivil}
+                  onChange={(e) => setEstadoCivil(e.target.value)}
+                  className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
+                >
+                  <option value="" disabled></option>
+                  <option value="Solteiro(a)">Solteiro(a)</option>
+                  <option value="Casado(a)">Casado(a)</option>
+                  <option value="Divorciado(a)">Divorciado(a)</option>
+                  <option value="Viúvo(a)">Viúvo(a)</option>
+                  <option value="União Estável">União Estável</option>
+                </select>
+              </fieldset>
+            )}
 
-          <section className="border-2 border-traco  flex flex-col items-center 2xl:w-100 w-75 2xl:h-[460px] h-[300px] gap-10 p-2">
             <fieldset className="w-[98%]">
-              <label
-                htmlFor="EstadoCivil"
-                className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-              >
-                Estado Civil*
-              </label>
-              <select
-                required
-                type="EstadoCivil"
-                name="email"
-                value={estadoCivil}
-                autoComplete="off"
-                onChange={handleEstadoChange}
-                className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
-              >
-                <option value="" disabled selected></option>
-                <option value="Solteiro(a)">Solteiro(a)</option>
-                <option value="Casado(a)">Casado(a)</option>
-                <option value="Divorciado(a)">Divorciado(a)</option>
-                <option value="Viúvo(a)">Viúvo(a)</option>
-                <option value="União Estável">União Estável</option>
-              </select>
-            </fieldset>
-            <fieldset className="w-[98%]">
-              <label
-                htmlFor="celular"
-                className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-              >
+              <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
                 Telefone*
               </label>
               <input
                 required
                 type="text"
-                name="celular"
                 value={celular}
-                maxLength={13}
-                autoComplete="off"
+                maxLength={15}
                 onChange={(e) => setCelular(formatarTelefone(e.target.value))}
-                className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
               />
             </fieldset>
+
             <fieldset className="w-[98%]">
-              <label
-                htmlFor="email"
-                className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-              >
+              <label className="2xl:text-xl text-md text-traco font-bold font-[Arial]">
                 E-mail*
               </label>
               <input
                 required
                 type="email"
-                name="email"
                 value={email}
-                autoComplete="off"
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                className="bg-white border border-gray-300 w-full 2xl:h-12 h-10 rounded-lg p-2 text-traco shadow-sm"
               />
             </fieldset>
           </section>
 
-          {/* Coluna 3 */}
-          <section className="border-2 border-traco flex flex-col items-center 2xl:w-150 w-100 2xl:h-[460px] h-[300px] 2xl:gap-10 gap-2 p-2">
-            <fieldset className="w-[98%] flex justify-between">
-              <div className="w-[45%]">
-                <label
-                  htmlFor="cep"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  CEP*
-                </label>
+          {/* Coluna 3 - Endereço (Sempre igual) */}
+          <section className="border-2 border-traco flex flex-col items-center 2xl:w-150 w-100 2xl:h-[480px] h-[350px] 2xl:gap-8 gap-5 p-3 shadow-sm rounded-xl">
+            <div className="flex gap-3 w-full">
+              <fieldset className="w-[45%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">CEP*</label>
                 <input
                   required
                   type="text"
-                  name="cep"
                   value={cep}
                   maxLength={9}
-                  autoComplete="off"
                   onChange={(e) => setCep(formatarCEP(e.target.value))}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-              <div className="w-[48%]">
-                <label
-                  htmlFor="cidade"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Cidade*
-                </label>
+              </fieldset>
+              <fieldset className="w-[52%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">Cidade*</label>
                 <input
                   required
                   type="text"
-                  name="cidade"
                   value={cidade}
-                  autoComplete="off"
                   onChange={(e) => setCidade(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
 
-            <fieldset className="w-[98%] flex justify-between">
-              <div className="w-[48%] ">
-                <label
-                  htmlFor="Rua/Av"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Rua/Av*
-                </label>
+            <div className="flex gap-3 w-full">
+              <fieldset className="w-[58%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">Rua/Av*</label>
                 <input
                   required
                   type="text"
-                  name="Rua/Av"
                   value={rua_av}
-                  autoComplete="off"
                   onChange={(e) => setRuaAv(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-              <div className="w-[48%]">
-                <label
-                  htmlFor="Bairro"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Bairro*
-                </label>
+              </fieldset>
+              <fieldset className="w-[40%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">Bairro*</label>
                 <input
                   required
                   type="text"
-                  name="Bairro"
                   value={bairro}
-                  autoComplete="off"
                   onChange={(e) => setBairro(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
 
-            <fieldset className="w-[98%] flex justify-between">
-              <div className="w-[35%] ">
-                <label
-                  htmlFor="quadra"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Quadra*
-                </label>
+            <div className="flex gap-3 w-full">
+              <fieldset className="w-1/3">
+                <label className="2xl:text-xl text-md text-traco font-bold">Quadra*</label>
                 <input
-                  required
                   type="text"
-                  name="quadra"
                   value={quadra}
-                  autoComplete="off"
                   onChange={(e) => setQuadra(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-              <div className="w-[35%]">
-                <label
-                  htmlFor="lote"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Lote*
-                </label>
+              </fieldset>
+              <fieldset className="w-1/3">
+                <label className="2xl:text-xl text-md text-traco font-bold">Lote*</label>
                 <input
-                  required
                   type="text"
-                  name="lote"
                   value={lote}
-                  autoComplete="off"
                   onChange={(e) => setLote(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-
-              <div className="w-[18%]">
-                <label
-                  htmlFor="numero"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Nº*
-                </label>
+              </fieldset>
+              <fieldset className="w-1/4">
+                <label className="2xl:text-xl text-md text-traco font-bold">Nº*</label>
                 <input
-                  required
                   type="text"
-                  name="numero"
                   value={numero_endereco}
-                  autoComplete="off"
-                  onChange={(e) =>
-                    setNumeroEndereco(formatarAno(e.target.value))
-                  }
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  onChange={(e) => setNumeroEndereco(e.target.value)}
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
 
-            <fieldset className="w-[98%] flex justify-between">
-              <div className="w-[68%] ">
-                <label
-                  htmlFor="municipio"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  Municipio*
+            <div className="flex gap-3 w-full mt-2">
+              <fieldset className="w-[70%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">
+                  Município*
                 </label>
                 <input
                   required
                   type="text"
-                  name="municipio"
                   value={municipio}
-                  autoComplete="off"
                   onChange={(e) => setMunicipio(e.target.value)}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-              <div className="w-[28%] ">
-                <label
-                  htmlFor="uf"
-                  className="2xl:text-xl text-md text-traco font-bold font-[Arial]"
-                >
-                  UF*
-                </label>
+              </fieldset>
+              <fieldset className="w-[25%]">
+                <label className="2xl:text-xl text-md text-traco font-bold">UF*</label>
                 <input
                   required
                   type="text"
-                  name="uf"
                   value={uf}
                   maxLength={2}
-                  autoComplete="off"
                   onChange={(e) => setUf(formatarUF(e.target.value))}
-                  className="bg-white w-full 2xl:h-12 h-8 rounded-lg p-1 text-traco"
+                  className="bg-white border border-gray-300 w-full 2xl:h-13 h-10 rounded-lg p-2 text-traco shadow-sm"
                 />
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
           </section>
         </div>
 
@@ -449,7 +335,7 @@ function CadastroVendedor({
           value="Prosseguir"
           disabled={!isFormValid}
           onClick={onNext}
-          className="self-center bg-traco  2xl:h-12 h-8 rounded-lg w-[60%] 2xl:text-3xl text-2xl  font-bold  text-white hover:bg-white hover:text-traco transition hover:cursor-pointer"
+          className="self-center bg-traco 2xl:h-16 h-12 rounded-xl w-[60%] 2xl:text-3xl text-2xl font-bold text-white hover:bg-white hover:text-traco border-2 border-traco transition cursor-pointer shadow-lg mb-4"
         />
       </main>
     </div>
