@@ -1,14 +1,16 @@
 const cadastrarCliente = require("../modelos/cadastrarCliente");
 
 module.exports = async function cadastro(req, res) {
+  console.log("🚀 CONTROLLER NOVO CARREGADO");
   try {
-    const usuario_id = req.user?.id;
-    const usuario_Cadastro = req.user?.usuario;
-
-    if (!usuario_id || !usuario_Cadastro) {
+    
+    if (!req.user) {
       return res.status(401).json({ error: "Usuário não autenticado" });
     }
 
+    const usuario_id = req.user?.id ?? 1;
+    const usuario_cadastro = req.user?.usuario ?? "Sistema";
+    
     const {
       nomeVendedor,
       estadoCivilVendedor,
@@ -75,7 +77,6 @@ module.exports = async function cadastro(req, res) {
       municipioVendedor,
       ufVendedor,
       cepVendedor,
-
       nome,
       cpf_cnpj,
       rg,
@@ -83,7 +84,6 @@ module.exports = async function cadastro(req, res) {
       email,
       servico,
       Number(valor_servico),
-
       placa,
       modelo,
       ano_fabricacao,
@@ -96,7 +96,7 @@ module.exports = async function cadastro(req, res) {
       rua,
       bairro,
       cidade,
-      cep
+      cep,
     );
 
     res.status(201).json({ message: "Cadastro realizado com sucesso!" });

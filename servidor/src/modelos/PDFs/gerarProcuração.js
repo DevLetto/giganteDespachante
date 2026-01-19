@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = function GerarProcuração(dados) {
 
-  const cpf_cnpj = dados.cpf_cnpjVendedor || "";
+  const cpf_cnpj = dados.cpf_cnpj || "";
 
   let cpf = "";
   let cnpj = "";
@@ -57,7 +57,7 @@ module.exports = function GerarProcuração(dados) {
     .font("Arial-Italic")
     .fontSize(9)
     .text(
-      `         Pelo presente instrumento de procuração o (a) Outorgante: ${dados.nomeVendedor}`,
+      `         Pelo presente instrumento de procuração o (a) Outorgante: ${dados.nome}`,
       { align: "justify" }
     );
 
@@ -65,10 +65,10 @@ module.exports = function GerarProcuração(dados) {
   doc.moveDown(1);
   doc.fontSize(9.5);
 
-  doc.font("Arial-Italic").text(`Residente á ${dados.rua_avVendedor}`, { align: "justify" });
+  doc.font("Arial-Italic").text(`Residente á ${dados.rua}`, { align: "justify" });
   doc.moveDown(0.1);
   doc.text(
-    `Bairro: ${dados.bairroVendedor} Cidade: ${dados.cidadeVendedor}  CEP: ${dados.cepVendedor} `,
+    `Bairro: ${dados.bairro} Cidade: ${dados.cidade}  CEP: ${dados.cep} `,
     {
       align: "justify",
     }

@@ -80,10 +80,7 @@ function Cadastrar() {
       rg,
       telefone,
       email,
-      rua,
-      cep,
-      bairro,
-      cidade,
+      
 
       servico: Array.isArray(servico) ? servico.join(", ") : "",
 
@@ -95,7 +92,11 @@ function Cadastrar() {
       chassi,
       cor,
       observacao,
-      usuario_Cadastro: usuarioLogado?.usuario || "Sistema",
+      usuario_cadastro: usuarioLogado.usuario,
+      rua,
+      bairro,
+      cidade,
+      cep,
     };
 
     try {
